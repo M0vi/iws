@@ -140,6 +140,20 @@
   }
   .btn-outline:hover { border-color: var(--verde-accent); color: var(--verde-accent); }
 
+  .catalog-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 16px; min-width: 100px;
+    border: 1px solid var(--verde); background: transparent;
+    color: var(--verde); text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .catalog-link:hover {
+    background: var(--verde); color: var(--branco);
+    border-color: var(--verde-accent);
+  }
+
   .hero-stats {
     position: absolute; right: 60px; bottom: 60px; z-index: 2;
     display: flex; gap: 48px;
@@ -556,6 +570,7 @@
     <li><a href="#sobre">Sobre</a></li>
     <li><a href="#solucoes">Soluções</a></li>
     <li><a href="#tecnologia">Tecnologia</a></li>
+    <li><a href="#catalogo">Catálogo</a></li>
     <li><a href="#performance">Performance</a></li>
     <li><a href="#nanotec">Nanotecnologia</a></li>
     <li><a href="#clientes">Clientes</a></li>
@@ -856,6 +871,51 @@
         </tbody>
       </table>
     </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO -->
+<section id="catalogo">
+  <div class="sec-tag reveal">Catálogo</div>
+  <h2 class="sec-title reveal">Catálogo de produtos e serviços</h2>
+  <p class="sec-desc reveal" style="max-width:540px; margin-top:12px;">
+    Conheça as principais opções disponíveis e acesse o catálogo completo em PDF para detalhes técnicos e especificações.
+  </p>
+  <div class="nano-table-wrap reveal" style="margin-top:40px;">
+    <table class="nano-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Descrição</th>
+          <th>Veja mais</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brocas premium</td>
+          <td>Brocas PDC e tricônicas customizadas para campanhas em Pré-Sal e campos complexos.</td>
+          <td><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="catalog-link">Veja mais</a></td>
+        </tr>
+        <tr>
+          <td>Controle de sólidos</td>
+          <td>Soluções para separação e tratamento de sólidos com alta eficiência operacional.</td>
+          <td><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="catalog-link">Veja mais</a></td>
+        </tr>
+        <tr>
+          <td>Fluidos de perfuração</td>
+          <td>Slipstream de fluidos, reologia e gerenciamento completo para perfuração segura.</td>
+          <td><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="catalog-link">Veja mais</a></td>
+        </tr>
+        <tr>
+          <td>Serviços de análise</td>
+          <td>Monitoramento em tempo real e manutenção preditiva com suporte de dados aplicados.</td>
+          <td><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="catalog-link">Veja mais</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:28px;">
+    <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-primary">Ver catálogo completo</a>
   </div>
 </section>
 
