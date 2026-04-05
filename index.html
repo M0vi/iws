@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IWS Brasil — Engenharia e Inovação</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1a4d2e;
+    --verde-mid: #2d6e47;
+    --verde-light: #3a8a5a;
+    --verde-accent: #4caf70;
+    --branco: #ffffff;
+    --off: #f4f7f4;
+    --cinza: #e8ede9;
+    --text-dark: #111a13;
+    --text-mid: #3a4e3c;
+    --text-light: #6b8270;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--branco);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(26,77,46,0.97);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; height: 68px;
+    border-bottom: 1px solid rgba(76,175,112,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 3px;
+    color: var(--branco);
+  }
+  .nav-logo span { color: var(--verde-accent); }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--verde-accent); }
+
+  /* ── HERO ── */
+  #hero {
+    height: 100vh; min-height: 700px;
+    background: var(--verde);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 0 60px;
+  }
+
+  .hero-bg-lines {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 80px,
+        rgba(76,175,112,0.04) 80px,
+        rgba(76,175,112,0.04) 81px
+      );
+  }
+
+  .hero-geo {
+    position: absolute; right: -80px; bottom: -80px;
+    width: 620px; height: 620px;
+    border: 1px solid rgba(76,175,112,0.12);
+    transform: rotate(30deg);
+  }
+  .hero-geo::before {
+    content:''; position: absolute; inset: 60px;
+    border: 1px solid rgba(76,175,112,0.08);
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--verde-accent); margin-bottom: 28px;
+  }
+  .hero-tag::before {
+    content:''; display: block;
+    width: 36px; height: 1px; background: var(--verde-accent);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: .96; letter-spacing: 2px;
+    color: var(--branco);
+    margin-bottom: 28px;
+  }
+  .hero-title em { color: var(--verde-accent); font-style: normal; }
+
+  .hero-sub {
+    font-size: 16px; font-weight: 300; line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    max-width: 500px; margin-bottom: 48px;
+  }
+
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    padding: 14px 36px;
+    background: var(--verde-accent); color: var(--verde);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none;
+    transition: background .2s, transform .15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #5dd482; transform: translateY(-1px); }
+
+  .btn-outline {
+    padding: 14px 36px;
+    background: transparent; color: var(--branco);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.3); cursor: pointer; text-decoration: none;
+    transition: border-color .2s, color .2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--verde-accent); color: var(--verde-accent); }
+
+  .hero-stats {
+    position: absolute; right: 60px; bottom: 60px; z-index: 2;
+    display: flex; gap: 48px;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px; letter-spacing: 2px;
+    color: var(--verde-accent); line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-top: 4px;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 100px 60px; }
+
+  .sec-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--verde-mid); margin-bottom: 16px;
+  }
+  .sec-tag::before {
+    content:''; display: block;
+    width: 28px; height: 2px; background: var(--verde-mid);
+  }
+
+  .sec-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    letter-spacing: 1px; line-height: 1;
+    color: var(--verde); margin-bottom: 20px;
+  }
+
+  .sec-desc {
+    font-size: 16px; font-weight: 300; line-height: 1.8;
+    color: var(--text-mid); max-width: 580px;
+  }
+
+  /* ── ABOUT ── */
+  #sobre {
+    background: var(--off);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+
+  .about-visual {
+    position: relative; height: 480px;
+  }
+
+  .about-card {
+    position: absolute; background: var(--verde);
+    padding: 32px;
+  }
+  .about-card.main {
+    inset: 0 60px 60px 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .about-card.accent {
+    right: 0; bottom: 0; width: 200px; height: 200px;
+    background: var(--verde-accent);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+  }
+
+  .about-year {
+    font-family: 'Bebas Neue', sans-serif; font-size: 80px;
+    color: rgba(255,255,255,0.08); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .about-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-weight: 600; letter-spacing: 1px;
+    color: var(--branco); text-transform: uppercase;
+  }
+  .about-card-sub {
+    font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px;
+  }
+  .about-accent-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 52px;
+    color: var(--verde); line-height: 1;
+  }
+  .about-accent-label {
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--verde); font-weight: 600; margin-top: 4px;
+  }
+
+  .about-text .sec-desc { margin-bottom: 36px; }
+
+  .timeline {
+    border-left: 2px solid var(--cinza);
+    padding-left: 24px; margin-top: 32px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .tl-item { position: relative; }
+  .tl-item::before {
+    content:''; position: absolute; left: -32px; top: 5px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--verde-mid);
+  }
+  .tl-year {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--verde-accent); text-transform: uppercase;
+  }
+  .tl-text {
+    font-size: 14px; color: var(--text-mid); line-height: 1.5; margin-top: 2px;
+  }
+
+  /* ── SOLUTIONS ── */
+  #solucoes {
+    background: var(--branco);
+  }
+
+  .sol-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 64px;
+  }
+
+  .sol-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+
+  .sol-card {
+    background: var(--off); padding: 40px 36px;
+    border-top: 3px solid transparent;
+    transition: border-color .2s, background .2s, transform .2s;
+    cursor: default;
+  }
+  .sol-card:hover {
+    border-top-color: var(--verde-accent);
+    background: var(--branco);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(26,77,46,0.08);
+  }
+
+  .sol-icon {
+    width: 48px; height: 48px;
+    background: var(--verde); margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sol-icon svg { width: 24px; height: 24px; stroke: var(--verde-accent); fill: none; stroke-width: 1.5; }
+
+  .sol-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 2px;
+    color: var(--verde-accent); margin-bottom: 8px;
+  }
+  .sol-name {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700;
+    color: var(--verde); text-transform: uppercase; letter-spacing: .5px;
+    margin-bottom: 12px;
+  }
+  .sol-desc {
+    font-size: 14px; line-height: 1.7; color: var(--text-mid);
+  }
+
+  /* ── TECNOLOGIA ── */
+  #tecnologia {
+    background: var(--verde);
+    position: relative; overflow: hidden;
+  }
+
+  .tec-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 60px,
+        rgba(76,175,112,0.03) 60px,
+        rgba(76,175,112,0.03) 61px
+      );
+  }
+
+  #tecnologia .sec-title { color: var(--branco); }
+  #tecnologia .sec-tag { color: var(--verde-accent); }
+  #tecnologia .sec-tag::before { background: var(--verde-accent); }
+  #tecnologia .sec-desc { color: rgba(255,255,255,0.65); }
+
+  .tec-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-top: 60px;
+  }
+
+  .tec-card {
+    border: 1px solid rgba(76,175,112,0.15);
+    padding: 36px 32px;
+    transition: border-color .2s, background .2s;
+  }
+  .tec-card:hover {
+    border-color: rgba(76,175,112,0.45);
+    background: rgba(76,175,112,0.04);
+  }
+
+  .tec-card-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 40px;
+    color: rgba(76,175,112,0.25); line-height: 1; margin-bottom: 16px;
+  }
+  .tec-card-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700;
+    color: var(--branco); text-transform: uppercase; letter-spacing: .5px;
+    margin-bottom: 12px;
+  }
+  .tec-card-desc {
+    font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.55);
+  }
+
+  /* ── PERFORMANCE ── */
+  #performance {
+    background: var(--off);
+  }
+
+  .perf-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center; margin-top: 60px;
+  }
+
+  .perf-metrics {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+
+  .metric-box {
+    background: var(--branco); padding: 32px 24px;
+    border-bottom: 3px solid var(--verde);
+  }
+  .metric-box.accent { border-bottom-color: var(--verde-accent); }
+
+  .metric-val {
+    font-family: 'Bebas Neue', sans-serif; font-size: 52px;
+    color: var(--verde); line-height: 1;
+  }
+  .metric-box.accent .metric-val { color: var(--verde-accent); }
+  .metric-unit {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 16px;
+    color: var(--text-light); font-weight: 600;
+  }
+  .metric-label {
+    font-size: 13px; color: var(--text-mid); margin-top: 8px; line-height: 1.4;
+  }
+
+  .perf-text .sec-title { margin-bottom: 16px; }
+  .perf-text .sec-desc { margin-bottom: 28px; }
+
+  .perf-list {
+    list-style: none; display: flex; flex-direction: column; gap: 14px;
+  }
+  .perf-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 14px; color: var(--text-mid); line-height: 1.5;
+  }
+  .perf-list li::before {
+    content:''; flex-shrink: 0;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--verde-accent); margin-top: 6px;
+  }
+
+  /* ── NANOTEC ── */
+  #nanotec {
+    background: var(--branco);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+
+  .nano-cards {
+    display: flex; flex-direction: column; gap: 16px; margin-top: 40px;
+  }
+
+  .nano-card {
+    border-left: 3px solid var(--cinza);
+    padding: 20px 24px;
+    transition: border-color .2s;
+  }
+  .nano-card:hover { border-left-color: var(--verde-accent); }
+
+  .nano-card-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700;
+    color: var(--verde); text-transform: uppercase; letter-spacing: .5px;
+    margin-bottom: 6px;
+  }
+  .nano-card-desc {
+    font-size: 13px; color: var(--text-mid); line-height: 1.6;
+  }
+
+  .nano-table-wrap { overflow-x: auto; margin-top: 40px; }
+
+  .nano-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  .nano-table th {
+    background: var(--verde); color: var(--branco);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 14px 16px; text-align: left; font-weight: 600;
+  }
+  .nano-table td {
+    padding: 12px 16px; border-bottom: 1px solid var(--cinza);
+    color: var(--text-mid);
+  }
+  .nano-table tr:hover td { background: var(--off); }
+  .nano-table .highlight {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 16px;
+    font-weight: 700; color: var(--verde-accent);
+  }
+
+  /* ── CLIENTES ── */
+  #clientes {
+    background: var(--verde);
+    text-align: center;
+  }
+  #clientes .sec-title { color: var(--branco); text-align: center; }
+  #clientes .sec-tag { justify-content: center; color: var(--verde-accent); }
+  #clientes .sec-tag::before { background: var(--verde-accent); }
+
+  .clients-sub {
+    font-size: 15px; color: rgba(255,255,255,0.55); margin: 12px auto 56px;
+    max-width: 500px;
+  }
+
+  .clients-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+  }
+
+  .client-box {
+    background: rgba(255,255,255,0.04); padding: 32px 20px;
+    transition: background .2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .client-box:hover { background: rgba(255,255,255,0.09); }
+
+  .client-name {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700;
+    color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px;
+    text-align: center;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  #certs {
+    background: var(--off); padding: 60px;
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .certs-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-light);
+    white-space: nowrap;
+  }
+
+  .certs-list {
+    display: flex; gap: 32px; flex-wrap: wrap; align-items: center;
+  }
+
+  .cert-badge {
+    border: 1px solid var(--cinza); padding: 12px 20px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px;
+    color: var(--verde);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0f2e1c; padding: 48px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px;
+    color: var(--branco);
+  }
+  .footer-brand span { color: var(--verde-accent); }
+
+  .footer-copy {
+    font-size: 12px; color: rgba(255,255,255,0.35);
+    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px;
+  }
+
+  .footer-links {
+    display: flex; gap: 28px; list-style: none;
+  }
+  .footer-links a {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--verde-accent); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag  { animation: fadeUp .6s ease both .2s; }
+  .hero-title{ animation: fadeUp .7s ease both .35s; }
+  .hero-sub  { animation: fadeUp .7s ease both .5s; }
+  .hero-ctas { animation: fadeUp .7s ease both .65s; }
+  .hero-stats{ animation: fadeUp .7s ease both .8s; }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">IWS <span>Brasil</span></div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#solucoes">Soluções</a></li>
+    <li><a href="#tecnologia">Tecnologia</a></li>
+    <li><a href="#performance">Performance</a></li>
+    <li><a href="#nanotec">Nanotecnologia</a></li>
+    <li><a href="#clientes">Clientes</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-geo"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Engenharia &amp; Inovação — Desde 2012</div>
+    <h1 class="hero-title">
+      Soluções para<br><em>Perfuração</em><br>&amp; Produção
+    </h1>
+    <p class="hero-sub">
+      Redução de custos e aumento de performance operacional através de tecnologia avançada, ciência de dados e inovação contínua.
+    </p>
+    <div class="hero-ctas">
+      <a href="#solucoes" class="btn-primary">Explorar Soluções</a>
+      <a href="#sobre" class="btn-outline">Sobre a IWS</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Anos de atuação</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">75%</div>
+      <div class="stat-label">Redução de custos</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">64%</div>
+      <div class="stat-label">Aumento de ROP</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="about-visual reveal">
+    <div class="about-card main">
+      <div class="about-year">2012</div>
+      <div class="about-card-title">IWS do Brasil</div>
+      <div class="about-card-sub">Fundada em Macaé · Rio de Janeiro · Aracaju</div>
+    </div>
+    <div class="about-card accent">
+      <div class="about-accent-num">API<br>Q1</div>
+      <div class="about-accent-label">Certificada</div>
+    </div>
+  </div>
+
+  <div class="about-text">
+    <div class="sec-tag">Nossa Trajetória</div>
+    <h2 class="sec-title">12 Anos de Inovação<br>Contínua</h2>
+    <p class="sec-desc reveal">
+      A IWS Brasil é uma empresa focada em engenharia e inovação para a indústria de óleo e gás, com soluções integradas de perfuração e produção via ciência de dados, tecnologia de brocas premium e serviços especializados.
+    </p>
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-year">2012</div>
+        <div class="tl-text">Fundação em Macaé com filiais no RJ e Aracaju. Representante VAREL, DHP, OFITE e DIGGER no Brasil.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2017</div>
+        <div class="tl-text">Obtenção do CRRC junto à Petrobras. Expansão da comercialização de produtos.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2018</div>
+        <div class="tl-text">Contrato para desenvolvimento de brocas customizadas para o Pré-Sal.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2019</div>
+        <div class="tl-text">Excelentes performances em projetos OnShore e OffShore Pré-Sal.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024</div>
+        <div class="tl-text">Soluções integradas de perfuração e produção via ciência de dados e IA.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUÇÕES -->
+<section id="solucoes">
+  <div class="sol-header reveal">
+    <div>
+      <div class="sec-tag">Portfolio</div>
+      <h2 class="sec-title">Produtos &amp;<br>Serviços</h2>
+    </div>
+    <p class="sec-desc" style="max-width:360px; font-size:14px;">
+      Certificada ISO 9001, ISO 45001 e OHSAS 18001. Soluções completas para toda a cadeia de perfuração e produção.
+    </p>
+  </div>
+
+  <div class="sol-grid">
+    <div class="sol-card reveal">
+      <div class="sol-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      </div>
+      <div class="sol-num">01</div>
+      <div class="sol-name">Sistema IA &amp; Data Science</div>
+      <p class="sol-desc">Análise em tempo real, manutenção preditiva e tomada de decisão automatizada para otimização da perfuração via ciência de dados.</p>
+    </div>
+
+    <div class="sol-card reveal">
+      <div class="sol-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22V12M12 12L8 16M12 12L16 16"/><path d="M20 17.607A9 9 0 1 0 3.5 14"/></svg>
+      </div>
+      <div class="sol-num">02</div>
+      <div class="sol-name">Desenvolvimento de Brocas</div>
+      <p class="sol-desc">Brocas PDC e Tricônicas premium customizadas para o Pré-Sal. Redução de custos entre 50–75% e aumento de 64% na taxa de penetração.</p>
+    </div>
+
+    <div class="sol-card reveal">
+      <div class="sol-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <div class="sol-num">03</div>
+      <div class="sol-name">Reologia dos Fluidos</div>
+      <p class="sol-desc">Monitoramento em tempo real de densidade e viscosidade com MUDWATCHER. Engenharia de fluidos DESC e procurement técnico.</p>
+    </div>
+
+    <div class="sol-card reveal">
+      <div class="sol-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      </div>
+      <div class="sol-num">04</div>
+      <div class="sol-name">Acessórios de Cimentação</div>
+      <p class="sol-desc">Sapata escareadora, colar de estágio, CaseRUNNER, packers mecânicos e hidráulicos, bridge plugs e cement retainers DIGGER.</p>
+    </div>
+
+    <div class="sol-card reveal">
+      <div class="sol-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+      </div>
+      <div class="sol-num">05</div>
+      <div class="sol-name">Controle de Sólidos</div>
+      <p class="sol-desc">Centrífuga decanter GN SOLIDS CONTROL, unidade de secador de cascalho, bomba de cavidades progressivas NEMO para alta viscosidade.</p>
+    </div>
+
+    <div class="sol-card reveal">
+      <div class="sol-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div class="sol-num">06</div>
+      <div class="sol-name">Unidade de Filtração</div>
+      <p class="sol-desc">Fabricação e filtração de fluidos em uma única unidade móvel. Eliminação de custos de transporte e prevenção de contaminação.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section id="tecnologia">
+  <div class="tec-bg"></div>
+  <div style="position:relative; z-index:2;">
+    <div class="sec-tag reveal">Inteligência Artificial</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; margin-bottom:0;">
+      <h2 class="sec-title reveal">Melhorando Eficiência com<br>Ciência de Dados IA</h2>
+      <p class="sec-desc reveal">O sistema DEEPVIEW monitora dados EDR em 1 segundo, otimizando parâmetros de perfuração, gerenciando potência e reduzindo tempo não produtivo.</p>
+    </div>
+
+    <div class="tec-grid">
+      <div class="tec-card reveal">
+        <div class="tec-card-num">01</div>
+        <div class="tec-card-title">Análise em Tempo Real</div>
+        <p class="tec-card-desc">IA permite análise de dados de perfuração, otimizando parâmetros para melhora da eficiência e redução de custos operacionais.</p>
+      </div>
+      <div class="tec-card reveal">
+        <div class="tec-card-num">02</div>
+        <div class="tec-card-title">Manutenção Preditiva</div>
+        <p class="tec-card-desc">IA prevê falhas de equipamentos, permitindo manutenção proativa para evitar tempo não produtivo e assegurar integridade.</p>
+      </div>
+      <div class="tec-card reveal">
+        <div class="tec-card-num">03</div>
+        <div class="tec-card-title">Decisão Automatizada</div>
+        <p class="tec-card-desc">IA facilita decisões automatizadas melhorando a agilidade operacional e otimizando estratégias de perfuração via aprimoramento de processos.</p>
+      </div>
+      <div class="tec-card reveal">
+        <div class="tec-card-num">04</div>
+        <div class="tec-card-title">Gestão de Riscos</div>
+        <p class="tec-card-desc">Avaliação e mitigação de riscos, otimização de protocolos de segurança e gestão de resposta a emergências baseadas em dados.</p>
+      </div>
+      <div class="tec-card reveal">
+        <div class="tec-card-num">05</div>
+        <div class="tec-card-title">Gerenciamento de Reservatório</div>
+        <p class="tec-card-desc">Previsão de performance, otimização da produção e monitoramento contínuo das condições do reservatório para extração sustentável.</p>
+      </div>
+      <div class="tec-card reveal">
+        <div class="tec-card-num">06</div>
+        <div class="tec-card-title">DeepView HQ Cloud</div>
+        <p class="tec-card-desc">Monitoramento de múltiplos poços e sondas com status em tempo real. Acesso remoto e estatísticas de progresso para fiscais e engenheiros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFORMANCE -->
+<section id="performance">
+  <div class="sec-tag reveal">Resultados Comprovados</div>
+  <h2 class="sec-title reveal">Performance de<br>Brocas &amp; Operações</h2>
+
+  <div class="perf-grid">
+    <div class="perf-metrics reveal">
+      <div class="metric-box">
+        <div class="metric-val">64<span class="metric-unit">%</span></div>
+        <div class="metric-label">Aumento na taxa de penetração (ROP) vs projeto PSY</div>
+      </div>
+      <div class="metric-box accent">
+        <div class="metric-val">75<span class="metric-unit">%</span></div>
+        <div class="metric-label">Redução de custos de perfuração em poços Pré-Sal e OnShore</div>
+      </div>
+      <div class="metric-box accent">
+        <div class="metric-val">205<span class="metric-unit">%</span></div>
+        <div class="metric-label">Acréscimo na taxa de penetração — Campo Búzios / Petrobras</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">34<span class="metric-unit">%</span></div>
+        <div class="metric-label">Economia em custo total de perfuração — Poço horizontal BC, Canadá</div>
+      </div>
+    </div>
+
+    <div class="perf-text reveal">
+      <h3 class="sec-title" style="font-size:36px;">Brocas Customizadas<br>Pré-Sal</h3>
+      <p class="sec-desc" style="font-size:15px;">
+        Após 4 versões de brocas desenvolvidas especificamente para o Pré-Sal, a IWS Brasil comprova redução de custos de perfuração de até 75% — com potencial de economizar dezenas de milhões de dólares por poço.
+      </p>
+      <ul class="perf-list">
+        <li>Brocas customizadas nos diâmetros 12¼" e 8½" para carbonatos do Pré-Sal</li>
+        <li>Performance consistente muito acima da média em ROP e metragem por broca</li>
+        <li>Contratação via custo por metro perfurado ou com bônus e malus</li>
+        <li>Brocas premium disponíveis em inventário para resposta imediata</li>
+        <li>Record no Pré-Sal em taxa de penetração com cortadores TRIDON — Campo Búzios</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- NANOTECNOLOGIA -->
+<section id="nanotec">
+  <div>
+    <div class="sec-tag reveal">Reservoir Solutions</div>
+    <h2 class="sec-title reveal">Nanotecnologia<br>para Reservatórios</h2>
+    <p class="sec-desc reveal">
+      Parceria com TenEx para soluções baseadas em tecnologia proprietária de materiais, visando o menor custo por barril com produtos adaptados a cada reservatório.
+    </p>
+
+    <div class="nano-cards reveal">
+      <div class="nano-card">
+        <div class="nano-card-title">NanoCLEAR®</div>
+        <p class="nano-card-desc">Moléculas químicas + nanopartículas. Forças químicas + mecânicas. Efeitos de longo prazo. Recuperação eficiente de óleo.</p>
+      </div>
+      <div class="nano-card">
+        <div class="nano-card-title">NoHIT®</div>
+        <p class="nano-card-desc">Tecnologia pioneira para mitigação de comunicação de fraturamento com poço existente.</p>
+      </div>
+      <div class="nano-card">
+        <div class="nano-card-title">FullSTIM™</div>
+        <p class="nano-card-desc">Compostos químicos especialmente ajustados para re-estimulação de poços em produção.</p>
+      </div>
+      <div class="nano-card">
+        <div class="nano-card-title">CeraFLO™</div>
+        <p class="nano-card-desc">Compostos proprietários amigáveis ao meio ambiente para eliminar problemas de parafina e asfaltenos.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="sec-tag">NanoCLEAR® — Resultados</div>
+    <h3 class="sec-title" style="font-size:36px; margin-bottom:8px;">Aumento Médio<br>de 98% em Produção</h3>
+    <p style="font-size:14px; color:var(--text-light); margin-bottom:24px;">Resultados em múltiplas bacias — média de 16 meses de sustentação</p>
+
+    <div class="nano-table-wrap">
+      <table class="nano-table">
+        <thead>
+          <tr>
+            <th>Bacia</th>
+            <th>Aumento de Óleo %</th>
+            <th>Meses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Willinston</td><td class="highlight">79%</td><td>18</td></tr>
+          <tr><td>Delaware</td><td class="highlight">111%</td><td>24</td></tr>
+          <tr><td>Mid Con</td><td class="highlight">88%</td><td>20</td></tr>
+          <tr><td>Powder River</td><td class="highlight">80%</td><td>10</td></tr>
+          <tr><td>San Joaquin</td><td class="highlight">189%</td><td>7</td></tr>
+          <tr><td>Avalon / Delaware</td><td class="highlight">90%</td><td>12</td></tr>
+          <tr style="background:var(--off);">
+            <td><strong>Média</strong></td>
+            <td class="highlight"><strong>98%</strong></td>
+            <td><strong>16</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section id="clientes">
+  <div class="sec-tag">Base de Clientes</div>
+  <h2 class="sec-title reveal">Nossos Clientes</h2>
+  <p class="clients-sub reveal">Empresas líderes nacionais e internacionais confiam nas soluções IWS Brasil</p>
+
+  <div class="clients-grid reveal">
+    <div class="client-box"><div class="client-name">Petrobras</div></div>
+    <div class="client-box"><div class="client-name">Eneva</div></div>
+    <div class="client-box"><div class="client-name">Petro Recôncavo</div></div>
+    <div class="client-box"><div class="client-name">Equinor</div></div>
+    <div class="client-box"><div class="client-name">Baker Hughes</div></div>
+    <div class="client-box"><div class="client-name">3R Petroleum</div></div>
+    <div class="client-box"><div class="client-name">Imetame</div></div>
+    <div class="client-box"><div class="client-name">Carmo Energy</div></div>
+    <div class="client-box"><div class="client-name">Seacrest Petróleo</div></div>
+    <div class="client-box"><div class="client-name">Great Energy</div></div>
+    <div class="client-box"><div class="client-name">Açu Petróleo</div></div>
+    <div class="client-box"><div class="client-name">Matra</div></div>
+    <div class="client-box"><div class="client-name">Origem</div></div>
+    <div class="client-box"><div class="client-name">GeoControl</div></div>
+    <div class="client-box"><div class="client-name">CNPC</div></div>
+  </div>
+</section>
+
+<!-- CERTIFICAÇÕES -->
+<div id="certs">
+  <div class="certs-label">Certificações</div>
+  <div class="certs-list">
+    <div class="cert-badge">API Q1</div>
+    <div class="cert-badge">ISO 9001</div>
+    <div class="cert-badge">ISO 45001</div>
+    <div class="cert-badge">OHSAS 18001</div>
+    <div class="cert-badge">CRRC Petrobras</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">IWS <span>Brasil</span></div>
+  <ul class="footer-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#solucoes">Soluções</a></li>
+    <li><a href="#tecnologia">Tecnologia</a></li>
+    <li><a href="#clientes">Clientes</a></li>
+    <li><a href="mailto:vendas@iwsbrasil.com">vendas@iwsbrasil.com</a></li>
+  </ul>
+  <div class="footer-copy">© 2024 IWS Brasil · www.iwsbrasil.com</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => io.observe(r));
+</script>
+</body>
+</html>
