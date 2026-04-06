@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IWS Brasil</title>
 <link rel="icon" href="logo.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary: #0a1f12;
@@ -22,6 +22,7 @@
   --shadow-lg: 0 16px 48px rgba(0,0,0,0.20);
   --surface: rgba(255,255,255,0.03);
   --border: rgba(255,255,255,0.07);
+  --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @keyframes fadeUp {
@@ -37,16 +38,12 @@
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(0.7); }
 }
-@keyframes lineGrow {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font);
   line-height: 1.6;
   color: #dde6d8;
   background: var(--dark);
@@ -74,9 +71,7 @@ body.light-mode .accordion-header { background: #ffffff; }
 body.light-mode .accordion-content { background: rgba(0,0,0,0.02); }
 body.light-mode .client-logo { background: #ffffff; }
 body.light-mode .timeline-text { color: var(--gray); }
-body.light-mode .contato-right { background: rgba(0,0,0,0.04); }
-body.light-mode .form-group input,
-body.light-mode .form-group textarea { background: #ffffff; color: #1a2a1e; border-color: rgba(0,0,0,0.12); }
+body.light-mode .contato-left { background: #ffffff; }
 
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; height: auto; }
@@ -132,10 +127,10 @@ header.scrolled {
   transform: translateX(-50%);
 }
 .nav-links a {
-  font-family: monospace, monospace;
-  font-weight: 400;
-  font-size: 0.72rem;
-  letter-spacing: 1.5px;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.55);
   transition: color 0.25s;
@@ -195,7 +190,6 @@ body.light-mode .switch-handle { transform: translateX(22px); }
   background: var(--dark);
 }
 
-/* Ambient glow blobs */
 .hero-blob {
   position: absolute;
   border-radius: 50%;
@@ -213,7 +207,6 @@ body.light-mode .switch-handle { transform: translateX(22px); }
   bottom: 100px; right: -50px;
 }
 
-/* Grid lines */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -221,17 +214,6 @@ body.light-mode .switch-handle { transform: translateX(22px); }
     linear-gradient(rgba(200,150,15,0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(200,150,15,0.03) 1px, transparent 1px);
   background-size: 60px 60px;
-  pointer-events: none;
-}
-
-/* Diagonal accent stripe */
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 420px; height: 420px;
-  background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(200,150,15,0.05) 60deg, transparent 120deg);
-  transform: rotate(15deg);
   pointer-events: none;
 }
 
@@ -250,10 +232,11 @@ body.light-mode .switch-handle { transform: translateX(22px); }
 }
 
 .hero-eyebrow {
-  font-family: monospace, monospace;
+  font-family: var(--font);
   font-size: 0.72rem;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
+  font-weight: 500;
   color: var(--accent);
   margin-bottom: 20px;
   display: flex;
@@ -275,12 +258,12 @@ body.light-mode .switch-handle { transform: translateX(22px); }
 }
 
 .hero h1 {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font);
   font-size: clamp(4rem, 9vw, 8.5rem);
-  font-weight: 400;
+  font-weight: 300;
   line-height: 0.92;
   margin-bottom: 28px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--white);
   animation: fadeUp 0.8s ease-out 0.25s both;
@@ -311,7 +294,6 @@ body.light-mode .switch-handle { transform: translateX(22px); }
   animation: fadeUp 0.8s ease-out 0.55s both;
 }
 
-/* Stats bar at bottom of hero */
 .hero-stats {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -329,18 +311,20 @@ body.light-mode .switch-handle { transform: translateX(22px); }
 }
 .hero-stat:last-child { border-right: none; }
 .hero-stat-num {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font);
   font-size: 2rem;
-  letter-spacing: 2px;
+  font-weight: 300;
+  letter-spacing: 1px;
   color: var(--accent);
   line-height: 1;
   margin-bottom: 2px;
 }
 .hero-stat-label {
-  font-family: monospace, monospace;
-  font-size: 0.62rem;
-  letter-spacing: 1.5px;
+  font-family: var(--font);
+  font-size: 0.65rem;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
+  font-weight: 500;
   color: rgba(255,255,255,0.35);
 }
 
@@ -350,10 +334,10 @@ body.light-mode .switch-handle { transform: translateX(22px); }
   align-items: center;
   gap: 8px;
   padding: 12px 26px;
-  font-family: monospace, monospace;
+  font-family: var(--font);
   font-weight: 500;
-  font-size: 0.72rem;
-  letter-spacing: 2px;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   border-radius: 2px;
   transition: all 0.2s;
@@ -387,10 +371,10 @@ body.light-mode .switch-handle { transform: translateX(22px); }
 body.light-mode .section-alt { background: rgba(0,0,0,0.025); }
 
 .section-eyebrow {
-  font-family: monospace, monospace;
-  font-size: 0.65rem;
-  font-weight: 400;
-  letter-spacing: 3px;
+  font-family: var(--font);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 14px;
@@ -406,11 +390,11 @@ body.light-mode .section-alt { background: rgba(0,0,0,0.025); }
 }
 
 .section-title {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font);
   font-size: clamp(2.4rem, 5vw, 4rem);
-  font-weight: 400;
+  font-weight: 300;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-bottom: 16px;
   color: var(--white);
   line-height: 1.0;
@@ -458,10 +442,10 @@ body.light-mode .section-subtitle { color: var(--gray); }
   box-shadow: 0 0 0 3px rgba(200,150,15,0.15);
 }
 .timeline-year {
-  font-family: monospace, monospace;
-  font-weight: 500;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
   color: var(--accent);
   margin-bottom: 5px;
 }
@@ -490,9 +474,10 @@ body.light-mode .stats-grid { background: rgba(0,0,0,0.06); border-color: rgba(0
 }
 body.light-mode .stat-item { background: #ffffff; }
 .stat-number {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font);
   font-size: 3.2rem;
-  letter-spacing: 2px;
+  font-weight: 300;
+  letter-spacing: 0px;
   color: var(--accent-light);
   display: block;
   line-height: 1;
@@ -500,11 +485,12 @@ body.light-mode .stat-item { background: #ffffff; }
 }
 body.light-mode .stat-number { color: var(--primary); }
 .stat-label {
-  font-family: monospace, monospace;
-  font-size: 0.62rem;
+  font-family: var(--font);
+  font-size: 0.65rem;
+  font-weight: 500;
   color: rgba(255,255,255,0.35);
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
 }
 body.light-mode .stat-label { color: var(--gray); }
 .stat-bar {
@@ -519,17 +505,16 @@ body.light-mode .stat-label { color: var(--gray); }
   background: var(--accent);
   width: 0;
   transition: width 1.8s cubic-bezier(0.4,0,0.2,1);
-  transform-origin: left;
 }
 .stat-bar-fill.animated { width: var(--w); }
 
 /* Certs */
 .cert-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 40px; }
 .cert-item {
-  font-family: monospace, monospace;
+  font-family: var(--font);
   font-weight: 500;
-  font-size: 0.65rem;
-  letter-spacing: 2px;
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--accent);
   border: 1px solid rgba(200,150,15,0.25);
@@ -539,8 +524,6 @@ body.light-mode .stat-label { color: var(--gray); }
 }
 
 /* --- CARDS --- */
-.grid { display: grid; gap: 1px; }
-.grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .grid-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -574,9 +557,10 @@ body.light-mode .card:hover { background: #fafaf7; }
 }
 
 .card-tag {
-  font-family: monospace, monospace;
-  font-size: 0.6rem;
-  letter-spacing: 2px;
+  font-family: var(--font);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--accent);
   background: rgba(200,150,15,0.08);
@@ -587,11 +571,11 @@ body.light-mode .card:hover { background: #fafaf7; }
   margin-bottom: 16px;
 }
 .card-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.25rem;
+  font-family: var(--font);
+  font-size: 1.2rem;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   margin-bottom: 10px;
   color: var(--white);
 }
@@ -602,9 +586,10 @@ body.light-mode .card-text { color: var(--gray); }
 /* --- PARTNERS --- */
 .partners-block { margin-top: 56px; }
 .partners-label {
-  font-family: monospace, monospace;
-  font-size: 0.62rem;
-  letter-spacing: 2.5px;
+  font-family: var(--font);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.25);
   margin-bottom: 16px;
@@ -612,9 +597,10 @@ body.light-mode .card-text { color: var(--gray); }
 body.light-mode .partners-label { color: rgba(0,0,0,0.3); }
 .partners-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .partner-badge {
-  font-family: monospace, monospace;
-  font-size: 0.65rem;
-  letter-spacing: 1.5px;
+  font-family: var(--font);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.35);
   background: rgba(255,255,255,0.03);
@@ -626,7 +612,7 @@ body.light-mode .partners-label { color: rgba(0,0,0,0.3); }
 body.light-mode .partner-badge { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); color: var(--gray); }
 .partner-badge:hover { border-color: rgba(200,150,15,0.4); color: var(--accent); }
 
-/* --- CATáLOGO --- */
+/* --- CATÁLOGO --- */
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -670,20 +656,22 @@ body.light-mode .catalog-image::after {
 .catalog-item:hover .catalog-image img { transform: scale(1.06); filter: saturate(0.9); }
 .catalog-content { padding: 20px 22px 24px; }
 .catalog-content h3 {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 6px;
 }
 body.light-mode .catalog-content h3 { color: var(--primary); }
-.catalog-content p { color: rgba(255,255,255,0.38); font-size: 0.8rem; font-weight: 300; line-height: 1.6; margin-bottom: 16px; }
+.catalog-content p { color: rgba(255,255,255,0.38); font-size: 0.82rem; font-weight: 300; line-height: 1.6; margin-bottom: 16px; }
 body.light-mode .catalog-content p { color: var(--gray); }
 .btn-sm {
-  font-family: monospace, monospace;
-  font-size: 0.62rem;
-  letter-spacing: 1.5px;
+  font-family: var(--font);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-transform: uppercase;
   padding: 7px 16px;
   background: transparent;
@@ -697,13 +685,14 @@ body.light-mode .catalog-content p { color: var(--gray); }
 
 .catalog-cta { text-align: center; margin-top: 40px; }
 
-/* --- MARQUEE (CLIENTES) --- */
+/* --- MARQUEE --- */
 .marquee-section { padding: 80px 0; overflow: hidden; }
 .marquee-label {
   text-align: center;
-  font-family: monospace, monospace;
+  font-family: var(--font);
   font-size: 0.65rem;
-  letter-spacing: 3px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.25);
   margin-bottom: 40px;
@@ -757,12 +746,12 @@ body.light-mode .marquee-track::after { background: linear-gradient(to left, #f2
 }
 body.light-mode .client-card { background: #ffffff; border-color: rgba(0,0,0,0.06); }
 .client-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(200,150,15,0.2); }
-body.light-mode .client-card:hover { background: #fafaf7; }
 .client-card img { max-height: 32px; object-fit: contain; opacity: 0.6; filter: grayscale(1); transition: opacity 0.2s, filter 0.2s; }
 .client-card:hover img { opacity: 1; filter: grayscale(0); }
 .client-card-name {
-  font-family: monospace, monospace;
-  font-size: 0.6rem;
+  font-family: var(--font);
+  font-size: 0.62rem;
+  font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.3);
@@ -800,9 +789,10 @@ body.light-mode .nano-layout { background: rgba(0,0,0,0.06); border-color: rgba(
 }
 body.light-mode .nano-left { background: linear-gradient(135deg, #163521 0%, #0a1f12 100%); }
 .nano-left h3 {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.8rem;
-  letter-spacing: 2px;
+  font-family: var(--font);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   color: var(--accent-light);
   margin-bottom: 14px;
 }
@@ -816,15 +806,16 @@ body.light-mode .nano-left { background: linear-gradient(135deg, #163521 0%, #0a
 }
 .nano-product strong {
   display: block;
-  font-family: monospace, monospace;
-  font-size: 0.72rem;
-  letter-spacing: 1px;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
   color: var(--accent-light);
   margin-bottom: 3px;
 }
 .nano-product span { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.5; }
 
-.nano-right { background: rgba(255,255,255,0.015); padding: 40px; display: flex; flex-direction: column; gap: 1px; }
+.nano-right { background: rgba(255,255,255,0.015); padding: 40px; display: flex; flex-direction: column; gap: 16px; }
 body.light-mode .nano-right { background: #fafaf7; }
 
 .nano-stat-card {
@@ -832,25 +823,39 @@ body.light-mode .nano-right { background: #fafaf7; }
   border: 1px solid rgba(255,255,255,0.05);
   border-radius: 3px;
   padding: 24px;
-  margin-bottom: 16px;
 }
 body.light-mode .nano-stat-card { background: #ffffff; border-color: rgba(0,0,0,0.06); }
 .nano-stat-card .big-num {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font);
   font-size: 3.5rem;
+  font-weight: 300;
   color: var(--accent);
-  letter-spacing: 2px;
+  letter-spacing: 0px;
   line-height: 1;
   display: block;
   margin-bottom: 6px;
 }
 body.light-mode .nano-stat-card .big-num { color: var(--primary); }
+.nano-stat-card .nano-stat-label {
+  font-family: var(--font);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 8px;
+}
+.nano-stat-card .nano-stat-desc {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+}
 
 /* --- FAQ --- */
 .accordion { max-width: 760px; }
 .accordion-item {
   border-bottom: 1px solid rgba(255,255,255,0.06);
-  margin-bottom: 0;
 }
 body.light-mode .accordion-item { border-color: rgba(0,0,0,0.08); }
 .accordion-header {
@@ -863,9 +868,10 @@ body.light-mode .accordion-item { border-color: rgba(0,0,0,0.08); }
   transition: color 0.2s;
 }
 .accordion-header span:first-child {
-  font-family: monospace, monospace;
-  font-size: 0.78rem;
-  letter-spacing: 1px;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.6);
   transition: color 0.2s;
@@ -892,26 +898,23 @@ body.light-mode .accordion-header span:first-child { color: var(--gray); }
 body.light-mode .accordion-content p { color: var(--gray); }
 
 /* --- CONTATO --- */
-.contato-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 1px;
-  background: rgba(255,255,255,0.04);
+.contato-card {
+  background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.04);
   border-radius: 4px;
-  overflow: hidden;
-  margin-top: 48px;
-}
-body.light-mode .contato-layout { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.06); }
-.contato-left {
-  background: rgba(255,255,255,0.02);
   padding: 48px 40px;
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
 }
-body.light-mode .contato-left { background: #ffffff; }
+body.light-mode .contato-card { background: #ffffff; border-color: rgba(0,0,0,0.06); }
 .contato-left h3 {
-  font-family: 'Inter', sans-serif;
-  font-size: 2.2rem;
-  letter-spacing: 2px;
+  font-family: var(--font);
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
   color: var(--white);
   margin-bottom: 14px;
 }
@@ -927,20 +930,21 @@ body.light-mode .contato-left p { color: var(--gray); }
   background: var(--accent);
   color: var(--dark);
   border-radius: 2px;
-  font-family: monospace, monospace;
-  font-size: 0.72rem;
+  font-family: var(--font);
+  font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   transition: background 0.2s, transform 0.2s;
   margin-bottom: 36px;
 }
 .contato-email-btn:hover { background: var(--accent-light); transform: translateY(-2px); }
 
-.contato-contacts { display: flex; flex-direction: column; gap: 20px; }
+.contato-contacts { display: flex; flex-direction: column; gap: 24px; }
 .contact-person-label {
-  font-family: monospace, monospace;
-  font-size: 0.6rem;
+  font-family: var(--font);
+  font-size: 0.62rem;
+  font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--accent);
@@ -948,69 +952,42 @@ body.light-mode .contato-left p { color: var(--gray); }
 }
 .contact-person-name { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.7); margin-bottom: 2px; }
 body.light-mode .contact-person-name { color: var(--primary); }
-.contact-person-info { font-family: monospace, monospace; font-size: 0.72rem; color: rgba(255,255,255,0.35); line-height: 1.7; }
+.contact-person-info { font-family: var(--font); font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.35); line-height: 1.7; }
 body.light-mode .contact-person-info { color: var(--gray); }
 .contact-person-info a { color: rgba(255,255,255,0.35); transition: color 0.2s; }
 body.light-mode .contact-person-info a { color: var(--gray); }
 .contact-person-info a:hover { color: var(--accent); }
 
-.contato-right {
-  background: rgba(255,255,255,0.025);
-  padding: 48px 40px;
+.contato-right-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-body.light-mode .contato-right { background: #fafaf7; }
-
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-.form-group { margin-bottom: 14px; }
-.form-group label {
-  display: block;
-  margin-bottom: 7px;
-  font-family: monospace, monospace;
-  font-size: 0.62rem;
+.contato-info-block {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 3px;
+  padding: 20px 22px;
+}
+body.light-mode .contato-info-block { background: #f4f2ed; border-color: rgba(0,0,0,0.06); }
+.contato-info-block h4 {
+  font-family: var(--font);
+  font-size: 0.65rem;
+  font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: var(--accent);
+  margin-bottom: 8px;
 }
-body.light-mode .form-group label { color: var(--gray); }
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 11px 14px;
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 2px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
+.contato-info-block p {
+  font-size: 0.85rem;
   font-weight: 300;
-  background: rgba(255,255,255,0.04);
-  color: rgba(255,255,255,0.8);
-  transition: border-color 0.2s;
-  outline: none;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
 }
-body.light-mode .form-group input,
-body.light-mode .form-group textarea {
-  background: #ffffff;
-  border-color: rgba(0,0,0,0.1);
-  color: #1a2a1e;
-}
-.form-group input:focus,
-.form-group textarea:focus { border-color: var(--accent); }
-.btn-submit {
-  width: 100%;
-  padding: 13px;
-  background: var(--accent);
-  color: var(--dark);
-  border: none;
-  border-radius: 2px;
-  font-family: monospace, monospace;
-  font-weight: 500;
-  font-size: 0.72rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-  margin-top: 8px;
-}
-.btn-submit:hover { background: var(--accent-light); transform: translateY(-1px); }
+body.light-mode .contato-info-block p { color: var(--gray); }
+.contato-info-block a { color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.contato-info-block a:hover { color: var(--accent); }
 
 /* --- FOOTER --- */
 footer {
@@ -1018,7 +995,6 @@ footer {
   border-top: 1px solid rgba(255,255,255,0.05);
   padding: 56px 0 0;
 }
-body.light-mode footer { background: #0a1208; }
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
@@ -1026,9 +1002,10 @@ body.light-mode footer { background: #0a1208; }
   margin-bottom: 40px;
 }
 .footer-brand-name {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font);
   font-size: 1.6rem;
-  letter-spacing: 3px;
+  font-weight: 400;
+  letter-spacing: 2px;
   color: var(--white);
 }
 .footer-brand-name span { color: var(--accent); }
@@ -1041,9 +1018,10 @@ body.light-mode footer { background: #0a1208; }
   line-height: 1.7;
 }
 .footer-col h4 {
-  font-family: monospace, monospace;
-  font-size: 0.62rem;
-  letter-spacing: 2.5px;
+  font-family: var(--font);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 20px;
@@ -1064,22 +1042,7 @@ body.light-mode footer { background: #0a1208; }
   flex-wrap: wrap;
   gap: 12px;
 }
-.footer-bottom p { font-family: monospace, monospace; font-size: 0.62rem; letter-spacing: 1px; color: rgba(255,255,255,0.2); }
-.footer-social { display: flex; gap: 8px; }
-.footer-social a {
-  width: 30px; height: 30px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: monospace, monospace;
-  font-size: 0.58rem;
-  color: rgba(255,255,255,0.35);
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-.footer-social a:hover { background: var(--accent); color: var(--dark); border-color: var(--accent); }
+.footer-bottom p { font-family: var(--font); font-size: 0.65rem; font-weight: 400; letter-spacing: 0.5px; color: rgba(255,255,255,0.2); }
 
 /* --- SCROLL TOP --- */
 .scroll-top {
@@ -1112,7 +1075,7 @@ body.light-mode footer { background: #0a1208; }
 @media (max-width: 900px) {
   .sobre-layout { grid-template-columns: 1fr; gap: 48px; }
   .nano-layout { grid-template-columns: 1fr; }
-  .contato-layout { grid-template-columns: 1fr; }
+  .contato-card { grid-template-columns: 1fr; gap: 40px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
@@ -1133,7 +1096,6 @@ body.light-mode footer { background: #0a1208; }
   .hero-stats { grid-template-columns: repeat(2,1fr); position: relative; margin-top: 40px; }
   .section { padding: 64px 0; }
   .catalog-grid, .grid-cards, .tech-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { justify-content: center; text-align: center; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
@@ -1147,7 +1109,7 @@ body.light-mode footer { background: #0a1208; }
     <img src="logo.png" alt="IWS Brasil" class="nav-logo">
     <ul class="nav-links" id="navLinks">
       <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#solucoes">Soluááes</a></li>
+      <li><a href="#solucoes">Soluções</a></li>
       <li><a href="#tecnologia">Tecnologia</a></li>
       <li><a href="#catalogo">Catálogo</a></li>
       <li><a href="#nanotecnologia">Nano</a></li>
@@ -1156,7 +1118,7 @@ body.light-mode footer { background: #0a1208; }
     </ul>
     <div class="nav-right">
       <div class="theme-switch" onclick="toggleTheme()" aria-label="Tema">
-        <span class="theme-icon">??</span>
+        <span class="theme-icon">🌙</span>
         <span class="switch-handle"></span>
       </div>
       <div class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">
@@ -1166,7 +1128,7 @@ body.light-mode footer { background: #0a1208; }
   </nav>
 </header>
 
-<!-- --- HERO --- -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-blob hero-blob-1"></div>
   <div class="hero-blob hero-blob-2"></div>
@@ -1178,16 +1140,16 @@ body.light-mode footer { background: #0a1208; }
       <div class="hero-eyebrow">
         <span class="hero-eyebrow-line"></span>
         <span class="hero-eyebrow-dot"></span>
-        Perfuraááo &amp; Produááo á Onshore / Offshore
+        Perfuração &amp; Produção — Onshore / Offshore
       </div>
       <h1>
-        Soluááes<br>
+        Soluções<br>
         <span class="accent-word">de ponta</span>
         <span class="outline-word">para o campo</span>
       </h1>
-      <p>Brocas premium, fluidos de perfuraááo e tecnologia integrada para reduzir custos e maximizar eficiáncia operacional.</p>
+      <p>Brocas premium, fluidos de perfuração e tecnologia integrada para reduzir custos e maximizar eficiência operacional.</p>
       <div class="hero-ctas">
-        <a href="#catalogo" class="btn btn-primary">Ver catálogo ?</a>
+        <a href="#catalogo" class="btn btn-primary">Ver catálogo →</a>
         <a href="#contato" class="btn btn-ghost">Fale conosco</a>
       </div>
     </div>
@@ -1196,7 +1158,7 @@ body.light-mode footer { background: #0a1208; }
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="hero-stat-num">14+</div>
-      <div class="hero-stat-label">Anos de atuaááo</div>
+      <div class="hero-stat-label">Anos de atuação</div>
     </div>
     <div class="hero-stat">
       <div class="hero-stat-num">75%</div>
@@ -1213,38 +1175,38 @@ body.light-mode footer { background: #0a1208; }
   </div>
 </section>
 
-<!-- --- SOBRE --- -->
+<!-- SOBRE -->
 <section id="sobre" class="section section-alt">
   <div class="container">
-    <div class="section-eyebrow">Nossa histária</div>
+    <div class="section-eyebrow">Nossa história</div>
     <h2 class="section-title">14 anos de resultados comprovados</h2>
-    <p class="section-subtitle">A IWS Brasil fornece produtos e engenharia especializada em áleo &amp; gás, com soluááes integradas de perfuraááo, produááo e controle de fluidos adaptadas ao mercado brasileiro.</p>
+    <p class="section-subtitle">A IWS Brasil fornece produtos e engenharia especializada em óleo &amp; gás, com soluções integradas de perfuração, produção e controle de fluidos adaptadas ao mercado brasileiro.</p>
 
     <div class="sobre-layout">
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-year">2012</div>
-          <div class="timeline-text">Fundaááo em Macaá com filiais no Rio de Janeiro e Aracaju.</div>
+          <div class="timeline-text">Fundação em Macaé com filiais no Rio de Janeiro e Aracaju.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2013</div>
-          <div class="timeline-text">Representaááo no Brasil da VAREL (Brocas), DHP, OFITE e DIGGER. Obtenááo do CRRC junto á Petrobras.</div>
+          <div class="timeline-text">Representação no Brasil da VAREL (Brocas), DHP, OFITE e DIGGER. Obtenção do CRRC junto à Petrobras.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2018</div>
-          <div class="timeline-text">Expansáo comercial e contrato para desenvolvimento de brocas customizadas para o Prá-Sal.</div>
+          <div class="timeline-text">Expansão comercial e contrato para desenvolvimento de brocas customizadas para o Pré-Sal.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2019</div>
-          <div class="timeline-text">Excelentes performances em projetos de poáos Onshore e Offshore Prá-Sal.</div>
+          <div class="timeline-text">Excelentes performances em projetos de poços Onshore e Offshore Pré-Sal.</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-year">2020á2021</div>
-          <div class="timeline-text">Realizaááo de projetos integrados de perfuraááo e produááo via ciáncia de dados.</div>
+          <div class="timeline-year">2020–2021</div>
+          <div class="timeline-text">Realização de projetos integrados de perfuração e produção via ciência de dados.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2024</div>
-          <div class="timeline-text">Soluááes integradas via ciáncia de dados. Inovaááo contánua em brocas, acessários e serviáos.</div>
+          <div class="timeline-text">Soluções integradas via ciência de dados. Inovação contínua em brocas, acessórios e serviços.</div>
         </div>
       </div>
 
@@ -1252,12 +1214,12 @@ body.light-mode footer { background: #0a1208; }
         <div class="stats-grid">
           <div class="stat-item">
             <span class="stat-number">14+</span>
-            <span class="stat-label">Anos de atuaááo</span>
+            <span class="stat-label">Anos de atuação</span>
             <div class="stat-bar"><div class="stat-bar-fill" style="--w:100%"></div></div>
           </div>
           <div class="stat-item">
             <span class="stat-number">75%</span>
-            <span class="stat-label">Reduááo de custos</span>
+            <span class="stat-label">Redução de custos</span>
             <div class="stat-bar"><div class="stat-bar-fill" style="--w:75%"></div></div>
           </div>
           <div class="stat-item">
@@ -1282,50 +1244,50 @@ body.light-mode footer { background: #0a1208; }
   </div>
 </section>
 
-<!-- --- SOLUááES --- -->
+<!-- SOLUÇÕES -->
 <section id="solucoes" class="section">
   <div class="container">
     <div class="section-eyebrow">O que fazemos</div>
-    <h2 class="section-title">Produtos e serviáos</h2>
-    <p class="section-subtitle">Do poáo ao painel de controle á ferramentas, fluidos e análises que conectam a engenharia de campo á eficiáncia operacional.</p>
+    <h2 class="section-title">Produtos e serviços</h2>
+    <p class="section-subtitle">Do poço ao painel de controle — ferramentas, fluidos e análises que conectam a engenharia de campo à eficiência operacional.</p>
 
     <div class="grid-cards">
       <div class="card">
-        <div class="card-tag">PDC / TRI</div>
+        <div class="card-tag">PDC / Tricônica</div>
         <h3 class="card-title">Brocas Premium</h3>
-        <p class="card-text">Brocas PDC e tricánicas customizadas para formaááes do Prá-Sal e campos complexos. Alta durabilidade e ROP otimizada.</p>
+        <p class="card-text">Brocas PDC e tricônicas customizadas para formações do Pré-Sal e campos complexos. Alta durabilidade e ROP otimizada.</p>
       </div>
       <div class="card">
         <div class="card-tag">Fluidos</div>
         <h3 class="card-title">Eng. de Fluidos</h3>
-        <p class="card-text">Controle de reologia, densidade e propriedades de lama para avanáo contánuo, seguro e com menor TNP.</p>
+        <p class="card-text">Controle de reologia, densidade e propriedades de lama para avanço contínuo, seguro e com menor TNP.</p>
       </div>
       <div class="card">
         <div class="card-tag">Ciment.</div>
-        <h3 class="card-title">Cimentaááo</h3>
-        <p class="card-text">Acessários e metodologias que garantem estanqueidade e confiabilidade na completude do poáo.</p>
+        <h3 class="card-title">Cimentação</h3>
+        <p class="card-text">Acessórios e metodologias que garantem estanqueidade e confiabilidade na completude do poço.</p>
       </div>
       <div class="card">
-        <div class="card-tag">Sálidos</div>
-        <h3 class="card-title">Controle de Sálidos</h3>
-        <p class="card-text">Centráfugas decantadoras e equipamentos para tratamento de lama, mantendo estabilidade dos fluidos.</p>
+        <div class="card-tag">Sólidos</div>
+        <h3 class="card-title">Controle de Sólidos</h3>
+        <p class="card-text">Centrífugas decantadoras e equipamentos para tratamento de lama, mantendo estabilidade dos fluidos.</p>
       </div>
       <div class="card">
-        <div class="card-tag">Filtraááo</div>
-        <h3 class="card-title">Unid. de Filtraááo</h3>
-        <p class="card-text">Sistemas máveis de fabricaááo e filtraááo que reduzem custos logásticos em operaááes remotas.</p>
+        <div class="card-tag">Filtração</div>
+        <h3 class="card-title">Unid. de Filtração</h3>
+        <p class="card-text">Sistemas móveis de fabricação e filtração que reduzem custos logísticos em operações remotas.</p>
       </div>
       <div class="card">
         <div class="card-tag">Dados</div>
         <h3 class="card-title">Análise de Dados</h3>
-        <p class="card-text">Monitoramento em tempo real e suporte á decisáo operacional com mátricas confiáveis de campo.</p>
+        <p class="card-text">Monitoramento em tempo real e suporte à decisão operacional com métricas confiáveis de campo.</p>
       </div>
     </div>
 
     <div class="partners-block">
       <div class="partners-label">Marcas representadas no Brasil</div>
       <div class="partners-row">
-        <span class="partner-badge">VAREL á Brocas</span>
+        <span class="partner-badge">VAREL — Brocas</span>
         <span class="partner-badge">OFITE</span>
         <span class="partner-badge">DIGGER Downhole</span>
         <span class="partner-badge">OPTIMAX Deepview</span>
@@ -1338,64 +1300,64 @@ body.light-mode footer { background: #0a1208; }
   </div>
 </section>
 
-<!-- --- TECNOLOGIA --- -->
+<!-- TECNOLOGIA -->
 <section id="tecnologia" class="section section-alt">
   <div class="container">
     <div class="section-eyebrow">Tecnologia</div>
     <h2 class="section-title">Dados que entregam controle</h2>
-    <p class="section-subtitle">Conectamos dados de campo a decisáes confiáveis á reduzindo tempo náo produtivo e aumentando a eficiáncia das perfuraááes.</p>
+    <p class="section-subtitle">Conectamos dados de campo a decisões confiáveis — reduzindo tempo não produtivo e aumentando a eficiência das perfurações.</p>
 
     <div class="tech-grid">
       <div class="card">
         <h3 class="card-title">Análise em Tempo Real</h3>
-        <p class="card-text">Acompanhamos a perfuraááo segundo a segundo para ajustar parámetros de forma proativa.</p>
+        <p class="card-text">Acompanhamos a perfuração segundo a segundo para ajustar parâmetros de forma proativa.</p>
       </div>
       <div class="card">
-        <h3 class="card-title">Manutenááo Preditiva</h3>
-        <p class="card-text">Identificamos sinais de desgaste e evitamos paradas náo planejadas com antecedáncia.</p>
+        <h3 class="card-title">Manutenção Preditiva</h3>
+        <p class="card-text">Identificamos sinais de desgaste e evitamos paradas não planejadas com antecedência.</p>
       </div>
       <div class="card">
-        <h3 class="card-title">Decisáes Orientadas</h3>
-        <p class="card-text">Relatários claros e aááes recomendadas baseadas em dados reais do poáo.</p>
+        <h3 class="card-title">Decisões Orientadas por Dados</h3>
+        <p class="card-text">Relatórios claros e ações recomendadas baseadas em dados reais do poço.</p>
       </div>
       <div class="card">
-        <h3 class="card-title">Gestáo de Riscos</h3>
-        <p class="card-text">Mitigaááo de riscos com protocolos adaptados á operaááo e ao perfil do campo.</p>
+        <h3 class="card-title">Gestão de Riscos</h3>
+        <p class="card-text">Mitigação de riscos com protocolos adaptados à operação e ao perfil do campo.</p>
       </div>
       <div class="card">
-        <h3 class="card-title">Reservatários</h3>
-        <p class="card-text">Previsáo de performance e acompanhamento contánuo das condiááes de produááo.</p>
+        <h3 class="card-title">Reservatórios</h3>
+        <p class="card-text">Previsão de performance e acompanhamento contínuo das condições de produção.</p>
       </div>
       <div class="card">
         <h3 class="card-title">Painel Integrado</h3>
-        <p class="card-text">Monitoramento unificado de máltiplos poáos para decisáes mais rápidas e embasadas.</p>
+        <p class="card-text">Monitoramento unificado de múltiplos poços para decisões mais rápidas e embasadas.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- --- CATáLOGO --- -->
+<!-- CATÁLOGO -->
 <section id="catalogo" class="section">
   <div class="container">
     <div class="section-eyebrow">Produtos</div>
-    <h2 class="section-title">Catálogo de soluááes</h2>
-    <p class="section-subtitle">Nossa linha completa de produtos e serviáos para perfuraááo e produááo de áleo &amp; gás.</p>
+    <h2 class="section-title">Catálogo de soluções</h2>
+    <p class="section-subtitle">Nossa linha completa de produtos e serviços para perfuração e produção de óleo &amp; gás.</p>
 
     <div class="catalog-grid">
       <div class="catalog-item">
         <div class="catalog-image"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Brocas"></div>
         <div class="catalog-content">
           <h3>Brocas Premium</h3>
-          <p>PDC e tricánicas para Prá-Sal. Alta performance comprovada.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes ?</a>
+          <p>PDC e tricônicas para Pré-Sal. Alta performance comprovada.</p>
+          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
         </div>
       </div>
       <div class="catalog-item">
-        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Sálidos"></div>
+        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Sólidos"></div>
         <div class="catalog-content">
-          <h3>Controle de Sálidos</h3>
-          <p>Centráfugas decantadoras e secadores de cascalho.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes ?</a>
+          <h3>Controle de Sólidos</h3>
+          <p>Centrífugas decantadoras e secadores de cascalho.</p>
+          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
         </div>
       </div>
       <div class="catalog-item">
@@ -1403,101 +1365,101 @@ body.light-mode footer { background: #0a1208; }
         <div class="catalog-content">
           <h3>Engenharia de Fluidos</h3>
           <p>Análise completa de reologia, densidade e propriedades de lama.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes ?</a>
+          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
         </div>
       </div>
       <div class="catalog-item">
         <div class="catalog-image"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Dados"></div>
         <div class="catalog-content">
-          <h3>Serviáos de Dados</h3>
-          <p>Monitoramento em tempo real e manutenááo preditiva.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes ?</a>
+          <h3>Serviços de Dados</h3>
+          <p>Monitoramento em tempo real e manutenção preditiva.</p>
+          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
         </div>
       </div>
       <div class="catalog-item">
-        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Cimentaááo"></div>
+        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Cimentação"></div>
         <div class="catalog-content">
-          <h3>Acess. de Cimentaááo</h3>
-          <p>Ferramentas especializadas á Sapatas, Colares, Packers, BPP.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes ?</a>
+          <h3>Acess. de Cimentação</h3>
+          <p>Ferramentas especializadas — Sapatas, Colares, Packers, BPP.</p>
+          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
         </div>
       </div>
       <div class="catalog-item">
-        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Filtraááo"></div>
+        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Filtração"></div>
         <div class="catalog-content">
-          <h3>Unidades de Filtraááo</h3>
-          <p>Sistemas máveis de filtraááo e fabricaááo de fluidos em campo.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes ?</a>
+          <h3>Unidades de Filtração</h3>
+          <p>Sistemas móveis de filtração e fabricação de fluidos em campo.</p>
+          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
         </div>
       </div>
     </div>
 
     <div class="catalog-cta">
-      <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn btn-primary">Baixar catálogo completo (PDF) ?</a>
+      <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn btn-primary">Baixar catálogo completo (PDF) →</a>
     </div>
   </div>
 </section>
 
-<!-- --- NANOTECNOLOGIA --- -->
+<!-- NANOTECNOLOGIA -->
 <section id="nanotecnologia" class="section section-alt">
   <div class="container">
-    <div class="section-eyebrow">Inovaááo</div>
-    <h2 class="section-title">Soluááes de reservatário á Nanotecnologia</h2>
-    <p class="section-subtitle">Tecnologias proprietárias baseadas em nanomateriais para aumentar a produááo de áleo, reduzir BSW e minimizar o impacto ambiental.</p>
+    <div class="section-eyebrow">Inovação</div>
+    <h2 class="section-title">Nanotecnologia para reservatórios</h2>
+    <p class="section-subtitle">Tecnologias proprietárias baseadas em nanomateriais para aumentar a produção de óleo, reduzir BSW e minimizar o impacto ambiental.</p>
 
     <div class="nano-layout">
       <div class="nano-left">
-        <h3>NanoCLEARá á TenEx</h3>
-        <p>Combinaááo de moláculas quámicas e nanopartáculas que geram foráas quámicas <strong style="color:var(--accent-light)">e mecánicas</strong> para recuperaááo eficiente de áleo á com efeitos de longo prazo e formulaááo econámica.</p>
+        <h3>NanoCLEAR — TenEx</h3>
+        <p>Combinação de moléculas químicas e nanopartículas que geram forças químicas <strong style="color:var(--accent-light)">e mecânicas</strong> para recuperação eficiente de óleo — com efeitos de longo prazo e formulação econômica.</p>
         <div class="nano-products">
           <div class="nano-product">
-            <strong>CeraFLOá</strong>
-            <span>Eliminaááo de parafina e asfaltenos com compostos ambientalmente amigáveis.</span>
+            <strong>CeraFLO</strong>
+            <span>Eliminação de parafina e asfaltenos com compostos ambientalmente amigáveis.</span>
           </div>
           <div class="nano-product">
-            <strong>FullSTIMá</strong>
-            <span>Re-estimulaááo de poáos em produááo com compostos quámicos ajustados.</span>
+            <strong>FullSTIM</strong>
+            <span>Re-estimulação de poços em produção com compostos químicos ajustados.</span>
           </div>
           <div class="nano-product">
-            <strong>NoHITá</strong>
-            <span>Mitigaááo pioneira de comunicaááo de fraturamento com poáo existente.</span>
+            <strong>NoHIT</strong>
+            <span>Mitigação pioneira de comunicação de fraturamento com poço existente.</span>
           </div>
           <div class="nano-product">
             <strong>Gel Breaker / Scale Breaker</strong>
-            <span>Dissoluááo de polámeros, gáis e incrustaááes inorgánicas na formaááo.</span>
+            <span>Dissolução de polímeros, géis e incrustações inorgânicas na formação.</span>
           </div>
         </div>
       </div>
       <div class="nano-right">
         <div class="nano-stat-card">
           <span class="big-num">98%</span>
-          <div style="font-family:monospace,monospace;font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;">Aumento mádio de produááo de áleo</div>
-          <div style="font-size:0.82rem;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.7;">Mádia ao longo de 16 meses em máltiplas bacias. Menor incremento registrado: 46%.</div>
+          <div class="nano-stat-label">Aumento médio de produção de óleo</div>
+          <div class="nano-stat-desc">Média ao longo de 16 meses em múltiplas bacias. Menor incremento registrado: 46%.</div>
         </div>
         <div class="nano-stat-card">
           <span class="big-num">12%</span>
-          <div style="font-family:monospace,monospace;font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;">Reduááo mádia na produááo de água</div>
-          <div style="font-size:0.82rem;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.7;">Controle de produááo de areia com pasta de micropartáculas em poáos novos e existentes.</div>
+          <div class="nano-stat-label">Redução média na produção de água</div>
+          <div class="nano-stat-desc">Controle de produção de areia com pasta de micropartículas em poços novos e existentes.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- --- FAQ --- -->
+<!-- FAQ -->
 <section id="faq" class="section">
   <div class="container">
     <div class="section-eyebrow">FAQ</div>
     <h2 class="section-title">Perguntas frequentes</h2>
-    <p class="section-subtitle">Dávidas sobre nossos produtos e soluááes.</p>
+    <p class="section-subtitle">Dúvidas sobre nossos produtos e soluções.</p>
     <div class="accordion">
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>Quais tipos de brocas vocás oferecem?</span>
+          <span>Quais tipos de brocas vocês oferecem?</span>
           <span class="accordion-plus">+</span>
         </div>
         <div class="accordion-content">
-          <p>Oferecemos brocas PDC e tricánicas customizadas para diferentes formaááes geolágicas, incluindo aplicaááes no Prá-Sal e campos offshore. Cada broca á selecionada ou projetada com base no perfil do poáo e nas condiááes de formaááo.</p>
+          <p>Oferecemos brocas PDC e tricônicas customizadas para diferentes formações geológicas, incluindo aplicações no Pré-Sal e campos offshore. Cada broca é selecionada ou projetada com base no perfil do poço e nas condições de formação.</p>
         </div>
       </div>
       <div class="accordion-item">
@@ -1506,104 +1468,100 @@ body.light-mode footer { background: #0a1208; }
           <span class="accordion-plus">+</span>
         </div>
         <div class="accordion-content">
-          <p>Utilizamos sensores avanáados e algoritmos de análise para acompanhar parámetros de perfuraááo em tempo real, permitindo ajustes proativos e otimizaááo contánua da performance com o sistema OPTIMAX Deepview.</p>
+          <p>Utilizamos sensores avançados e algoritmos de análise para acompanhar parâmetros de perfuração em tempo real, permitindo ajustes proativos e otimização contínua da performance com o sistema OPTIMAX Deepview.</p>
         </div>
       </div>
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>Vocás trabalham com projetos offshore?</span>
+          <span>Vocês trabalham com projetos offshore?</span>
           <span class="accordion-plus">+</span>
         </div>
         <div class="accordion-content">
-          <p>Sim, temos experiáncia comprovada em projetos offshore incluindo plataformas fixas e FPSOs, com soluááes adaptadas ás condiááes marinhas e requisitos Petrobras (CRRC registrado).</p>
+          <p>Sim, temos experiência comprovada em projetos offshore incluindo plataformas fixas e FPSOs, com soluções adaptadas às condições marinhas e requisitos Petrobras (CRRC registrado).</p>
         </div>
       </div>
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>Quais sáo as condiááes de contrataááo de brocas?</span>
+          <span>Quais são as condições de contratação de brocas?</span>
           <span class="accordion-plus">+</span>
         </div>
         <div class="accordion-content">
-          <p>Brocas premium disponáveis em inventário. Contrataááo via custo por metro perfurado ou com bánus e malus, alinhando os objetivos de performance entre IWS Brasil e a operadora.</p>
+          <p>Brocas premium disponíveis em inventário. Contratação via custo por metro perfurado ou com bônus e malus, alinhando os objetivos de performance entre IWS Brasil e a operadora.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- --- CLIENTES (MARQUEE) --- -->
+<!-- CLIENTES -->
 <section id="clientes" class="marquee-section section-alt">
   <div class="container" style="margin-bottom:0">
-    <div class="section-eyebrow">Portfálio</div>
+    <div class="section-eyebrow">Portfólio</div>
     <h2 class="section-title">Nossos clientes</h2>
-    <p class="section-subtitle">Empresas láderes que confiam em nossas soluááes para operaááes de áleo &amp; gás.</p>
+    <p class="section-subtitle">Empresas líderes que confiam em nossas soluções para operações de óleo &amp; gás.</p>
   </div>
-  <div class="marquee-label">á Clientes ativos á</div>
+  <div class="marquee-label">— Clientes ativos —</div>
   <div class="marquee-track">
     <div class="marquee-inner" id="marqueeInner"></div>
   </div>
 </section>
 
-<!-- --- CONTATO --- -->
+<!-- CONTATO -->
 <section id="contato" class="section">
   <div class="container">
     <div class="section-eyebrow">Fale conosco</div>
     <h2 class="section-title">Vamos conversar</h2>
-    <p class="section-subtitle">Estamos prontos para discutir suas necessidades em perfuraááo e produááo.</p>
+    <p class="section-subtitle">Estamos prontos para discutir suas necessidades em perfuração e produção.</p>
 
-    <div class="contato-layout">
+    <div class="contato-card">
       <div class="contato-left">
         <h3>Contato direto</h3>
-        <p>Para consultas comerciais, especificaááo de produtos ou suporte tácnico. Respondemos em atá 1 dia átil.</p>
-        <a href="mailto:vendas@iwsbrasil.com" class="contato-email-btn">? vendas@iwsbrasil.com</a>
+        <p>Para consultas comerciais, especificação de produtos ou suporte técnico. Respondemos em até 1 dia útil.</p>
+        <a href="mailto:vendas@iwsbrasil.com" class="contato-email-btn">✉ vendas@iwsbrasil.com</a>
+
+        <div class="contato-contacts">
+          <div>
+            <div class="contact-person-label">Comercial</div>
+            <div class="contact-person-name">IWS Brasil</div>
+            <div class="contact-person-info">
+              <a href="mailto:vendas@iwsbrasil.com">vendas@iwsbrasil.com</a><br>
+              <a href="http://www.iwsbrasil.com" target="_blank">www.iwsbrasil.com</a>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="contato-right">
-        <form id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Nome *</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="phone">Telefone</label>
-              <input type="tel" id="phone" name="phone">
-            </div>
-            <div class="form-group">
-              <label for="company">Empresa</label>
-              <input type="text" id="company" name="company">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="message">Mensagem *</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Enviar mensagem ?</button>
-        </form>
+      <div class="contato-right-info">
+        <div class="contato-info-block">
+          <h4>Escritórios</h4>
+          <p>Macaé — Rio de Janeiro — Aracaju</p>
+        </div>
+        <div class="contato-info-block">
+          <h4>Certificações</h4>
+          <p>API Q1 · ISO 9001 · ISO 45001 · OHSAS 18001<br>CRRC registrado junto à Petrobras</p>
+        </div>
+        <div class="contato-info-block">
+          <h4>Atuação</h4>
+          <p>Onshore e Offshore · Pré-Sal e pós-Sal<br>Plataformas fixas e FPSOs</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- --- FOOTER --- -->
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-brand-name">IWS <span>Brasil</span></div>
-        <p>Engenharia e fornecimento de produtos especializados para a indástria de áleo &amp; gás. Brocas, fluidos, cimentaááo e tecnologia integrada.</p>
+        <p>Engenharia e fornecimento de produtos especializados para a indústria de óleo &amp; gás. Brocas, fluidos, cimentação e tecnologia integrada.</p>
       </div>
       <div class="footer-col">
         <h4>Links Rápidos</h4>
         <ul>
           <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#solucoes">Soluááes</a></li>
+          <li><a href="#solucoes">Soluções</a></li>
           <li><a href="#tecnologia">Tecnologia</a></li>
           <li><a href="#catalogo">Catálogo</a></li>
           <li><a href="#nanotecnologia">Nanotecnologia</a></li>
@@ -1614,8 +1572,8 @@ body.light-mode footer { background: #0a1208; }
         <h4>Contato</h4>
         <p>
           <a href="mailto:vendas@iwsbrasil.com">vendas@iwsbrasil.com</a><br>
-          Macaá á Rio de Janeiro á Aracaju<br><br>
-          <a href="http://www.iwsbrasil.com">www.iwsbrasil.com</a>
+          Macaé · Rio de Janeiro · Aracaju<br><br>
+          <a href="http://www.iwsbrasil.com" target="_blank">www.iwsbrasil.com</a>
         </p>
       </div>
     </div>
@@ -1625,10 +1583,9 @@ body.light-mode footer { background: #0a1208; }
   </div>
 </footer>
 
-<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">?</div>
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 
 <script>
-// -- MARQUEE CLIENTS --
 const clients = [
   "3R PETROLEUM","BAKER HUGHES","CARMO ENERGY","ENEVA","EQUINOR",
   "GREAT ENERGY","IMETAME","MATRA","PETROBRAS","PETRORECONCAVO",
@@ -1637,18 +1594,14 @@ const clients = [
 
 function buildMarquee() {
   const inner = document.getElementById('marqueeInner');
-  // Duplicate for seamless loop
   const allClients = [...clients, ...clients];
   allClients.forEach(name => {
     const card = document.createElement('div');
     card.className = 'client-card';
     const img = document.createElement('img');
-    const slug = name.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'');
     img.src = `clientes/${encodeURIComponent(name)}.png`;
     img.alt = name;
-    img.onerror = function() {
-      this.style.display = 'none';
-    };
+    img.onerror = function() { this.style.display = 'none'; };
     const label = document.createElement('div');
     label.className = 'client-card-name';
     label.textContent = name;
@@ -1659,7 +1612,6 @@ function buildMarquee() {
 }
 buildMarquee();
 
-// -- SCROLL EVENTS --
 window.addEventListener('scroll', () => {
   document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
   document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 400);
@@ -1668,7 +1620,6 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// -- ACCORDION --
 function toggleAccordion(header) {
   const item = header.parentElement;
   const isOpen = item.classList.contains('open');
@@ -1682,15 +1633,13 @@ function toggleAccordion(header) {
   }
 }
 
-// -- THEME --
 function toggleTheme() {
   document.body.classList.toggle('light-mode');
   document.body.classList.toggle('dark-mode');
   const isDark = document.body.classList.contains('dark-mode');
-  document.querySelector('.theme-icon').textContent = isDark ? '??' : '??';
+  document.querySelector('.theme-icon').textContent = isDark ? '🌙' : '☀️';
 }
 
-// -- NAV --
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
@@ -1700,16 +1649,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   });
 });
 
-// -- FORM --
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('.btn-submit');
-  btn.textContent = 'Mensagem enviada ?';
-  btn.style.background = '#2d7a44';
-  setTimeout(() => { btn.textContent = 'Enviar mensagem ?'; btn.style.background = ''; this.reset(); }, 3500);
-});
-
-// -- SECURITY --
 document.addEventListener('keydown', e => {
   if (e.ctrlKey && ['a','c','u','s','p'].includes(e.key)) e.preventDefault();
   if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
