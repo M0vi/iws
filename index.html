@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IWS Brasil — Engenharia e Inovação</title>
+<title>IWS Brasil</title>
+<link rel="icon" href="logo.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -911,6 +912,104 @@ footer {
   .client-logos { grid-template-columns: repeat(2, 1fr); }
   .certifications { grid-template-columns: repeat(2, 1fr); }
 }
+/* Contact Section */
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-top: 40px;
+}
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.contact-item h3 {
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+.contact-item p {
+  margin: 0;
+  color: var(--dark);
+}
+.contact-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.contact-form .form-group {
+  margin-bottom: 20px;
+}
+.contact-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: inherit;
+}
+/* Footer */
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+.footer-section h4 {
+  color: var(--white);
+  margin-bottom: 15px;
+}
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+.footer-section ul li a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-section ul li a:hover {
+  color: var(--accent);
+}
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+.social-link {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+.social-link:hover {
+  transform: scale(1.1);
+}
+@media (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+  .contact-form .form-row {
+    grid-template-columns: 1fr;
+  }
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 <body class="dark-mode">
@@ -1208,24 +1307,87 @@ footer {
 <section id="contato" class="section">
   <div class="container">
     <h2 class="section-title">Vamos conversar</h2>
-    <p class="section-subtitle">Envie um e-mail para vendas@iwsbrasil.com para falar diretamente com nossa equipe comercial.</p>
+    <p class="section-subtitle">Estamos prontos para discutir suas necessidades em engenharia e inovação para óleo & gás.</p>
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="contact-item">
+          <h3>Email</h3>
+          <p>vendas@iwsbrasil.com</p>
+        </div>
+        <div class="contact-item">
+          <h3>Telefone</h3>
+          <p>+55 21 99999-9999</p>
+        </div>
+        <div class="contact-item">
+          <h3>Endereço</h3>
+          <p>Rio de Janeiro, Brasil</p>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#" class="social-link">Facebook</a>
+          <a href="#" class="social-link">Instagram</a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Nome *</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Telefone</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+              <label for="company">Empresa</label>
+              <input type="text" id="company" name="company">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Mensagem *</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn">Enviar Mensagem</button>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 <footer>
   <div class="container">
     <div class="footer-content">
-      <div>
-        <div class="logo" style="text-align: left; margin-bottom: 20px;">IWS <span>Brasil</span></div>
-        <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">Engenharia e inovação para a indústria de óleo &amp; gás.</p>
+      <div class="footer-section">
+        <div class="logo">IWS <span>Brasil</span></div>
+        <p>Engenharia e inovação para a indústria de óleo & gás.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#" class="social-link">Facebook</a>
+          <a href="#" class="social-link">Instagram</a>
+        </div>
       </div>
-      <ul class="footer-links">
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#solucoes">Soluções</a></li>
-        <li><a href="#tecnologia">Tecnologia</a></li>
-        <li><a href="#catalogo">Catálogo</a></li>
-        <li><a href="#clientes">Clientes</a></li>
-        <li><a href="mailto:vendas@iwsbrasil.com">Contato</a></li>
-      </ul>
+      <div class="footer-section">
+        <h4>Links Rápidos</h4>
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#solucoes">Soluções</a></li>
+          <li><a href="#tecnologia">Tecnologia</a></li>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#clientes">Clientes</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contato</h4>
+        <p>Email: vendas@iwsbrasil.com</p>
+        <p>Telefone: +55 21 99999-9999</p>
+        <p>Endereço: Rio de Janeiro, Brasil</p>
+      </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 IWS Brasil. Todos os direitos reservados.</p>
@@ -1236,18 +1398,18 @@ footer {
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
     <h2>Entre em Contato</h2>
-    <form id="contactForm">
+    <form id="modalContactForm">
       <div class="form-group">
-        <label for="name">Nome</label>
-        <input type="text" id="name" name="name" required>
+        <label for="modalName">Nome</label>
+        <input type="text" id="modalName" name="name" required>
       </div>
       <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" required>
+        <label for="modalEmail">E-mail</label>
+        <input type="email" id="modalEmail" name="email" required>
       </div>
       <div class="form-group">
-        <label for="message">Mensagem</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
+        <label for="modalMessage">Mensagem</label>
+        <textarea id="modalMessage" name="message" rows="4" required></textarea>
       </div>
       <button type="submit" class="btn">Enviar Mensagem</button>
     </form>
@@ -1355,6 +1517,13 @@ window.onclick = function(event) {
 
 // Contact form
 document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+  this.reset();
+});
+
+// Modal contact form
+document.getElementById('modalContactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
   closeModal();
