@@ -1190,36 +1190,6 @@ footer {
         <p>Para consultas comerciais, especificação de produtos ou suporte técnico, envie um e-mail para nossa equipe. Respondemos em até 1 dia útil.</p>
         <a href="mailto:vendas@iwsbrasil.com" class="contato-email">vendas@iwsbrasil.com</a>
       </div>
-
-      <div class="contato-right">
-        <form id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Nome *</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="phone">Telefone</label>
-              <input type="tel" id="phone" name="phone">
-            </div>
-            <div class="form-group">
-              <label for="company">Empresa</label>
-              <input type="text" id="company" name="company">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="message">Mensagem *</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Enviar Mensagem</button>
-        </form>
-      </div>
     </div>
   </div>
 </section>
@@ -1334,13 +1304,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
     document.getElementById('navLinks').classList.remove('active');
   });
-});
-
-// Contact form
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-  this.reset();
 });
 
 // Security
