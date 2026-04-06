@@ -555,6 +555,12 @@ body.dark-mode header.scrolled {
   padding: 100px 0;
 }
 .section-alt { background: var(--light); }
+body.dark-mode .section-alt { background: rgba(255,255,255,0.05); }
+body.dark-mode .card,
+body.dark-mode .client-logo,
+body.dark-mode .modal-content {
+  background: rgba(255,255,255,0.08);
+}
 .section-title {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
@@ -571,7 +577,7 @@ body.dark-mode header.scrolled {
   display: grid;
   gap: 30px;
 }
-.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: stretch; }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .card {
@@ -580,6 +586,9 @@ body.dark-mode header.scrolled {
   border-radius: 12px;
   box-shadow: var(--shadow);
   transition: transform 0.3s, box-shadow 0.3s;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .card:hover {
   transform: translateY(-5px);
@@ -608,6 +617,7 @@ body.dark-mode header.scrolled {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 30px;
   margin-top: 40px;
+  align-content: start;
 }
 .stat-item {
   text-align: center;
@@ -775,12 +785,14 @@ footer {
   background: var(--dark);
   color: var(--white);
   padding: 40px 0;
-  text-align: center;
+  text-align: left;
 }
 .footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
   margin-bottom: 20px;
 }
 .footer-links {
@@ -788,6 +800,9 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.footer-links li {
+  min-width: 120px;
 }
 .footer-links a {
   color: rgba(255,255,255,0.8);
@@ -799,8 +814,51 @@ footer {
   padding-top: 20px;
   font-size: 0.9rem;
   color: rgba(255,255,255,0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.footer-bottom p {
+  margin: 0;
+}
+.footer-bottom .social-links {
+  display: flex;
+  gap: 12px;
+}
+.footer-bottom .social-links a {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  color: rgba(255,255,255,0.9);
 }
 @media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-links {
+    width: 100%;
+    align-items: center;
+  }
+  .footer-links li {
+    min-width: auto;
+  }
+  .footer-bottom {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-bottom .social-links {
+    justify-content: center;
+    display: none;
+  }
   .nav {
     padding: 10px 0;
   }
@@ -834,6 +892,9 @@ footer {
   }
   .nav-links a {
     font-size: 1.05rem;
+    color: var(--dark);
+  }
+  body.dark-mode .nav-links a {
     color: rgba(255,255,255,0.96);
   }
   .nav-links a::after {
@@ -1168,12 +1229,6 @@ footer {
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 IWS Brasil. Todos os direitos reservados.</p>
-      <div class="social-links">
-        <a href="#" title="LinkedIn">💼</a>
-        <a href="#" title="Twitter">🐦</a>
-        <a href="#" title="Facebook">📘</a>
-        <a href="#" title="Instagram">📷</a>
-      </div>
     </div>
   </div>
 </footer>
