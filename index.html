@@ -786,61 +786,6 @@ body.dark-mode .contato-left p { color: rgba(255,255,255,0.5); }
   font-size: 1.1rem;
 }
 
-.contato-right {
-  background: var(--light);
-  border-radius: 6px;
-  padding: 36px;
-  border: 1px solid rgba(0,0,0,0.06);
-}
-body.dark-mode .contato-right { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-.form-group { margin-bottom: 16px; }
-.form-group label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--gray);
-}
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 11px 14px;
-  border: 1px solid rgba(0,0,0,0.12);
-  border-radius: 3px;
-  font-family: 'Barlow', sans-serif;
-  font-size: 0.92rem;
-  background: var(--white);
-  color: var(--dark);
-  transition: border-color 0.2s;
-  outline: none;
-}
-body.dark-mode .form-group input,
-body.dark-mode .form-group textarea {
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.1);
-  color: #dde8e2;
-}
-.form-group input:focus,
-.form-group textarea:focus { border-color: var(--accent); }
-.btn-submit {
-  width: 100%;
-  padding: 13px;
-  background: var(--accent);
-  color: var(--dark);
-  border: none;
-  border-radius: 3px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.25s, transform 0.2s;
-}
-.btn-submit:hover { background: var(--accent-light); transform: translateY(-1px); }
 
 /* ─── FOOTER ─── */
 footer {
@@ -1378,55 +1323,6 @@ footer {
         <h3>Entre em contato direto</h3>
         <p>Para consultas comerciais, especificação de produtos ou suporte técnico, entre em contato com nossa equipe. Respondemos em até 1 dia útil.</p>
         <a href="mailto:vendas@iwsbrasil.com" class="contato-email">vendas@iwsbrasil.com</a>
-
-        <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 18px;">
-          <div>
-            <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Operações e Negócios</div>
-            <div style="font-size:0.88rem; color:var(--gray);">Sérgio Andre Pessoa<br>
-            <a href="mailto:sabp@iwsbrasil.com" style="color:var(--accent);">sabp@iwsbrasil.com</a><br>
-            +55 (21) 96728-4652</div>
-          </div>
-          <div>
-            <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">CEO</div>
-            <div style="font-size:0.88rem; color:var(--gray);">Luiz Carlos de Albuquerque<br>
-            <a href="mailto:lca@iwsbrasil.com" style="color:var(--accent);">lca@iwsbrasil.com</a><br>
-            +55 (21) 98111-1312</div>
-          </div>
-          <div>
-            <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Unidades</div>
-            <div style="font-size:0.88rem; color:var(--gray);">Macaé (sede) · Rio de Janeiro · Aracaju</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="contato-right">
-        <form id="contactForm">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Nome *</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="phone">Telefone</label>
-              <input type="tel" id="phone" name="phone">
-            </div>
-            <div class="form-group">
-              <label for="company">Empresa</label>
-              <input type="text" id="company" name="company">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="message">Mensagem *</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Enviar Mensagem</button>
-        </form>
       </div>
     </div>
   </div>
@@ -1544,13 +1440,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
     document.getElementById('navLinks').classList.remove('active');
   });
-});
-
-// Contact form
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-  this.reset();
 });
 
 // Security
