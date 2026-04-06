@@ -432,6 +432,121 @@ body.dark-mode .stat-number { color: var(--accent-light); }
 }
 .stat-bar-fill.animated { width: var(--w); }
 
+/* ─── CERTIFICAÇÕES ─── */
+.cert-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+.cert-item {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(212,160,23,0.3);
+  background: rgba(212,160,23,0.06);
+  padding: 7px 14px;
+  border-radius: 3px;
+}
+
+/* ─── PARCEIROS ─── */
+.partners-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+  align-items: center;
+}
+.partner-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray);
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 8px 16px;
+  border-radius: 3px;
+  transition: border-color 0.2s, color 0.2s;
+}
+body.dark-mode .partner-badge {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.45);
+}
+.partner-badge:hover { border-color: var(--accent); color: var(--accent); }
+.partners-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 12px;
+}
+body.dark-mode .partners-label { color: rgba(255,255,255,0.35); }
+
+/* ─── NANOTECNOLOGIA ─── */
+.nano-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 48px;
+  align-items: start;
+}
+.nano-highlight {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+  border-radius: 6px;
+  padding: 36px;
+  color: var(--white);
+}
+.nano-highlight h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  color: var(--accent-light);
+}
+.nano-highlight p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 20px;
+}
+.nano-products {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.nano-product {
+  background: rgba(255,255,255,0.08);
+  border-left: 3px solid var(--accent);
+  padding: 14px 16px;
+  border-radius: 3px;
+}
+.nano-product strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--accent-light);
+  margin-bottom: 4px;
+}
+.nano-product span {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+}
+@media (max-width: 768px) {
+  .nano-grid { grid-template-columns: 1fr; }
+}
+
 /* ─── CARDS ─── */
 .grid { display: grid; gap: 24px; }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
@@ -888,6 +1003,7 @@ footer {
       <li><a href="#solucoes">Soluções</a></li>
       <li><a href="#tecnologia">Tecnologia</a></li>
       <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#nanotecnologia">Nanotecnologia</a></li>
       <li><a href="#clientes">Clientes</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
@@ -933,20 +1049,24 @@ footer {
           <div class="timeline-text">Fundação em Macaé com filiais no Rio de Janeiro e Aracaju.</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-year">2017</div>
-          <div class="timeline-text">Obtenção do CRRC Petrobras e expansão comercial.</div>
+          <div class="timeline-year">2013</div>
+          <div class="timeline-text">Representação no Brasil da VAREL (Brocas), DHP, OFITE e DIGGER. Obtenção do CRRC junto à Petrobras.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2018</div>
-          <div class="timeline-text">Desenvolvimento de brocas customizadas para o Pré-Sal.</div>
+          <div class="timeline-text">Expansão comercial e contrato para desenvolvimento de brocas customizadas para o Pré-Sal.</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2019</div>
-          <div class="timeline-text">Resultados consistentes em projetos Onshore e Offshore.</div>
+          <div class="timeline-text">Excelentes performances em projetos de poços Onshore e Offshore Pré-Sal.</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-year">2026</div>
-          <div class="timeline-text">Ampliação das soluções integradas com foco em desempenho e qualidade.</div>
+          <div class="timeline-year">2020–2021</div>
+          <div class="timeline-text">Realização de projetos integrados de perfuração e produção via ciência de dados.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-text">12 anos de inovação contínua em brocas, acessórios e serviços. Soluções integradas via ciência de dados.</div>
         </div>
       </div>
 
@@ -973,6 +1093,14 @@ footer {
           <div class="stat-bar"><div class="stat-bar-fill" style="--w: 100%"></div></div>
         </div>
       </div>
+    </div>
+
+    <!-- Certificações -->
+    <div class="cert-row">
+      <div class="cert-item">API Q1</div>
+      <div class="cert-item">ISO 9001</div>
+      <div class="cert-item">ISO 45001</div>
+      <div class="cert-item">OHSAS 18001</div>
     </div>
   </div>
 </section>
@@ -1013,6 +1141,20 @@ footer {
         <div class="card-icon">DADOS</div>
         <h3 class="card-title">Análise de Dados</h3>
         <p class="card-text">Monitoramento em tempo real e suporte à decisão operacional com métricas confiáveis de campo.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px;">
+      <div class="partners-label">Marcas representadas no Brasil</div>
+      <div class="partners-row">
+        <span class="partner-badge">VAREL — Brocas</span>
+        <span class="partner-badge">OFITE</span>
+        <span class="partner-badge">DIGGER Downhole Tools</span>
+        <span class="partner-badge">OPTIMAX Deepview</span>
+        <span class="partner-badge">RDTech</span>
+        <span class="partner-badge">TenEx</span>
+        <span class="partner-badge">GeoControl</span>
+        <span class="partner-badge">BRD Degree</span>
       </div>
     </div>
   </div>
@@ -1129,6 +1271,53 @@ footer {
   </div>
 </section>
 
+<!-- NANOTECNOLOGIA -->
+<section id="nanotecnologia" class="section">
+  <div class="container">
+    <div class="section-eyebrow">Inovação</div>
+    <h2 class="section-title">Soluções de Reservatório — Nanotecnologia</h2>
+    <p class="section-subtitle">Tecnologias proprietárias baseadas em nanomateriais para aumentar a produção de óleo, reduzir BSW e minimizar o impacto ambiental das operações.</p>
+
+    <div class="nano-grid">
+      <div class="nano-highlight">
+        <h3>NanoCLEAR® — TenEx</h3>
+        <p>Combinação de moléculas químicas e nanopartículas que geram forças químicas <em style="font-style:normal; color:var(--accent-light);">e mecânicas</em> para recuperação eficiente de óleo — com efeitos de longo prazo e formulação econômica.</p>
+        <div class="nano-products">
+          <div class="nano-product">
+            <strong>CeraFLO™</strong>
+            <span>Eliminação de parafina e asfaltenos. Compostos ambientalmente amigáveis.</span>
+          </div>
+          <div class="nano-product">
+            <strong>FullSTIM™</strong>
+            <span>Re-estimulação de poços em produção com compostos químicos ajustados.</span>
+          </div>
+          <div class="nano-product">
+            <strong>NoHIT®</strong>
+            <span>Mitigação pioneira de comunicação de fraturamento com poço existente.</span>
+          </div>
+          <div class="nano-product">
+            <strong>Gel Breaker / Scale Breaker</strong>
+            <span>Dissolução de polímeros, géis e incrustações inorgânicas na superfície ou na formação.</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="margin-bottom: 16px;">
+          <div class="card-icon">RESULTADO</div>
+          <h3 class="card-title">Performance Comprovada</h3>
+          <p class="card-text">Média de <strong style="color:var(--accent)">98% de aumento na produção de óleo</strong> ao longo de 16 meses em múltiplas bacias, com redução média de 12% na produção de água.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">AREIA</div>
+          <h3 class="card-title">Controle de Produção de Areia</h3>
+          <p class="card-text">Pasta de micropartículas projetada para reduzir problemas na formação ao redor da parede do poço e melhorar a eficiência do reservatório em poços novos e existentes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section id="faq" class="section section-alt">
   <div class="container">
@@ -1187,8 +1376,57 @@ footer {
     <div class="contato-grid">
       <div class="contato-left">
         <h3>Entre em contato direto</h3>
-        <p>Para consultas comerciais, especificação de produtos ou suporte técnico, envie um e-mail para nossa equipe. Respondemos em até 1 dia útil.</p>
+        <p>Para consultas comerciais, especificação de produtos ou suporte técnico, entre em contato com nossa equipe. Respondemos em até 1 dia útil.</p>
         <a href="mailto:vendas@iwsbrasil.com" class="contato-email">vendas@iwsbrasil.com</a>
+
+        <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 18px;">
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Operações e Negócios</div>
+            <div style="font-size:0.88rem; color:var(--gray);">Sérgio Andre Pessoa<br>
+            <a href="mailto:sabp@iwsbrasil.com" style="color:var(--accent);">sabp@iwsbrasil.com</a><br>
+            +55 (21) 96728-4652</div>
+          </div>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">CEO</div>
+            <div style="font-size:0.88rem; color:var(--gray);">Luiz Carlos de Albuquerque<br>
+            <a href="mailto:lca@iwsbrasil.com" style="color:var(--accent);">lca@iwsbrasil.com</a><br>
+            +55 (21) 98111-1312</div>
+          </div>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Unidades</div>
+            <div style="font-size:0.88rem; color:var(--gray);">Macaé (sede) · Rio de Janeiro · Aracaju</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contato-right">
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Nome *</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Telefone</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+              <label for="company">Empresa</label>
+              <input type="text" id="company" name="company">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Mensagem *</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Enviar Mensagem</button>
+        </form>
       </div>
     </div>
   </div>
@@ -1209,6 +1447,7 @@ footer {
           <li><a href="#solucoes">Soluções</a></li>
           <li><a href="#tecnologia">Tecnologia</a></li>
           <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#nanotecnologia">Nanotecnologia</a></li>
           <li><a href="#clientes">Clientes</a></li>
         </ul>
       </div>
@@ -1216,7 +1455,7 @@ footer {
         <h4>Contato</h4>
         <p>
           <a href="mailto:vendas@iwsbrasil.com">vendas@iwsbrasil.com</a><br>
-          Rio de Janeiro, Brasil
+          Macaé · Rio de Janeiro · Aracaju
         </p>
       </div>
     </div>
@@ -1262,7 +1501,8 @@ fetch('clientes/logos.json')
   .catch(() => renderClients([
     "3R PETROLEUM.png","BAKER HUGHES.png","CARMO ENERGY.png",
     "ENEVA.png","EQUINOR.png","GREAT ENERGY.png","IMETAME.png",
-    "MATRA.png","PETROBRAS.png","PETRORECONCAVO.png","SEACREST.png"
+    "MATRA.png","PETROBRAS.png","PETRORECONCAVO.png","SEACREST.png",
+    "ORIGEM.png","ACU PETROLEO.png"
   ]));
 
 // Scroll
@@ -1304,6 +1544,13 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
     document.getElementById('navLinks').classList.remove('active');
   });
+});
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+  this.reset();
 });
 
 // Security
