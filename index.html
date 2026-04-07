@@ -3,1101 +3,425 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+<meta name="description" content="IWS Brasil — Engenharia e fornecimento de produtos especializados para perfuração e produção de óleo e gás.">
 <title>IWS Brasil</title>
 <link rel="icon" href="logo.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 :root {
-  --primary: #1F4A2E;
-  --primary-mid: #17271F;
-  --accent: #2C6E42;
-  --accent-light: #5B8B65;
-  --accent-dim: rgba(91,139,101,0.15);
-  --light: #F4F1E8;
-  --dark: #102114;
-  --gray: #617165;
-  --gray-light: #A3B3A4;
-  --white: #E8E4DB;
-  --shadow: 0 4px 24px rgba(0,0,0,0.10);
-  --shadow-lg: 0 16px 48px rgba(0,0,0,0.20);
-  --surface: rgba(232,228,219,0.05);
-  --border: rgba(232,228,219,0.12);
-  --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --primary:       #1A3D25;
+  --accent:        #2E7D47;
+  --accent-light:  #4CAF6F;
+  --accent-glow:   rgba(46,125,71,0.18);
+  --dark:          #0C1A0F;
+  --dark-mid:      #111D14;
+  --surface:       rgba(255,255,255,0.03);
+  --surface-hover: rgba(255,255,255,0.055);
+  --border:        rgba(255,255,255,0.07);
+  --border-accent: rgba(46,125,71,0.3);
+  --text:          #D6E4D8;
+  --text-muted:    rgba(214,228,216,0.45);
+  --text-dim:      rgba(214,228,216,0.25);
+  --white:         #EAE6DD;
+  --gray:          #5A6B5C;
+  --font-display:  'Syne', sans-serif;
+  --font-body:     'DM Sans', -apple-system, sans-serif;
+  --ease:          cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+body.light {
+  --dark:          #F0EDE6;
+  --dark-mid:      #E8E4DC;
+  --surface:       rgba(0,0,0,0.025);
+  --surface-hover: rgba(0,0,0,0.045);
+  --border:        rgba(0,0,0,0.07);
+  --border-accent: rgba(46,125,71,0.25);
+  --text:          #1A2E1D;
+  --text-muted:    rgba(26,46,29,0.5);
+  --text-dim:      rgba(26,46,29,0.3);
+  --white:         #1A2E1D;
+  --accent-glow:   rgba(46,125,71,0.1);
 }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes scrollLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
+body.light header { background: rgba(240,237,230,0.95); }
+body.light .marquee-fade-l { background: linear-gradient(to right, #F0EDE6, transparent); }
+body.light .marquee-fade-r { background: linear-gradient(to left,  #F0EDE6, transparent); }
+body.light .noise { opacity: 0.06; }
+body.light footer { background: rgba(0,0,0,0.04); border-color: var(--border); }
+body.light .footer-copy { color: var(--text-muted); }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-
 body {
-  font-family: var(--font);
-  line-height: 1.6;
-  color: #dde6d8;
+  font-family: var(--font-body);
   background: var(--dark);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
   user-select: none;
   -webkit-user-select: none;
-  overflow-x: hidden;
+  transition: background 0.4s, color 0.4s;
+}
+a   { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+.noise {
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
 
-body.light-mode {
-  background: #f2f0eb;
-  color: #1a2a1e;
-}
-body.light-mode header {
-  background: rgba(242,240,235,0.97);
-  border-bottom-color: rgba(91,139,101,0.2);
-}
-body.light-mode .nav-links a { color: #2a3a2e; }
-body.light-mode .card { background: #ffffff; }
-body.light-mode .section-alt { background: rgba(0,0,0,0.03); }
-body.light-mode .section-title { color: var(--primary); }
-body.light-mode .card-title { color: var(--primary); }
-body.light-mode .stat-item { background: #ffffff; }
-body.light-mode .stat-number { color: var(--primary); }
-body.light-mode .accordion-header { background: #ffffff; }
-body.light-mode .accordion-content { background: rgba(0,0,0,0.02); }
-body.light-mode .client-logo { background: #ffffff; }
-body.light-mode .timeline-text { color: var(--gray); }
-body.light-mode .contato-left { background: #ffffff; }
-
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; height: auto; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
-
-/* --- NOISE OVERLAY --- */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.4;
-}
-body.light-mode::before { opacity: 0.15; }
-
-/* --- HEADER --- */
+/* HEADER */
 header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(16,33,20,0.92);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(12,26,15,0.88);
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  z-index: 1001;
-  backdrop-filter: blur(16px);
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s, background 0.4s;
 }
-header.scrolled {
-  box-shadow: 0 2px 32px rgba(0,0,0,0.4);
-  border-bottom-color: rgba(91,139,101,0.25);
-}
-
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 68px;
-}
-.nav-logo {
-  height: 40px;
-  width: auto;
-  transition: opacity 0.2s;
-}
-.nav-logo:hover { opacity: 0.8; }
-
+header.scrolled { box-shadow: 0 2px 40px rgba(0,0,0,0.5); }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+.nav-logo { height: 38px; width: auto; transition: opacity 0.2s; }
+.nav-logo:hover { opacity: 0.75; }
 .nav-links {
-  display: flex;
-  gap: 28px;
-  list-style: none;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  list-style: none; display: flex; gap: 30px;
+  position: absolute; left: 50%; transform: translateX(-50%);
 }
 .nav-links a {
-  font-family: var(--font);
-  font-weight: 500;
-  font-size: 0.75rem;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  transition: color 0.25s;
-  position: relative;
+  font-family: var(--font-display);
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-muted); transition: color 0.2s; position: relative;
 }
 .nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent);
-  transition: width 0.3s ease;
+  content: ''; position: absolute; left: 0; bottom: -4px;
+  width: 0; height: 1px; background: var(--accent); transition: width 0.3s var(--ease);
 }
 .nav-links a:hover { color: var(--accent); }
 .nav-links a:hover::after { width: 100%; }
+.nav-right { display: flex; align-items: center; gap: 12px; }
 
-.nav-right { display: flex; align-items: center; gap: 14px; }
-
-.theme-switch {
-  width: 44px; height: 22px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 999px;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.3s;
+.theme-btn {
+  width: 42px; height: 22px; border-radius: 99px;
+  background: var(--surface); border: 1px solid var(--border);
+  cursor: pointer; position: relative; transition: background 0.3s; flex-shrink: 0;
 }
+.theme-btn-knob {
+  position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent); transition: transform 0.3s var(--ease);
+}
+body.light .theme-btn-knob { transform: translateX(20px); }
 .theme-icon {
-  font-size: 0.7rem;
-  position: absolute;
-  left: 5px; top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
+  position: absolute; left: 5px; top: 50%;
+  transform: translateY(-50%); font-size: 0.65rem; pointer-events: none;
 }
-.switch-handle {
-  position: absolute;
-  top: 2px; left: 2px;
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: var(--accent);
-  transition: transform 0.3s ease;
-}
-body.light-mode .switch-handle { transform: translateX(22px); }
+.menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1100; background: none; border: none; padding: 4px; }
+.menu-toggle span { display: block; width: 22px; height: 1.5px; background: var(--text-muted); border-radius: 2px; transition: 0.3s; }
 
-.menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-.menu-toggle span { width: 22px; height: 1.5px; background: rgba(255,255,255,0.7); transition: 0.3s; border-radius: 2px; }
-
-/* --- HERO --- */
+/* HERO */
 .hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  background: var(--dark);
-  padding-bottom: 90px;
+  min-height: 100vh; display: flex; align-items: center;
+  position: relative; overflow: hidden; background: var(--dark); padding-bottom: 88px;
 }
-
-.hero-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  pointer-events: none;
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 0% 30%, rgba(20,60,32,0.65) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 100% 80%, rgba(46,125,71,0.08) 0%, transparent 60%);
 }
-.hero-blob-1 {
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(22,53,33,0.7) 0%, transparent 70%);
-  top: -100px; left: -150px;
-}
-.hero-blob-2 {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(91,139,101,0.12) 0%, transparent 70%);
-  bottom: 100px; right: -50px;
-}
-
 .hero-grid {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0; pointer-events: none;
   background-image:
-    linear-gradient(rgba(91,139,101,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(91,139,101,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 80% at 20% 40%, black 0%, transparent 70%);
 }
-
-.hero-bg-img {
-  position: absolute;
-  inset: 0;
-  background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=60') center/cover no-repeat;
-  opacity: 0.08;
+.hero-photo {
+  position: absolute; inset: 0; pointer-events: none;
+  background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=55') center/cover no-repeat;
+  opacity: 0.055;
 }
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 760px;
-  padding-top: 60px;
+.hero-content { position: relative; z-index: 2; padding-top: 80px; max-width: 820px; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 28px; animation: fadeUp 0.8s var(--ease) 0.1s both;
 }
-
-.hero-eyebrow {
-  font-family: var(--font);
-  font-size: 0.72rem;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--accent);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  animation: fadeUp 0.8s ease-out 0.1s both;
-}
-.hero-eyebrow-line {
-  display: inline-block;
-  width: 36px; height: 1px;
-  background: var(--accent);
-}
-
+.hero-tag-line { width: 32px; height: 1px; background: var(--accent); flex-shrink: 0; }
 .hero h1 {
-  font-family: var(--font);
-  font-size: clamp(4rem, 9vw, 8.5rem);
-  font-weight: 300;
-  line-height: 0.92;
-  margin-bottom: 28px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--white);
-  animation: fadeUp 0.8s ease-out 0.25s both;
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 8.5vw, 8rem); font-weight: 800;
+  line-height: 0.9; letter-spacing: -1px; text-transform: uppercase;
+  color: var(--white); margin-bottom: 32px;
+  animation: fadeUp 0.8s var(--ease) 0.22s both;
 }
-.hero h1 .accent-word {
-  color: var(--accent);
-  display: block;
+.hero h1 em { font-style: normal; color: var(--accent); display: block; }
+.hero h1 .stroke { -webkit-text-stroke: 1.5px rgba(255,255,255,0.2); color: transparent; }
+.hero-desc {
+  font-size: 1rem; font-weight: 300; line-height: 1.85;
+  color: var(--text-muted); max-width: 480px; margin-bottom: 44px;
+  animation: fadeUp 0.8s var(--ease) 0.36s both;
 }
-.hero h1 .outline-word {
-  -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-  color: transparent;
-}
-
-.hero p {
-  font-size: 1rem;
-  font-weight: 300;
-  margin-bottom: 40px;
-  color: rgba(255,255,255,0.55);
-  max-width: 460px;
-  line-height: 1.8;
-  animation: fadeUp 0.8s ease-out 0.4s both;
-}
-
-.hero-ctas {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  animation: fadeUp 0.8s ease-out 0.55s both;
-}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp 0.8s var(--ease) 0.48s both; }
 
 .hero-stats {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  z-index: 2;
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+  display: grid; grid-template-columns: repeat(4, 1fr);
   border-top: 1px solid var(--border);
-  background: rgba(16,33,20,0.6);
-  backdrop-filter: blur(8px);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  animation: fadeIn 1s ease-out 0.8s both;
+  background: rgba(12,26,15,0.7); backdrop-filter: blur(10px);
+  animation: fadeIn 1s var(--ease) 0.6s both;
 }
-.hero-stat {
-  padding: 20px 28px;
-  border-right: 1px solid var(--border);
-}
+.hero-stat { padding: 18px 28px; border-right: 1px solid var(--border); }
 .hero-stat:last-child { border-right: none; }
-.hero-stat-num {
-  font-family: var(--font);
-  font-size: 2rem;
-  font-weight: 300;
-  letter-spacing: 1px;
-  color: var(--accent);
-  line-height: 1;
-  margin-bottom: 2px;
-}
-.hero-stat-label {
-  font-family: var(--font);
-  font-size: 0.65rem;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: rgba(255,255,255,0.35);
-}
+.hero-stat-num { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 3px; }
+.hero-stat-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-dim); }
 
-/* --- BUTTONS --- */
+/* BUTTONS */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 26px;
-  font-family: var(--font);
-  font-weight: 500;
-  font-size: 0.75rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  border-radius: 2px;
-  transition: all 0.2s;
-  cursor: pointer;
-  border: 1px solid transparent;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; font-family: var(--font-display);
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  border-radius: 3px; border: 1px solid transparent; cursor: pointer;
+  transition: all 0.22s var(--ease);
 }
-.btn-primary {
-  background: var(--accent);
-  color: var(--dark);
-  border-color: var(--accent);
-}
-.btn-primary:hover {
-  background: var(--accent-light);
-  border-color: var(--accent-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(91,139,101,0.3);
-}
-.btn-ghost {
-  background: transparent;
-  color: rgba(255,255,255,0.7);
-  border-color: rgba(255,255,255,0.15);
-}
-.btn-ghost:hover {
-  border-color: rgba(255,255,255,0.4);
-  color: var(--white);
-}
-
-/* --- SECTIONS --- */
-.section { padding: 100px 0; }
-.section-alt { background: rgba(255,255,255,0.025); }
-body.light-mode .section-alt { background: rgba(0,0,0,0.025); }
-
-.section-eyebrow {
-  font-family: var(--font);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.section-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 20px; height: 1px;
-  background: var(--accent);
-}
-
-.section-title {
-  font-family: var(--font);
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-  color: var(--white);
-  line-height: 1.0;
-}
-body.light-mode .section-title { color: var(--primary); }
-
-.section-subtitle {
-  font-size: 0.95rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.45);
-  margin-bottom: 56px;
-  max-width: 520px;
-  line-height: 1.8;
-}
-body.light-mode .section-subtitle { color: var(--gray); }
-
-/* --- SOBRE --- */
-.sobre-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
-  align-items: start;
-}
-
-.timeline { position: relative; padding-left: 24px; }
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 8px; bottom: 8px;
-  width: 1px;
-  background: linear-gradient(180deg, var(--accent) 0%, rgba(91,139,101,0.1) 100%);
-}
-.timeline-item {
-  position: relative;
-  margin-bottom: 32px;
-  padding-left: 18px;
-}
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -28px; top: 7px;
-  width: 8px; height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 0 3px rgba(91,139,101,0.15);
-}
-.timeline-year {
-  font-family: var(--font);
-  font-weight: 600;
-  font-size: 0.72rem;
-  letter-spacing: 1.5px;
-  color: var(--accent);
-  margin-bottom: 5px;
-}
-.timeline-text {
-  font-size: 0.88rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.6;
-}
-body.light-mode .timeline-text { color: var(--gray); }
-
-/* Stats mosaic */
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-body.light-mode .stats-grid { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.06); }
-.stat-item {
-  background: rgba(255,255,255,0.025);
-  padding: 28px 24px;
-}
-body.light-mode .stat-item { background: #ffffff; }
-.stat-number {
-  font-family: var(--font);
-  font-size: 3.2rem;
-  font-weight: 300;
-  letter-spacing: 0px;
-  color: var(--accent-light);
-  display: block;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-body.light-mode .stat-number { color: var(--primary); }
-.stat-label {
-  font-family: var(--font);
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.35);
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-}
-body.light-mode .stat-label { color: var(--gray); }
-.stat-bar {
-  height: 2px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 1px;
-  margin-top: 14px;
-  overflow: hidden;
-}
-.stat-bar-fill {
-  height: 100%;
-  background: var(--accent);
-  width: 0;
-  transition: width 1.8s cubic-bezier(0.4,0,0.2,1);
-}
-.stat-bar-fill.animated { width: var(--w); }
-
-/* Certs */
-.cert-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 40px; }
-.cert-item {
-  font-family: var(--font);
-  font-weight: 500;
-  font-size: 0.68rem;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid rgba(44,110,66,0.25);
-  background: rgba(44,110,66,0.05);
-  padding: 6px 12px;
-  border-radius: 2px;
-}
-
-/* --- CARDS --- */
-.grid-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 4px;
-  overflow: hidden;
-}
-body.light-mode .grid-cards { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.06); }
-
-.card {
-  background: rgba(255,255,255,0.02);
-  padding: 30px 28px;
-  transition: background 0.25s;
-  position: relative;
-}
-body.light-mode .card { background: #ffffff; }
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(44,110,66,0), transparent);
-  transition: background 0.3s;
-}
-.card:hover { background: rgba(255,255,255,0.04); }
-body.light-mode .card:hover { background: #fafaf7; }
-.card:hover::before {
-  background: linear-gradient(90deg, transparent, rgba(44,110,66,0.4), transparent);
-}
-
-.card-tag {
-  font-family: var(--font);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(44,110,66,0.08);
-  border: 1px solid rgba(44,110,66,0.15);
-  display: inline-block;
-  padding: 4px 9px;
-  border-radius: 2px;
-  margin-bottom: 16px;
-}
-.card-title {
-  font-family: var(--font);
-  font-size: 1.2rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 10px;
-  color: var(--white);
-}
-body.light-mode .card-title { color: var(--primary); }
-.card-text { color: rgba(255,255,255,0.4); font-size: 0.875rem; font-weight: 300; line-height: 1.7; }
-body.light-mode .card-text { color: var(--gray); }
-
-/* --- PARTNERS --- */
-.partners-block { margin-top: 56px; }
-.partners-label {
-  font-family: var(--font);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-  margin-bottom: 16px;
-}
-body.light-mode .partners-label { color: rgba(0,0,0,0.3); }
-.partners-row { display: flex; gap: 10px; flex-wrap: wrap; }
-.partner-badge {
-  font-family: var(--font);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  padding: 7px 14px;
-  border-radius: 2px;
-  transition: border-color 0.2s, color 0.2s;
-}
-body.light-mode .partner-badge { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); color: var(--gray); }
-.partner-badge:hover { border-color: rgba(91,139,101,0.4); color: var(--accent); }
-
-/* --- CATÁLOGO --- */
-.catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 48px;
-}
-body.light-mode .catalog-grid { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.06); }
-.catalog-item {
-  background: rgba(255,255,255,0.02);
-  transition: background 0.25s;
-  overflow: hidden;
-  position: relative;
-}
-body.light-mode .catalog-item { background: #ffffff; }
-.catalog-item:hover { background: rgba(255,255,255,0.04); }
-body.light-mode .catalog-item:hover { background: #fafaf7; }
-.catalog-image {
-  height: 160px;
-  overflow: hidden;
-  position: relative;
-}
-.catalog-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 30%, rgba(16,33,20,0.85));
-}
-body.light-mode .catalog-image::after {
-  background: linear-gradient(to bottom, transparent 30%, rgba(242,240,235,0.7));
-}
-.catalog-image img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-  filter: saturate(0.6);
-}
-.catalog-item:hover .catalog-image img { transform: scale(1.06); filter: saturate(0.9); }
-.catalog-content { padding: 20px 22px 24px; }
-.catalog-content h3 {
-  font-family: var(--font);
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: var(--white);
-  margin-bottom: 6px;
-}
-body.light-mode .catalog-content h3 { color: var(--primary); }
-.catalog-content p { color: rgba(255,255,255,0.38); font-size: 0.82rem; font-weight: 300; line-height: 1.6; margin-bottom: 16px; }
-body.light-mode .catalog-content p { color: var(--gray); }
+.btn-primary { background: var(--accent); color: var(--dark); border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-light); border-color: var(--accent-light); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(46,125,71,0.35); }
+.btn-outline { background: transparent; color: var(--text-muted); border-color: var(--border); }
+.btn-outline:hover { border-color: var(--border-accent); color: var(--accent); }
 .btn-sm {
-  font-family: var(--font);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 7px 16px;
-  background: transparent;
-  color: var(--accent);
-  border: 1px solid rgba(44,110,66,0.25);
-  border-radius: 2px;
-  display: inline-block;
-  transition: background 0.2s, border-color 0.2s;
+  padding: 8px 18px; font-family: var(--font-display);
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  background: transparent; color: var(--accent); border: 1px solid var(--border-accent);
+  border-radius: 2px; display: inline-block; transition: background 0.2s, border-color 0.2s;
 }
-.btn-sm:hover { background: rgba(44,110,66,0.1); border-color: var(--accent); }
+.btn-sm:hover { background: var(--accent-glow); border-color: var(--accent); }
 
-.catalog-cta { text-align: center; margin-top: 40px; }
+/* SECTIONS */
+.section { padding: 110px 0; }
+.section-alt { background: rgba(255,255,255,0.018); }
+body.light .section-alt { background: rgba(0,0,0,0.025); }
 
-/* --- MARQUEE --- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--accent); flex-shrink: 0; }
+.section-title {
+  font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; line-height: 1;
+  color: var(--white); margin-bottom: 18px;
+}
+body.light .section-title { color: var(--primary); }
+.section-sub { font-size: 0.95rem; font-weight: 300; line-height: 1.85; color: var(--text-muted); max-width: 520px; margin-bottom: 60px; }
+
+/* GRID CARDS */
+.grid-3 {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+}
+body.light .grid-3 { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.08); }
+.card { background: var(--dark-mid); padding: 32px 28px; position: relative; overflow: hidden; transition: background 0.25s; }
+body.light .card { background: #fff; }
+.card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: transparent; transition: background 0.3s; }
+.card:hover { background: var(--surface-hover); }
+body.light .card:hover { background: #f8f8f5; }
+.card:hover::before { background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.card-num { font-family: var(--font-display); font-size: 0.58rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; opacity: 0.7; }
+.card-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: var(--white); margin-bottom: 12px; }
+body.light .card-title { color: var(--primary); }
+.card-text { font-size: 0.875rem; font-weight: 300; color: var(--text-muted); line-height: 1.75; }
+
+/* CATÁLOGO */
+.catalog-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 56px;
+}
+body.light .catalog-grid { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.08); }
+.catalog-item { background: var(--dark-mid); overflow: hidden; position: relative; transition: background 0.25s; }
+body.light .catalog-item { background: #fff; }
+.catalog-item:hover { background: var(--surface-hover); }
+.cat-img { height: 165px; overflow: hidden; position: relative; }
+.cat-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 25%, rgba(12,26,15,0.88)); }
+body.light .cat-img::after { background: linear-gradient(to bottom, transparent 25%, rgba(240,237,230,0.8)); }
+.cat-img img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.5); transition: transform 0.65s var(--ease), filter 0.4s; }
+.catalog-item:hover .cat-img img { transform: scale(1.07); filter: saturate(0.85); }
+.cat-body { padding: 20px 22px 26px; }
+.cat-body h3 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: var(--white); margin-bottom: 7px; }
+body.light .cat-body h3 { color: var(--primary); }
+.cat-body p { font-size: 0.82rem; font-weight: 300; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px; }
+.catalog-cta { text-align: center; margin-top: 44px; }
+
+/* MARQUEE */
 .marquee-section { padding: 80px 0; overflow: hidden; }
-.marquee-label {
-  text-align: center;
-  font-family: var(--font);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-  margin-bottom: 40px;
-}
-body.light-mode .marquee-label { color: rgba(0,0,0,0.3); }
-
-.marquee-track {
-  position: relative;
-  overflow: hidden;
-}
-.marquee-track::before,
-.marquee-track::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 120px;
-  z-index: 2;
-  pointer-events: none;
-}
-.marquee-track::before {
-  left: 0;
-  background: linear-gradient(to right, var(--dark), transparent);
-}
-body.light-mode .marquee-track::before { background: linear-gradient(to right, #f2f0eb, transparent); }
-.marquee-track::after {
-  right: 0;
-  background: linear-gradient(to left, var(--dark), transparent);
-}
-body.light-mode .marquee-track::after { background: linear-gradient(to left, #f2f0eb, transparent); }
-
-.marquee-inner {
-  display: flex;
-  gap: 0;
-  animation: scrollLeft 30s linear infinite;
-  width: max-content;
-}
+.marquee-label { text-align: center; font-family: var(--font-display); font-size: 0.6rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 44px; }
+.marquee-track { position: relative; overflow: hidden; }
+.marquee-fade-l, .marquee-fade-r { position: absolute; top: 0; bottom: 0; width: 140px; z-index: 2; pointer-events: none; }
+.marquee-fade-l { left: 0;  background: linear-gradient(to right, var(--dark), transparent); }
+.marquee-fade-r { right: 0; background: linear-gradient(to left,  var(--dark), transparent); }
+.marquee-inner { display: flex; width: max-content; animation: scrollLeft 32s linear infinite; }
 .marquee-inner:hover { animation-play-state: paused; }
-
-.client-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 28px;
-  margin: 0 1px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 3px;
-  min-width: 140px;
-  transition: background 0.2s, border-color 0.2s;
-}
-body.light-mode .client-card { background: #ffffff; border-color: rgba(0,0,0,0.06); }
-.client-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(44,110,66,0.2); }
-.client-card img { max-height: 32px; object-fit: contain; opacity: 0.6; filter: grayscale(1); transition: opacity 0.2s, filter 0.2s; }
+.client-card { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 28px; margin: 0 1px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; min-width: 138px; transition: background 0.2s, border-color 0.2s; }
+body.light .client-card { background: #fff; border-color: rgba(0,0,0,0.07); }
+.client-card:hover { background: var(--surface-hover); border-color: var(--border-accent); }
+.client-card img { max-height: 30px; object-fit: contain; opacity: 0.55; filter: grayscale(1); transition: opacity 0.2s, filter 0.2s; }
 .client-card:hover img { opacity: 1; filter: grayscale(0); }
-.client-card-name {
-  font-family: var(--font);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  text-align: center;
-}
-body.light-mode .client-card-name { color: var(--gray); }
+.client-card-name { font-family: var(--font-display); font-size: 0.58rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); text-align: center; }
 
-/* --- TECNOLOGIA --- */
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 4px;
-  overflow: hidden;
+/* NANOTECNOLOGIA */
+.nano-grid {
+  display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 1px;
+  background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 56px;
 }
-body.light-mode .tech-grid { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.06); }
-
-/* --- NANOTECNOLOGIA --- */
-.nano-layout {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 1px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 48px;
-}
-body.light-mode .nano-layout { background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.06); }
-.nano-left {
-  background: linear-gradient(135deg, rgba(31,74,46,0.8) 0%, rgba(16,33,20,0.9) 100%);
-  padding: 40px;
-}
-body.light-mode .nano-left { background: linear-gradient(135deg, #2C6E42 0%, #102114 100%); }
-.nano-left h3 {
-  font-family: var(--font);
-  font-size: 1.6rem;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  color: var(--accent-light);
-  margin-bottom: 14px;
-}
-.nano-left p { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 24px; }
+body.light .nano-grid { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.08); }
+.nano-left { padding: 44px; background: linear-gradient(140deg, rgba(30,70,42,0.85) 0%, rgba(12,26,15,0.95) 100%); }
+body.light .nano-left { background: linear-gradient(140deg, #1A3D25 0%, #0C1A0F 100%); }
+.nano-left h3 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; color: var(--accent-light); margin-bottom: 14px; }
+.nano-left > p { font-size: 0.9rem; font-weight: 300; color: rgba(255,255,255,0.58); line-height: 1.85; margin-bottom: 28px; }
 .nano-products { display: flex; flex-direction: column; gap: 10px; }
-.nano-product {
-  background: rgba(255,255,255,0.05);
-  border-left: 2px solid var(--accent);
-  padding: 12px 14px;
-  border-radius: 2px;
-}
-.nano-product strong {
-  display: block;
-  font-family: var(--font);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.5px;
-  color: var(--accent-light);
-  margin-bottom: 3px;
-}
-.nano-product span { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.5; }
+.nano-product { background: rgba(255,255,255,0.05); border-left: 2px solid var(--accent); padding: 12px 16px; border-radius: 2px; }
+.nano-product strong { display: block; font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px; color: var(--accent-light); margin-bottom: 4px; }
+.nano-product span { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.48); line-height: 1.6; }
+.nano-right { background: var(--dark-mid); padding: 44px; display: flex; flex-direction: column; gap: 16px; }
+body.light .nano-right { background: #f8f8f5; }
+.nano-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 26px; }
+body.light .nano-stat { background: #fff; border-color: rgba(0,0,0,0.07); }
+.nano-stat .big { display: block; font-family: var(--font-display); font-size: 3.4rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 7px; letter-spacing: -2px; }
+body.light .nano-stat .big { color: var(--primary); }
+.nano-stat .lbl { font-family: var(--font-display); font-size: 0.62rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+.nano-stat .desc { font-size: 0.83rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
 
-.nano-right { background: rgba(255,255,255,0.015); padding: 40px; display: flex; flex-direction: column; gap: 16px; }
-body.light-mode .nano-right { background: #fafaf7; }
+/* SOBRE */
+.sobre-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.timeline { position: relative; padding-left: 26px; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(180deg, var(--accent) 0%, rgba(46,125,71,0.08) 100%); }
+.timeline-item { position: relative; margin-bottom: 30px; padding-left: 18px; }
+.timeline-item::before { content: ''; position: absolute; left: -30px; top: 6px; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 4px var(--accent-glow); }
+.timeline-year { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 5px; }
+.timeline-text { font-size: 0.875rem; font-weight: 300; color: var(--text-muted); line-height: 1.65; }
 
-.nano-stat-card {
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 3px;
-  padding: 24px;
-}
-body.light-mode .nano-stat-card { background: #ffffff; border-color: rgba(0,0,0,0.06); }
-.nano-stat-card .big-num {
-  font-family: var(--font);
-  font-size: 3.5rem;
-  font-weight: 300;
-  color: var(--accent);
-  letter-spacing: 0px;
-  line-height: 1;
-  display: block;
-  margin-bottom: 6px;
-}
-body.light-mode .nano-stat-card .big-num { color: var(--primary); }
-.nano-stat-card .nano-stat-label {
-  font-family: var(--font);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  margin-bottom: 8px;
-}
-.nano-stat-card .nano-stat-desc {
-  font-size: 0.82rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.7;
-}
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+body.light .stats-grid { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.08); }
+.stat-item { background: var(--dark-mid); padding: 28px 24px; }
+body.light .stat-item { background: #fff; }
+.stat-num { display: block; font-family: var(--font-display); font-size: 3rem; font-weight: 800; letter-spacing: -2px; color: var(--accent-light); line-height: 1; margin-bottom: 5px; }
+body.light .stat-num { color: var(--primary); }
+.stat-lbl { font-family: var(--font-display); font-size: 0.6rem; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; color: var(--text-dim); }
+.stat-bar { height: 2px; background: var(--border); border-radius: 1px; margin-top: 16px; overflow: hidden; }
+.stat-bar-fill { height: 100%; background: var(--accent); width: 0; transition: width 1.8s cubic-bezier(0.4,0,0.2,1); }
+.stat-bar-fill.on { width: var(--w); }
+.cert-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 36px; }
+.cert-item { font-family: var(--font-display); font-size: 0.62rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); border: 1px solid var(--border-accent); background: var(--accent-glow); padding: 6px 12px; border-radius: 3px; }
 
-/* --- FAQ --- */
-.accordion { max-width: 760px; }
-.accordion-item {
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-body.light-mode .accordion-item { border-color: rgba(0,0,0,0.08); }
-.accordion-header {
-  padding: 20px 0;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: transparent;
-  transition: color 0.2s;
-}
-.accordion-header span:first-child {
-  font-family: var(--font);
-  font-size: 0.82rem;
-  font-weight: 400;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
-  transition: color 0.2s;
-}
-body.light-mode .accordion-header span:first-child { color: var(--gray); }
-.accordion-header:hover span:first-child { color: var(--accent); }
-.accordion-plus {
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: var(--accent);
-  transition: transform 0.3s;
-  line-height: 1;
-  flex-shrink: 0;
-}
-.accordion-item.open .accordion-plus { transform: rotate(45deg); }
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, padding 0.25s ease;
-  padding: 0;
-}
-.accordion-content.open { max-height: 200px; padding-bottom: 20px; }
-.accordion-content p { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.4); line-height: 1.7; }
-body.light-mode .accordion-content p { color: var(--gray); }
+/* FAQ */
+.accordion { max-width: 780px; }
+.accordion-item { border-bottom: 1px solid var(--border); }
+body.light .accordion-item { border-color: rgba(0,0,0,0.09); }
+.accordion-hd { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; cursor: pointer; background: none; border: none; width: 100%; text-align: left; }
+.accordion-hd-text { font-family: var(--font-display); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+.accordion-hd:hover .accordion-hd-text { color: var(--accent); }
+.accordion-icon { font-size: 1.2rem; font-weight: 300; line-height: 1; color: var(--accent); flex-shrink: 0; transition: transform 0.3s var(--ease); }
+.accordion-item.open .accordion-icon { transform: rotate(45deg); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.38s var(--ease), padding 0.25s; padding: 0; }
+.accordion-body.open { max-height: 220px; padding-bottom: 22px; }
+.accordion-body p { font-size: 0.9rem; font-weight: 300; color: var(--text-muted); line-height: 1.8; }
 
-/* --- CONTATO --- */
-.contato-card {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 4px;
-  padding: 48px 40px;
-  margin-top: 48px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
-body.light-mode .contato-card { background: #ffffff; border-color: rgba(0,0,0,0.06); }
-.contato-left h3 {
-  font-family: var(--font);
-  font-size: 2rem;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  color: var(--white);
-  margin-bottom: 14px;
-}
-body.light-mode .contato-left h3 { color: var(--primary); }
-.contato-left p { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.4); line-height: 1.8; margin-bottom: 32px; }
-body.light-mode .contato-left p { color: var(--gray); }
+/* CONTATO */
+.contato-card { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 52px 44px; margin-top: 52px; }
+body.light .contato-card { background: #fff; border-color: rgba(0,0,0,0.07); }
+.contato-left h3 { font-family: var(--font-display); font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; color: var(--white); margin-bottom: 14px; }
+body.light .contato-left h3 { color: var(--primary); }
+.contato-left > p { font-size: 0.9rem; font-weight: 300; color: var(--text-muted); line-height: 1.85; margin-bottom: 32px; }
+.email-btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 24px; background: var(--accent); color: var(--dark); font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border-radius: 3px; margin-bottom: 36px; transition: background 0.2s, transform 0.2s; }
+.email-btn:hover { background: var(--accent-light); transform: translateY(-2px); }
+.contact-lbl { font-family: var(--font-display); font-size: 0.58rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+.contact-name { font-size: 0.92rem; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+body.light .contact-name { color: var(--primary); }
+.contact-info { font-size: 0.82rem; font-weight: 300; color: var(--text-muted); line-height: 1.75; }
+.contact-info a { color: var(--text-muted); transition: color 0.2s; }
+.contact-info a:hover { color: var(--accent); }
+.contato-right { display: flex; flex-direction: column; gap: 18px; }
+.info-block { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 20px 22px; }
+body.light .info-block { background: #f5f3ee; border-color: rgba(0,0,0,0.07); }
+.info-block h4 { font-family: var(--font-display); font-size: 0.6rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 9px; }
+.info-block p { font-size: 0.87rem; font-weight: 300; color: var(--text-muted); line-height: 1.75; }
+.info-block a { color: var(--text-muted); transition: color 0.2s; }
+.info-block a:hover { color: var(--accent); }
 
-.contato-email-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
-  background: var(--accent);
-  color: var(--dark);
-  border-radius: 2px;
-  font-family: var(--font);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: background 0.2s, transform 0.2s;
-  margin-bottom: 36px;
-}
-.contato-email-btn:hover { background: var(--accent-light); transform: translateY(-2px); }
-
-.contato-contacts { display: flex; flex-direction: column; gap: 24px; }
-.contact-person-label {
-  font-family: var(--font);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-.contact-person-name { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.7); margin-bottom: 2px; }
-body.light-mode .contact-person-name { color: var(--primary); }
-.contact-person-info { font-family: var(--font); font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.35); line-height: 1.7; }
-body.light-mode .contact-person-info { color: var(--gray); }
-.contact-person-info a { color: rgba(255,255,255,0.35); transition: color 0.2s; }
-body.light-mode .contact-person-info a { color: var(--gray); }
-.contact-person-info a:hover { color: var(--accent); }
-
-.contato-right-info {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.contato-info-block {
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 3px;
-  padding: 20px 22px;
-}
-body.light-mode .contato-info-block { background: #f4f2ed; border-color: rgba(0,0,0,0.06); }
-.contato-info-block h4 {
-  font-family: var(--font);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 8px;
-}
-.contato-info-block p {
-  font-size: 0.85rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.7;
-}
-body.light-mode .contato-info-block p { color: var(--gray); }
-.contato-info-block a { color: rgba(255,255,255,0.5); transition: color 0.2s; }
-.contato-info-block a:hover { color: var(--accent); }
-
-/* --- FOOTER --- */
-footer {
-  background: rgba(5,12,8,0.95);
-  border-top: 1px solid rgba(255,255,255,0.05);
-  padding: 56px 0 0;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 56px;
-  margin-bottom: 40px;
-}
-.footer-brand-name {
-  font-family: var(--font);
-  font-size: 1.6rem;
-  font-weight: 400;
-  letter-spacing: 2px;
-  color: var(--white);
-}
+/* FOOTER */
+footer { background: rgba(6,14,8,0.98); border-top: 1px solid var(--border); padding: 60px 0 0; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 44px; }
+.footer-brand-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; letter-spacing: 1px; color: var(--white); }
 .footer-brand-name span { color: var(--accent); }
-.footer-brand p {
-  font-size: 0.82rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.3);
-  margin-top: 12px;
-  max-width: 260px;
-  line-height: 1.7;
-}
-.footer-col h4 {
-  font-family: var(--font);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 20px;
-}
+.footer-brand > p { font-size: 0.84rem; font-weight: 300; color: var(--text-dim); margin-top: 14px; max-width: 270px; line-height: 1.75; }
+.footer-col h4 { font-family: var(--font-display); font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
 .footer-col ul { list-style: none; }
 .footer-col ul li { margin-bottom: 10px; }
-.footer-col ul li a { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.35); transition: color 0.2s; }
-.footer-col ul li a:hover { color: var(--white); }
-.footer-col p { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.35); line-height: 1.8; }
-.footer-col p a { color: rgba(255,255,255,0.35); transition: color 0.2s; }
-.footer-col p a:hover { color: var(--accent); }
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.05);
-  padding: 18px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.footer-bottom p { font-family: var(--font); font-size: 0.65rem; font-weight: 400; letter-spacing: 0.5px; color: rgba(255,255,255,0.2); }
+.footer-col ul li a, .footer-col p a { font-size: 0.86rem; font-weight: 300; color: var(--text-dim); transition: color 0.2s; }
+.footer-col ul li a:hover, .footer-col p a:hover { color: var(--text); }
+.footer-col p { font-size: 0.86rem; font-weight: 300; color: var(--text-dim); line-height: 1.85; }
+.footer-bottom { border-top: 1px solid var(--border); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.footer-copy { font-family: var(--font-display); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.5px; color: var(--text-dim); }
 
-/* --- SCROLL TOP --- */
-.scroll-top {
-  position: fixed;
-  bottom: 24px; right: 24px;
-  width: 40px; height: 40px;
-  background: var(--accent);
-  border-radius: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--dark);
-  font-size: 1rem;
-  cursor: pointer;
-  opacity: 0; visibility: hidden;
-  transition: all 0.3s;
-  z-index: 1000;
-  font-weight: 700;
-}
+/* SCROLL TOP */
+.scroll-top { position: fixed; bottom: 24px; right: 24px; width: 42px; height: 42px; background: var(--accent); color: var(--dark); border-radius: 3px; border: none; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s var(--ease); z-index: 999; }
 .scroll-top.show { opacity: 1; visibility: visible; }
-.scroll-top:hover { background: var(--accent-light); transform: translateY(-2px); }
+.scroll-top:hover { background: var(--accent-light); transform: translateY(-3px); }
 
-/* --- RESPONSIVE --- */
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-  .hero-stats { grid-template-columns: repeat(2,1fr); }
+  .grid-3 { grid-template-columns: repeat(2,1fr); }
   .catalog-grid { grid-template-columns: repeat(2,1fr); }
-  .grid-cards { grid-template-columns: repeat(2,1fr); }
-  .tech-grid { grid-template-columns: repeat(2,1fr); }
+  .hero-stats { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 900px) {
-  .sobre-layout { grid-template-columns: 1fr; gap: 48px; }
-  .nano-layout { grid-template-columns: 1fr; }
-  .contato-card { grid-template-columns: 1fr; gap: 40px; }
+  .sobre-layout { grid-template-columns: 1fr; gap: 56px; }
+  .nano-grid { grid-template-columns: 1fr; }
+  .contato-card { grid-template-columns: 1fr; gap: 44px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
   .nav-links {
-    position: fixed; inset: 0;
-    background: rgba(16,33,20,0.99);
-    flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 32px;
+    position: fixed; inset: 0; z-index: 1050;
+    background: rgba(12,26,15,0.98);
+    flex-direction: column; align-items: center; justify-content: center; gap: 36px;
     transform: translateY(-100%); opacity: 0; visibility: hidden;
-    transition: all 0.35s ease; z-index: 1002;
+    transition: all 0.38s var(--ease);
   }
-  .nav-links.active { transform: translateY(0); opacity: 1; visibility: visible; }
-  .nav-links a { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+  .nav-links.open { transform: translateY(0); opacity: 1; visibility: visible; }
+  .nav-links a { font-size: 0.85rem; color: var(--text-muted); }
   .menu-toggle { display: flex; }
-  .hero { padding-bottom: 200px; }
-  .hero h1 { font-size: clamp(3.5rem,12vw,5rem); }
-  .hero-stats { grid-template-columns: repeat(2,1fr); position: relative; margin-top: 40px; }
-  .section { padding: 64px 0; }
-  .catalog-grid, .grid-cards, .tech-grid { grid-template-columns: 1fr; }
+  .hero { padding-bottom: 210px; }
+  .hero h1 { font-size: clamp(3rem, 13vw, 4.5rem); }
+  .hero-stats { grid-template-columns: repeat(2,1fr); position: relative; margin-top: 48px; }
+  .section { padding: 70px 0; }
+  .grid-3, .catalog-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { justify-content: center; text-align: center; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
-<body class="dark-mode">
+<body class="dark">
+<div class="noise" aria-hidden="true"></div>
 
-<header>
+<!-- HEADER -->
+<header id="header">
   <nav class="container nav">
-    <img src="logo.png" alt="IWS Brasil" class="nav-logo">
-    <ul class="nav-links" id="navLinks">
+    <a href="#hero" aria-label="IWS Brasil — Início">
+      <img src="logo.png" alt="IWS Brasil" class="nav-logo">
+    </a>
+    <ul class="nav-links" id="navLinks" role="navigation" aria-label="Menu principal">
       <li><a href="#solucoes">Soluções</a></li>
       <li><a href="#catalogo">Catálogo</a></li>
       <li><a href="#tecnologia">Tecnologia</a></li>
@@ -1108,115 +432,61 @@ footer {
       <li><a href="#contato">Contato</a></li>
     </ul>
     <div class="nav-right">
-      <div class="theme-switch" onclick="toggleTheme()" aria-label="Tema">
-        <span class="theme-icon">🌙</span>
-        <span class="switch-handle"></span>
-      </div>
-      <div class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">
+      <button class="theme-btn" id="themeBtn" aria-label="Alternar tema" type="button">
+        <span class="theme-icon" id="themeIcon">🌙</span>
+        <span class="theme-btn-knob"></span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" type="button">
         <span></span><span></span><span></span>
-      </div>
+      </button>
     </div>
   </nav>
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-blob hero-blob-1"></div>
-  <div class="hero-blob hero-blob-2"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-bg-img"></div>
-
+<section class="hero" id="hero">
+  <div class="hero-bg"   aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-photo" aria-hidden="true"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-line"></span>
-        Perfuração e produção onshore offshore
+      <div class="hero-tag">
+        <span class="hero-tag-line"></span>
+        Perfuração e produção onshore &amp; offshore
       </div>
       <h1>
-        Mais produtividade<br>
-        <span class="accent-word">e menos custo</span>
-        <span class="outline-word">no campo</span>
+        Mais<br>
+        <em>produtividade</em>
+        <span class="stroke">no campo</span>
       </h1>
-      <p>Fornecemos brocas premium, fluidos técnicos e suporte operacional para operações mais seguras, confiáveis e eficientes.</p>
+      <p class="hero-desc">Fornecemos brocas premium, fluidos técnicos e suporte operacional para operações mais seguras, confiáveis e eficientes.</p>
       <div class="hero-ctas">
         <a href="#catalogo" class="btn btn-primary">Ver catálogo →</a>
-        <a href="#contato" class="btn btn-ghost">Fale conosco</a>
+        <a href="#contato"  class="btn btn-outline">Fale conosco</a>
       </div>
     </div>
   </div>
-
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <div class="hero-stat-num">14+</div>
-      <div class="hero-stat-label">Anos de atuação</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">75%</div>
-      <div class="hero-stat-label">Redução de custos</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">64%</div>
-      <div class="hero-stat-label">Aumento de ROP</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">200%</div>
-      <div class="hero-stat-label">Ganho de performance</div>
-    </div>
+  <div class="hero-stats" aria-label="Indicadores">
+    <div class="hero-stat"><div class="hero-stat-num">14+</div><div class="hero-stat-label">Anos de atuação</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">75%</div><div class="hero-stat-label">Redução de custos</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">64%</div><div class="hero-stat-label">Aumento de ROP</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">200%</div><div class="hero-stat-label">Ganho de performance</div></div>
   </div>
 </section>
 
 <!-- SOLUÇÕES -->
 <section id="solucoes" class="section">
   <div class="container">
-    <div class="section-eyebrow">O que fazemos</div>
+    <div class="eyebrow">O que fazemos</div>
     <h2 class="section-title">Produtos e serviços</h2>
-    <p class="section-subtitle">Do poço ao painel de controle, com ferramentas, fluidos e análises que conectam a engenharia de campo à eficiência operacional.</p>
-
-    <div class="grid-cards">
-      <div class="card">
-        <div class="card-tag">PDC / Tricônica</div>
-        <h3 class="card-title">Brocas Premium</h3>
-        <p class="card-text">Brocas PDC e tricônicas customizadas para formações do Pré Sal e campos complexos. Alta durabilidade e ROP otimizada.</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">Fluidos</div>
-        <h3 class="card-title">Eng. de Fluidos</h3>
-        <p class="card-text">Controle de reologia, densidade e propriedades de lama para avanço contínuo, seguro e com menor TNP.</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">Ciment.</div>
-        <h3 class="card-title">Cimentação</h3>
-        <p class="card-text">Acessórios e metodologias que garantem estanqueidade e confiabilidade na completude do poço.</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">Sólidos</div>
-        <h3 class="card-title">Controle de Sólidos</h3>
-        <p class="card-text">Centrífugas decantadoras e equipamentos para tratamento de lama, mantendo estabilidade dos fluidos.</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">Filtração</div>
-        <h3 class="card-title">Unid. de Filtração</h3>
-        <p class="card-text">Sistemas móveis de fabricação e filtração que reduzem custos logísticos em operações remotas.</p>
-      </div>
-      <div class="card">
-        <div class="card-tag">Dados</div>
-        <h3 class="card-title">Análise de Dados</h3>
-        <p class="card-text">Monitoramento em tempo real e suporte à decisão operacional com métricas confiáveis de campo.</p>
-      </div>
-    </div>
-
-    <div class="partners-block">
-      <div class="partners-label">Marcas representadas no Brasil</div>
-      <div class="partners-row">
-        <span class="partner-badge">VAREL Brocas</span>
-        <span class="partner-badge">OFITE</span>
-        <span class="partner-badge">DIGGER Downhole</span>
-        <span class="partner-badge">OPTIMAX Deepview</span>
-        <span class="partner-badge">RDTech</span>
-        <span class="partner-badge">TenEx</span>
-        <span class="partner-badge">GeoControl</span>
-        <span class="partner-badge">BRD Degree</span>
-      </div>
+    <p class="section-sub">Do poço ao painel de controle — ferramentas, fluidos e análises que conectam engenharia de campo à eficiência operacional.</p>
+    <div class="grid-3">
+      <div class="card"><div class="card-num">01 — PDC / Tricônica</div><h3 class="card-title">Brocas Premium</h3><p class="card-text">Brocas PDC e tricônicas customizadas para formações do Pré Sal e campos complexos. Alta durabilidade e ROP otimizada.</p></div>
+      <div class="card"><div class="card-num">02 — Fluidos</div><h3 class="card-title">Eng. de Fluidos</h3><p class="card-text">Controle de reologia, densidade e propriedades de lama para avanço contínuo, seguro e com menor TNP.</p></div>
+      <div class="card"><div class="card-num">03 — Ciment.</div><h3 class="card-title">Cimentação</h3><p class="card-text">Acessórios e metodologias que garantem estanqueidade e confiabilidade na completude do poço.</p></div>
+      <div class="card"><div class="card-num">04 — Sólidos</div><h3 class="card-title">Controle de Sólidos</h3><p class="card-text">Centrífugas decantadoras e equipamentos para tratamento de lama, mantendo estabilidade dos fluidos.</p></div>
+      <div class="card"><div class="card-num">05 — Filtração</div><h3 class="card-title">Unid. de Filtração</h3><p class="card-text">Sistemas móveis de fabricação e filtração que reduzem custos logísticos em operações remotas.</p></div>
+      <div class="card"><div class="card-num">06 — Dados</div><h3 class="card-title">Análise de Dados</h3><p class="card-text">Monitoramento em tempo real e suporte à decisão operacional com métricas confiáveis de campo.</p></div>
     </div>
   </div>
 </section>
@@ -1224,35 +494,16 @@ footer {
 <!-- TECNOLOGIA -->
 <section id="tecnologia" class="section section-alt">
   <div class="container">
-    <div class="section-eyebrow">Tecnologia</div>
+    <div class="eyebrow">Tecnologia</div>
     <h2 class="section-title">Dados que entregam controle</h2>
-    <p class="section-subtitle">Conectamos dados de campo a decisões confiáveis, reduzindo tempo não produtivo e aumentando a eficiência das perfurações.</p>
-
-    <div class="tech-grid">
-      <div class="card">
-        <h3 class="card-title">Análise em Tempo Real</h3>
-        <p class="card-text">Acompanhamos a perfuração segundo a segundo para ajustar parâmetros de forma proativa.</p>
-      </div>
-      <div class="card">
-        <h3 class="card-title">Manutenção Preditiva</h3>
-        <p class="card-text">Identificamos sinais de desgaste e evitamos paradas não planejadas com antecedência.</p>
-      </div>
-      <div class="card">
-        <h3 class="card-title">Decisões Orientadas por Dados</h3>
-        <p class="card-text">Relatórios claros e ações recomendadas baseadas em dados reais do poço.</p>
-      </div>
-      <div class="card">
-        <h3 class="card-title">Gestão de Riscos</h3>
-        <p class="card-text">Mitigação de riscos com protocolos adaptados à operação e ao perfil do campo.</p>
-      </div>
-      <div class="card">
-        <h3 class="card-title">Reservatórios</h3>
-        <p class="card-text">Previsão de performance e acompanhamento contínuo das condições de produção.</p>
-      </div>
-      <div class="card">
-        <h3 class="card-title">Painel Integrado</h3>
-        <p class="card-text">Monitoramento unificado de múltiplos poços para decisões mais rápidas e embasadas.</p>
-      </div>
+    <p class="section-sub">Conectamos dados de campo a decisões confiáveis, reduzindo tempo não produtivo e aumentando a eficiência das perfurações.</p>
+    <div class="grid-3">
+      <div class="card"><div class="card-num">01</div><h3 class="card-title">Análise em Tempo Real</h3><p class="card-text">Acompanhamos a perfuração segundo a segundo para ajustar parâmetros de forma proativa.</p></div>
+      <div class="card"><div class="card-num">02</div><h3 class="card-title">Manutenção Preditiva</h3><p class="card-text">Identificamos sinais de desgaste e evitamos paradas não planejadas com antecedência.</p></div>
+      <div class="card"><div class="card-num">03</div><h3 class="card-title">Decisões por Dados</h3><p class="card-text">Relatórios claros e ações recomendadas baseadas em dados reais do poço.</p></div>
+      <div class="card"><div class="card-num">04</div><h3 class="card-title">Gestão de Riscos</h3><p class="card-text">Mitigação de riscos com protocolos adaptados à operação e ao perfil do campo.</p></div>
+      <div class="card"><div class="card-num">05</div><h3 class="card-title">Reservatórios</h3><p class="card-text">Previsão de performance e acompanhamento contínuo das condições de produção.</p></div>
+      <div class="card"><div class="card-num">06</div><h3 class="card-title">Painel Integrado</h3><p class="card-text">Monitoramento unificado de múltiplos poços para decisões mais rápidas e embasadas.</p></div>
     </div>
   </div>
 </section>
@@ -1260,63 +511,19 @@ footer {
 <!-- CATÁLOGO -->
 <section id="catalogo" class="section">
   <div class="container">
-    <div class="section-eyebrow">Produtos</div>
+    <div class="eyebrow">Produtos</div>
     <h2 class="section-title">Catálogo de soluções</h2>
-    <p class="section-subtitle">Nossa linha completa de produtos e serviços para perfuração e produção de óleo &amp; gás.</p>
-
+    <p class="section-sub">Nossa linha completa para perfuração e produção de óleo &amp; gás.</p>
     <div class="catalog-grid">
-      <div class="catalog-item">
-        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Brocas"></div>
-        <div class="catalog-content">
-          <h3>Brocas Premium</h3>
-          <p>PDC e tricônicas para Pré Sal. Alta performance comprovada.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
-        </div>
-      </div>
-      <div class="catalog-item">
-        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Sólidos"></div>
-        <div class="catalog-content">
-          <h3>Controle de Sólidos</h3>
-          <p>Centrífugas decantadoras e secadores de cascalho.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
-        </div>
-      </div>
-      <div class="catalog-item">
-        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Fluidos"></div>
-        <div class="catalog-content">
-          <h3>Engenharia de Fluidos</h3>
-          <p>Análise completa de reologia, densidade e propriedades de lama.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
-        </div>
-      </div>
-      <div class="catalog-item">
-        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Dados"></div>
-        <div class="catalog-content">
-          <h3>Serviços de Dados</h3>
-          <p>Monitoramento em tempo real e manutenção preditiva.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
-        </div>
-      </div>
-      <div class="catalog-item">
-        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Cimentação"></div>
-        <div class="catalog-content">
-          <h3>Acess. de Cimentação</h3>
-          <p>Ferramentas especializadas para Sapatas, Colares, Packers e BPP.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
-        </div>
-      </div>
-      <div class="catalog-item">
-        <div class="catalog-image"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Filtração"></div>
-        <div class="catalog-content">
-          <h3>Unidades de Filtração</h3>
-          <p>Sistemas móveis de filtração e fabricação de fluidos em campo.</p>
-          <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn-sm">Ver detalhes →</a>
-        </div>
-      </div>
+      <div class="catalog-item"><div class="cat-img"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Brocas Premium" loading="lazy"></div><div class="cat-body"><h3>Brocas Premium</h3><p>PDC e tricônicas para Pré Sal. Alta performance comprovada.</p><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener noreferrer" class="btn-sm">Ver detalhes →</a></div></div>
+      <div class="catalog-item"><div class="cat-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Controle de Sólidos" loading="lazy"></div><div class="cat-body"><h3>Controle de Sólidos</h3><p>Centrífugas decantadoras e secadores de cascalho.</p><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener noreferrer" class="btn-sm">Ver detalhes →</a></div></div>
+      <div class="catalog-item"><div class="cat-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Engenharia de Fluidos" loading="lazy"></div><div class="cat-body"><h3>Engenharia de Fluidos</h3><p>Análise completa de reologia, densidade e propriedades de lama.</p><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener noreferrer" class="btn-sm">Ver detalhes →</a></div></div>
+      <div class="catalog-item"><div class="cat-img"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Serviços de Dados" loading="lazy"></div><div class="cat-body"><h3>Serviços de Dados</h3><p>Monitoramento em tempo real e manutenção preditiva.</p><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener noreferrer" class="btn-sm">Ver detalhes →</a></div></div>
+      <div class="catalog-item"><div class="cat-img"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Acessórios de Cimentação" loading="lazy"></div><div class="cat-body"><h3>Acess. de Cimentação</h3><p>Ferramentas especializadas para Sapatas, Colares, Packers e BPP.</p><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener noreferrer" class="btn-sm">Ver detalhes →</a></div></div>
+      <div class="catalog-item"><div class="cat-img"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70" alt="Unidades de Filtração" loading="lazy"></div><div class="cat-body"><h3>Unidades de Filtração</h3><p>Sistemas móveis de filtração e fabricação de fluidos em campo.</p><a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener noreferrer" class="btn-sm">Ver detalhes →</a></div></div>
     </div>
-
     <div class="catalog-cta">
-      <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener" class="btn btn-primary">Baixar catálogo completo (PDF) →</a>
+      <a href="OFITE%20Catalog.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Baixar catálogo completo (PDF) →</a>
     </div>
   </div>
 </section>
@@ -1324,106 +531,49 @@ footer {
 <!-- NANOTECNOLOGIA -->
 <section id="nanotecnologia" class="section section-alt">
   <div class="container">
-    <div class="section-eyebrow">Inovação</div>
+    <div class="eyebrow">Inovação</div>
     <h2 class="section-title">Nanotecnologia para reservatórios</h2>
-    <p class="section-subtitle">Tecnologias proprietárias baseadas em nanomateriais para aumentar a produção de óleo, reduzir BSW e minimizar o impacto ambiental.</p>
-
-    <div class="nano-layout">
+    <p class="section-sub">Tecnologias proprietárias baseadas em nanomateriais para aumentar a produção de óleo, reduzir BSW e minimizar o impacto ambiental.</p>
+    <div class="nano-grid">
       <div class="nano-left">
         <h3>NanoCLEAR TenEx</h3>
         <p>Combinação de moléculas químicas e nanopartículas que geram forças químicas <strong style="color:var(--accent-light)">e mecânicas</strong> para recuperação eficiente de óleo, com efeitos de longo prazo e formulação econômica.</p>
         <div class="nano-products">
-          <div class="nano-product">
-            <strong>CeraFLO</strong>
-            <span>Eliminação de parafina e asfaltenos com compostos ambientalmente amigáveis.</span>
-          </div>
-          <div class="nano-product">
-            <strong>FullSTIM</strong>
-            <span>Reestimulação de poços em produção com compostos químicos ajustados.</span>
-          </div>
-          <div class="nano-product">
-            <strong>NoHIT</strong>
-            <span>Mitigação pioneira de comunicação de fraturamento com poço existente.</span>
-          </div>
-          <div class="nano-product">
-            <strong>Gel Breaker / Scale Breaker</strong>
-            <span>Dissolução de polímeros, géis e incrustações inorgânicas na formação.</span>
-          </div>
+          <div class="nano-product"><strong>CeraFLO</strong><span>Eliminação de parafina e asfaltenos com compostos ambientalmente amigáveis.</span></div>
+          <div class="nano-product"><strong>FullSTIM</strong><span>Reestimulação de poços em produção com compostos químicos ajustados.</span></div>
+          <div class="nano-product"><strong>NoHIT</strong><span>Mitigação pioneira de comunicação de fraturamento com poço existente.</span></div>
+          <div class="nano-product"><strong>Gel Breaker / Scale Breaker</strong><span>Dissolução de polímeros, géis e incrustações inorgânicas na formação.</span></div>
         </div>
       </div>
       <div class="nano-right">
-        <div class="nano-stat-card">
-          <span class="big-num">98%</span>
-          <div class="nano-stat-label">Aumento médio de produção de óleo</div>
-          <div class="nano-stat-desc">Média ao longo de 16 meses em múltiplas bacias. Menor incremento registrado: 46%.</div>
-        </div>
-        <div class="nano-stat-card">
-          <span class="big-num">12%</span>
-          <div class="nano-stat-label">Redução média na produção de água</div>
-          <div class="nano-stat-desc">Controle de produção de areia com pasta de micropartículas em poços novos e existentes.</div>
-        </div>
+        <div class="nano-stat"><span class="big">98%</span><div class="lbl">Aumento médio de produção de óleo</div><div class="desc">Média ao longo de 16 meses em múltiplas bacias. Menor incremento registrado: 46%.</div></div>
+        <div class="nano-stat"><span class="big">12%</span><div class="lbl">Redução média na produção de água</div><div class="desc">Controle de produção de areia com pasta de micropartículas em poços novos e existentes.</div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- SOBRE -->
-<section id="sobre" class="section section-alt">
+<section id="sobre" class="section">
   <div class="container">
-    <div class="section-eyebrow">Nossa história</div>
+    <div class="eyebrow">Nossa história</div>
     <h2 class="section-title">14 anos de resultados comprovados</h2>
-    <p class="section-subtitle">A IWS Brasil fornece produtos e engenharia especializada em óleo &amp; gás, com soluções integradas de perfuração, produção e controle de fluidos adaptadas ao mercado brasileiro.</p>
-
+    <p class="section-sub">A IWS Brasil fornece produtos e engenharia especializada em óleo &amp; gás, com soluções integradas de perfuração, produção e controle de fluidos adaptadas ao mercado brasileiro.</p>
     <div class="sobre-layout">
       <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-year">2012</div>
-          <div class="timeline-text">Fundação em Macaé com filiais no Rio de Janeiro e Aracaju.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2013</div>
-          <div class="timeline-text">Representação no Brasil da VAREL (Brocas), DHP, OFITE e DIGGER. Obtenção do CRRC junto à Petrobras.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2018</div>
-          <div class="timeline-text">Expansão comercial e contrato para desenvolvimento de brocas customizadas para o Pré Sal.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2019</div>
-          <div class="timeline-text">Excelentes performances em projetos de poços Onshore e Offshore Pré Sal.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2020 a 2021</div>
-          <div class="timeline-text">Realização de projetos integrados de perfuração e produção via ciência de dados.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2024</div>
-          <div class="timeline-text">Soluções integradas via ciência de dados. Inovação contínua em brocas, acessórios e serviços.</div>
-        </div>
+        <div class="timeline-item"><div class="timeline-year">2012</div><div class="timeline-text">Fundação em Macaé com filiais no Rio de Janeiro e Aracaju.</div></div>
+        <div class="timeline-item"><div class="timeline-year">2013</div><div class="timeline-text">Representação no Brasil da VAREL (Brocas), DHP, OFITE e DIGGER. Obtenção do CRRC junto à Petrobras.</div></div>
+        <div class="timeline-item"><div class="timeline-year">2018</div><div class="timeline-text">Expansão comercial e contrato para desenvolvimento de brocas customizadas para o Pré Sal.</div></div>
+        <div class="timeline-item"><div class="timeline-year">2019</div><div class="timeline-text">Excelentes performances em projetos de poços Onshore e Offshore Pré Sal.</div></div>
+        <div class="timeline-item"><div class="timeline-year">2020–2021</div><div class="timeline-text">Realização de projetos integrados de perfuração e produção via ciência de dados.</div></div>
+        <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-text">Soluções integradas via ciência de dados. Inovação contínua em brocas, acessórios e serviços.</div></div>
       </div>
-
       <div>
         <div class="stats-grid">
-          <div class="stat-item">
-            <span class="stat-number">14+</span>
-            <span class="stat-label">Anos de atuação</span>
-            <div class="stat-bar"><div class="stat-bar-fill" style="--w:100%"></div></div>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">75%</span>
-            <span class="stat-label">Redução de custos</span>
-            <div class="stat-bar"><div class="stat-bar-fill" style="--w:75%"></div></div>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">64%</span>
-            <span class="stat-label">Aumento de ROP</span>
-            <div class="stat-bar"><div class="stat-bar-fill" style="--w:64%"></div></div>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">200%</span>
-            <span class="stat-label">Ganho de perf.</span>
-            <div class="stat-bar"><div class="stat-bar-fill" style="--w:100%"></div></div>
-          </div>
+          <div class="stat-item"><span class="stat-num">14+</span><span class="stat-lbl">Anos de atuação</span><div class="stat-bar"><div class="stat-bar-fill" style="--w:100%"></div></div></div>
+          <div class="stat-item"><span class="stat-num">75%</span><span class="stat-lbl">Redução de custos</span><div class="stat-bar"><div class="stat-bar-fill" style="--w:75%"></div></div></div>
+          <div class="stat-item"><span class="stat-num">64%</span><span class="stat-lbl">Aumento de ROP</span><div class="stat-bar"><div class="stat-bar-fill" style="--w:64%"></div></div></div>
+          <div class="stat-item"><span class="stat-num">200%</span><span class="stat-lbl">Ganho de perf.</span><div class="stat-bar"><div class="stat-bar-fill" style="--w:100%"></div></div></div>
         </div>
         <div class="cert-row">
           <div class="cert-item">API Q1</div>
@@ -1436,104 +586,82 @@ footer {
   </div>
 </section>
 
+<!-- CLIENTES -->
+<section id="clientes" class="marquee-section section-alt">
+  <div class="container">
+    <div class="eyebrow">Portfólio</div>
+    <h2 class="section-title">Nossos clientes</h2>
+    <p class="section-sub">Empresas líderes que confiam em nossas soluções para operações de óleo &amp; gás.</p>
+  </div>
+  <div class="marquee-label">Clientes ativos</div>
+  <div class="marquee-track">
+    <div class="marquee-fade-l" aria-hidden="true"></div>
+    <div class="marquee-inner" id="marqueeInner"></div>
+    <div class="marquee-fade-r" aria-hidden="true"></div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section id="faq" class="section">
   <div class="container">
-    <div class="section-eyebrow">FAQ</div>
+    <div class="eyebrow">FAQ</div>
     <h2 class="section-title">Perguntas frequentes</h2>
-    <p class="section-subtitle">Dúvidas sobre nossos produtos e soluções.</p>
+    <p class="section-sub">Principais dúvidas sobre nossos produtos e soluções.</p>
     <div class="accordion">
       <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>Quais tipos de brocas vocês oferecem?</span>
-          <span class="accordion-plus">+</span>
-        </div>
-        <div class="accordion-content">
-          <p>Oferecemos brocas PDC e tricônicas customizadas para diferentes formações geológicas, incluindo aplicações no Pré Sal e campos offshore. Cada broca é selecionada ou projetada com base no perfil do poço e nas condições de formação.</p>
-        </div>
+        <button class="accordion-hd" aria-expanded="false" type="button">
+          <span class="accordion-hd-text">Quais tipos de brocas vocês oferecem?</span>
+          <span class="accordion-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body"><p>Brocas PDC e tricônicas customizadas para formações geológicas variadas, incluindo Pré Sal e campos offshore. Cada broca é selecionada com base no perfil do poço e nas condições de formação.</p></div>
       </div>
       <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>Como funciona o monitoramento em tempo real?</span>
-          <span class="accordion-plus">+</span>
-        </div>
-        <div class="accordion-content">
-          <p>Utilizamos sensores avançados e algoritmos de análise para acompanhar parâmetros de perfuração em tempo real, permitindo ajustes proativos e otimização contínua da performance com o sistema OPTIMAX Deepview.</p>
-        </div>
+        <button class="accordion-hd" aria-expanded="false" type="button">
+          <span class="accordion-hd-text">Como funciona o monitoramento em tempo real?</span>
+          <span class="accordion-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body"><p>Sensores avançados e algoritmos de análise acompanham parâmetros de perfuração em tempo real, permitindo ajustes proativos via sistema OPTIMAX Deepview.</p></div>
       </div>
       <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>Vocês trabalham com projetos offshore?</span>
-          <span class="accordion-plus">+</span>
-        </div>
-        <div class="accordion-content">
-          <p>Sim, temos experiência comprovada em projetos offshore incluindo plataformas fixas e FPSOs, com soluções adaptadas às condições marinhas e requisitos Petrobras (CRRC registrado).</p>
-        </div>
+        <button class="accordion-hd" aria-expanded="false" type="button">
+          <span class="accordion-hd-text">Vocês trabalham com projetos offshore?</span>
+          <span class="accordion-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body"><p>Sim. Temos experiência comprovada em plataformas fixas e FPSOs, com soluções adaptadas às condições marinhas e requisitos Petrobras (CRRC registrado).</p></div>
       </div>
       <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span>Quais são as condições de contratação de brocas?</span>
-          <span class="accordion-plus">+</span>
-        </div>
-        <div class="accordion-content">
-          <p>Brocas premium disponíveis em inventário. Contratação via custo por metro perfurado ou com bônus e malus, alinhando os objetivos de performance entre IWS Brasil e a operadora.</p>
-        </div>
+        <button class="accordion-hd" aria-expanded="false" type="button">
+          <span class="accordion-hd-text">Como funciona a contratação de brocas?</span>
+          <span class="accordion-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="accordion-body"><p>Brocas disponíveis em inventário. Contratação via custo por metro perfurado ou com bônus e malus, alinhando objetivos de performance entre IWS Brasil e a operadora.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CLIENTES -->
-<section id="clientes" class="marquee-section section-alt">
-  <div class="container" style="margin-bottom:0">
-    <div class="section-eyebrow">Portfólio</div>
-    <h2 class="section-title">Nossos clientes</h2>
-    <p class="section-subtitle">Empresas líderes que confiam em nossas soluções para operações de óleo &amp; gás.</p>
-  </div>
-  <div class="marquee-label">Clientes ativos</div>
-  <div class="marquee-track">
-    <div class="marquee-inner" id="marqueeInner"></div>
-  </div>
-</section>
-
 <!-- CONTATO -->
-<section id="contato" class="section">
+<section id="contato" class="section section-alt">
   <div class="container">
-    <div class="section-eyebrow">Fale conosco</div>
+    <div class="eyebrow">Fale conosco</div>
     <h2 class="section-title">Vamos conversar</h2>
-    <p class="section-subtitle">Estamos prontos para discutir suas necessidades em perfuração e produção.</p>
-
+    <p class="section-sub">Estamos prontos para discutir suas necessidades em perfuração e produção.</p>
     <div class="contato-card">
       <div class="contato-left">
         <h3>Contato direto</h3>
         <p>Para consultas comerciais, especificação de produtos ou suporte técnico. Respondemos em até 1 dia útil.</p>
-        <a href="mailto:vendas@iwsbrasil.com" class="contato-email-btn">✉ vendas@iwsbrasil.com</a>
-
-        <div class="contato-contacts">
-          <div>
-            <div class="contact-person-label">Comercial</div>
-            <div class="contact-person-name">IWS Brasil</div>
-            <div class="contact-person-info">
-              <a href="mailto:vendas@iwsbrasil.com">vendas@iwsbrasil.com</a><br>
-              <a href="http://www.iwsbrasil.com" target="_blank">www.iwsbrasil.com</a>
-            </div>
-          </div>
+        <a href="mailto:vendas@iwsbrasil.com" class="email-btn">✉ vendas@iwsbrasil.com</a>
+        <div class="contact-lbl">Comercial</div>
+        <div class="contact-name">IWS Brasil</div>
+        <div class="contact-info">
+          <a href="mailto:vendas@iwsbrasil.com">vendas@iwsbrasil.com</a><br>
+          <a href="https://www.iwsbrasil.com" target="_blank" rel="noopener noreferrer">www.iwsbrasil.com</a>
         </div>
       </div>
-
-      <div class="contato-right-info">
-        <div class="contato-info-block">
-          <h4>Escritórios</h4>
-          <p>Macaé, Rio de Janeiro e Aracaju</p>
-        </div>
-        <div class="contato-info-block">
-          <h4>Certificações</h4>
-          <p>API Q1 · ISO 9001 · ISO 45001 · OHSAS 18001<br>CRRC registrado junto à Petrobras</p>
-        </div>
-        <div class="contato-info-block">
-          <h4>Atuação</h4>
-          <p>Onshore e Offshore · Pré Sal e pós Sal<br>Plataformas fixas e FPSOs</p>
-        </div>
+      <div class="contato-right">
+        <div class="info-block"><h4>Escritórios</h4><p>Macaé, Rio de Janeiro e Aracaju</p></div>
+        <div class="info-block"><h4>Certificações</h4><p>API Q1 · ISO 9001 · ISO 45001 · OHSAS 18001<br>CRRC registrado junto à Petrobras</p></div>
+        <div class="info-block"><h4>Atuação</h4><p>Onshore e Offshore · Pré Sal e pós Sal<br>Plataformas fixas e FPSOs</p></div>
       </div>
     </div>
   </div>
@@ -1563,87 +691,137 @@ footer {
         <p>
           <a href="mailto:vendas@iwsbrasil.com">vendas@iwsbrasil.com</a><br>
           Macaé · Rio de Janeiro · Aracaju<br><br>
-          <a href="http://www.iwsbrasil.com" target="_blank">www.iwsbrasil.com</a>
+          <a href="https://www.iwsbrasil.com" target="_blank" rel="noopener noreferrer">www.iwsbrasil.com</a>
         </p>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 IWS Brasil. Todos os direitos reservados.</p>
+      <p class="footer-copy">&copy; 2026 IWS Brasil. Todos os direitos reservados.</p>
     </div>
   </div>
 </footer>
 
-<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Voltar ao topo" type="button">↑</button>
 
 <script>
-const clients = [
-  "3R PETROLEUM","BAKER HUGHES","CARMO ENERGY","ENEVA","EQUINOR",
-  "GREAT ENERGY","IMETAME","MATRA","PETROBRAS","PETRORECONCAVO",
-  "SEACREST","ORIGEM"
-];
+(function () {
+  'use strict';
 
-function buildMarquee() {
-  const inner = document.getElementById('marqueeInner');
-  const allClients = [...clients, ...clients];
-  allClients.forEach(name => {
-    const card = document.createElement('div');
-    card.className = 'client-card';
-    const img = document.createElement('img');
-    img.src = `clientes/${encodeURIComponent(name)}.png`;
-    img.alt = name;
-    img.onerror = function() { this.style.display = 'none'; };
-    const label = document.createElement('div');
-    label.className = 'client-card-name';
-    label.textContent = name;
-    card.appendChild(img);
-    card.appendChild(label);
-    inner.appendChild(card);
-  });
-}
-buildMarquee();
+  /* ── Marquee: usa textContent para nunca inserir HTML não-sanitizado ── */
+  var CLIENT_NAMES = [
+    '3R PETROLEUM','BAKER HUGHES','CARMO ENERGY','ENEVA','EQUINOR',
+    'GREAT ENERGY','IMETAME','MATRA','PETROBRAS','PETRORECONCAVO',
+    'SEACREST','ORIGEM'
+  ];
 
-window.addEventListener('scroll', () => {
-  document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
-  document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 400);
-  document.querySelectorAll('.stat-bar-fill').forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('animated');
-  });
-});
+  function buildMarquee() {
+    var inner = document.getElementById('marqueeInner');
+    if (!inner) return;
+    var doubled = CLIENT_NAMES.concat(CLIENT_NAMES);
+    var frag = document.createDocumentFragment();
 
-function toggleAccordion(header) {
-  const item = header.parentElement;
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.accordion-item').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.accordion-content').classList.remove('open');
-  });
-  if (!isOpen) {
-    item.classList.add('open');
-    item.querySelector('.accordion-content').classList.add('open');
+    doubled.forEach(function (name) {
+      var card = document.createElement('div');
+      card.className = 'client-card';
+
+      var img = document.createElement('img');
+      img.src = 'clientes/' + encodeURIComponent(name) + '.png';
+      img.alt = name;
+      img.loading = 'lazy';
+      img.onerror = function () { this.style.display = 'none'; };
+
+      var lbl = document.createElement('div');
+      lbl.className = 'client-card-name';
+      lbl.textContent = name; /* textContent — imune a XSS */
+
+      card.appendChild(img);
+      card.appendChild(lbl);
+      frag.appendChild(card);
+    });
+    inner.appendChild(frag);
   }
-}
+  buildMarquee();
 
-function toggleTheme() {
-  document.body.classList.toggle('light-mode');
-  document.body.classList.toggle('dark-mode');
-  const isDark = document.body.classList.contains('dark-mode');
-  document.querySelector('.theme-icon').textContent = isDark ? '🌙' : '☀️';
-}
+  /* ── Scroll ── */
+  var header    = document.getElementById('header');
+  var scrollBtn = document.getElementById('scrollTop');
 
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const t = document.querySelector(link.getAttribute('href'));
-    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    document.getElementById('navLinks').classList.remove('active');
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    header.classList.toggle('scrolled', y > 50);
+    scrollBtn.classList.toggle('show', y > 400);
+    document.querySelectorAll('.stat-bar-fill:not(.on)').forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight - 60) el.classList.add('on');
+    });
+  }, { passive: true });
+
+  /* ── Accordion (acessível com teclado) ── */
+  document.querySelectorAll('.accordion-hd').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item   = btn.closest('.accordion-item');
+      var isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('.accordion-item').forEach(function (i) {
+        i.classList.remove('open');
+        i.querySelector('.accordion-body').classList.remove('open');
+        i.querySelector('.accordion-hd').setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        item.querySelector('.accordion-body').classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
   });
-});
 
-document.addEventListener('keydown', e => {
-  if (e.ctrlKey && ['a','c','u','s','p'].includes(e.key)) e.preventDefault();
-  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
-});
-document.addEventListener('contextmenu', e => e.preventDefault());
+  /* ── Theme toggle (persiste em localStorage) ── */
+  var themeBtn  = document.getElementById('themeBtn');
+  var themeIcon = document.getElementById('themeIcon');
+
+  function applyTheme(isLight) {
+    document.body.classList.toggle('light', isLight);
+    document.body.classList.toggle('dark',  !isLight);
+    themeIcon.textContent = isLight ? '☀️' : '🌙';
+    try { localStorage.setItem('iws-theme', isLight ? 'light' : 'dark'); } catch (e) {}
+  }
+
+  try {
+    if (localStorage.getItem('iws-theme') === 'light') applyTheme(true);
+  } catch (e) {}
+
+  themeBtn.addEventListener('click', function () {
+    applyTheme(!document.body.classList.contains('light'));
+  });
+
+  /* ── Menu mobile ── */
+  var menuBtn  = document.getElementById('menuToggle');
+  var navLinks = document.getElementById('navLinks');
+
+  menuBtn.addEventListener('click', function () {
+    var open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+
+  navLinks.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      var target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  /* ── Hardening: bloqueia atalhos de devtools no front-end ── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'F12') { e.preventDefault(); return; }
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) { e.preventDefault(); return; }
+    if (e.ctrlKey && e.key === 'u') { e.preventDefault(); }
+  });
+  document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+})();
 </script>
 </body>
 </html>
