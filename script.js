@@ -72,10 +72,23 @@ function safeClientFile(name) { return SAFE_FILENAME.test(name) ? name : ''; }
 function initSplash() {
   var splash = document.getElementById('splash');
   if (!splash) return;
+
+  function hideSplash() {
+    splash.classList.add('hide');
+    splash.addEventListener('transitionend', function() {
+      splash.remove();
+    }, { once: true });
+    // Fallback caso transitionend não dispare
+    setTimeout(function() {
+      if (splash.parentNode) splash.remove();
+    }, 800);
+  }
+
   window.addEventListener('load', function() {
-    setTimeout(function() { splash.classList.add('hide'); }, 900);
+    setTimeout(hideSplash, 900);
   });
-  setTimeout(function() { splash.classList.add('hide'); }, 2200);
+  // Fallback caso load demore muito
+  setTimeout(hideSplash, 2200);
 }
 
 function initReveal() {
