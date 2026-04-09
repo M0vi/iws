@@ -1,6 +1,5 @@
 'use strict';
 
-/* ── DADOS SOLUÇÕES ── */
 var SOLUCOES = [
   {ico:'🪨', tag:'Perfuração', title:'Brocas PDC & Tricônicas Premium', desc:'Brocas customizadas VAREL para Pré-Sal e OnShore. +64% ROP médio, redução de custo de até 75% por poço nos diâmetros 8½" e 12¼".'},
   {ico:'🧪', tag:'Laboratório', title:'Equipamentos OFITE', desc:'Linha completa para análise e controle de fluidos: viscosímetros, filtros API, células HPHT — padrão mundial em laboratórios de O&G.'},
@@ -12,10 +11,6 @@ var SOLUCOES = [
   {ico:'🤖', tag:'Inteligência Artificial', title:'Sistema IA – Gerenciamento de Riscos', desc:'IA para análise em tempo real, manutenção preditiva e tomada de decisão automatizada. Integra sensores P/T, EDR e sistemas BEC/DAQ+.'},
 ];
 
-/*
-  CLIENTES — "file" deve corresponder exatamente ao nome do arquivo
-  dentro da pasta clientes/ (sem extensão, case-sensitive no Linux).
-*/
 var CLIENTS = [
   {file:'PETROBRAS',      label:'Petrobras'},
   {file:'ENEVA',          label:'Eneva'},
@@ -31,27 +26,17 @@ var CLIENTS = [
   {file:'GREAT ENERGY',   label:'Great Energy'},
 ];
 
-/* ─────────────────────────────────────────────
-   SEGURANÇA: valida que um nome de arquivo
-   de cliente não contém caracteres que
-   permitiriam path traversal ou injeção.
-   Aceita apenas letras, números, espaços e
-   alguns símbolos seguros.
-───────────────────────────────────────────── */
 var SAFE_FILENAME = /^[A-Za-z0-9À-ÿ _\-&.]+$/;
 
 function safeClientFile(name) {
   return SAFE_FILENAME.test(name) ? name : '';
 }
 
-/* ── RENDER SOLUÇÕES ── */
 function renderSolucoes() {
   var grid = document.getElementById('sol-grid');
   if (!grid) return;
 
   SOLUCOES.forEach(function(s) {
-    /* Todos os dados são internos/hardcoded — inseridos via textContent
-       para garantir que nenhum HTML seja interpretado                   */
     var card = document.createElement('div');
     card.className = 'sol-card';
     card.setAttribute('role', 'listitem');
@@ -81,28 +66,24 @@ function renderSolucoes() {
   });
 }
 
-/* ── RENDER CLIENTES (marquee) ── */
 function makeClientCard(c) {
   var safeFile  = safeClientFile(c.file);
-  var safeLabel = String(c.label).replace(/[<>"'&]/g, '');   /* strip HTML chars */
+  var safeLabel = String(c.label).replace(/[<>"'&]/g, '');
 
   var card = document.createElement('div');
   card.className = 'client-card';
 
   if (safeFile) {
     var img = document.createElement('img');
-    /* Construct path safely — never interpolate untrusted data */
     img.alt     = safeLabel;
     img.loading = 'lazy';
     img.decoding = 'async';
     img.src     = 'clientes/' + safeFile + '.png';
 
-    /* Fallback: .png → .jpg → text placeholder */
     var triedJpg = false;
     img.onerror = function() {
       if (!triedJpg) {
         triedJpg = true;
-        /* Reset onerror before changing src to avoid infinite loop */
         img.onerror = function() {
           img.onerror = null;
           showPlaceholder(card, img, safeLabel);
@@ -140,7 +121,6 @@ function renderClientes() {
   var track = document.getElementById('mq-track');
   if (!track) return;
 
-  /* Duplicate list for seamless CSS loop */
   var all = CLIENTS.concat(CLIENTS);
   var frag = document.createDocumentFragment();
   all.forEach(function(c) {
@@ -148,11 +128,9 @@ function renderClientes() {
   });
   track.appendChild(frag);
 
-  /* ~2.8 s per card */
   track.style.animationDuration = (CLIENTS.length * 2.8) + 's';
 }
 
-/* ── NAVBAR ── */
 function initNav() {
   var nav     = document.getElementById('nav');
   var burger  = document.getElementById('burger');
@@ -176,12 +154,10 @@ function initNav() {
     document.body.style.overflow = '';
   }
 
-  /* Scroll → add .scrolled class */
   window.addEventListener('scroll', function() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   }, {passive: true});
 
-  /* Burger toggle */
   burger.addEventListener('click', function() {
     if (burger.getAttribute('aria-expanded') === 'true') {
       closeMenu();
@@ -190,17 +166,14 @@ function initNav() {
     }
   });
 
-  /* Close on link click */
   links.querySelectorAll('.nl').forEach(function(a) {
     a.addEventListener('click', closeMenu);
   });
 
-  /* Close on overlay click */
   if (overlay) {
     overlay.addEventListener('click', closeMenu);
   }
 
-  /* Close on Escape */
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && links.classList.contains('open')) {
       closeMenu();
@@ -208,14 +181,12 @@ function initNav() {
     }
   });
 
-  /* Active link via IntersectionObserver */
   if ('IntersectionObserver' in window) {
     var navLinks = document.querySelectorAll('.nl[href^="#"]');
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           navLinks.forEach(function(l) { l.classList.remove('active'); });
-          /* Safely escape the id before using it as a CSS attribute selector */
           var id = entry.target.id.replace(/[^\w-]/g, '');
           var active = document.querySelector('.nl[href="#' + id + '"]');
           if (active) active.classList.add('active');
@@ -229,7 +200,6 @@ function initNav() {
   }
 }
 
-/* ── SCROLL TOP ── */
 function initScrollTop() {
   var btn = document.getElementById('scroll-top');
   if (!btn) return;
@@ -241,19 +211,28 @@ function initScrollTop() {
   });
 }
 
-/* ── FOOTER YEAR ── */
 function setYear() {
   var el = document.getElementById('yr');
   if (el) el.textContent = new Date().getFullYear();
 }
 
-/* ── INIT ── */
+function lockInteractions() {
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+  document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && (e.key === 'a' || e.key === 'A' || e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+      e.preventDefault();
+    }
+  });
+}
+
 function init() {
   renderSolucoes();
   renderClientes();
   initNav();
   initScrollTop();
   setYear();
+  lockInteractions();
 }
 
 if (document.readyState === 'loading') {
