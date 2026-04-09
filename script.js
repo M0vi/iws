@@ -329,6 +329,7 @@ function initMobileLinks() {
 }
 
 
+function init() {
   initSplash();
   renderSolucoes();
   renderClientes();
