@@ -192,13 +192,14 @@ function renderClientes() {
   if (!track) return;
 
   if (!('IntersectionObserver' in window)) { buildCarousel(track); return; }
+  var target = document.getElementById('clientes') || track;
   var io = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting) {
       buildCarousel(track);
       io.disconnect();
     }
-  }, { rootMargin: '200px' });
-  io.observe(track);
+  }, { rootMargin: '300px' });
+  io.observe(target);
 }
 
 function buildCarousel(track) {
@@ -206,7 +207,6 @@ function buildCarousel(track) {
   var frag = document.createDocumentFragment();
   all.forEach(function(c) { frag.appendChild(makeClientCard(c)); });
   track.appendChild(frag);
-  track.style.animationDuration = (CLIENTS.length * 2.8) + 's';
 }
 
 function initNav() {
