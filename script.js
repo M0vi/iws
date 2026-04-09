@@ -293,7 +293,11 @@ function setYear() {
 
 function lockInteractions() {
   document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-  document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+  document.addEventListener('selectstart', function(e) {
+    var tag = e.target && e.target.tagName;
+    if (tag === 'A' || tag === 'BUTTON' || tag === 'INPUT') return;
+    e.preventDefault();
+  });
   document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && ['a','A','u','U','s','S'].indexOf(e.key) !== -1) e.preventDefault();
   });
