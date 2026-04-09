@@ -8,9 +8,9 @@
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self';
                  script-src 'self';
-                 style-src 'self';
-                 img-src 'self' data:;
-                 font-src 'self';
+                 style-src 'self' https://fonts.googleapis.com;
+                 img-src 'self' data: https://images.unsplash.com;
+                 font-src 'self' https://fonts.gstatic.com;
                  connect-src 'none';
                  object-src 'none';
                  base-uri 'self';
@@ -21,6 +21,9 @@
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
   <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -52,13 +55,12 @@
 <main id="main-content">
 
 <section class="hero" id="hero" aria-labelledby="hero-heading">
-  <div class="hero-orb o1" aria-hidden="true"></div>
-  <div class="hero-orb o2" aria-hidden="true"></div>
+  <div class="hero-bg-img" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-text">
-      <span class="pill" aria-label="Operações">OnShore · OffShore · Pré-Sal</span>
       <h1 id="hero-heading">Tecnologia que<br /><em>perfura mais fundo</em><br />e custa menos</h1>
-      <p class="hero-sub">12 anos de inovação em brocas PDC, equipamentos de laboratório OFITE, acessórios de cimentação e inteligência de dados para as maiores operadoras do Brasil.</p>
+      <p class="hero-sub">Brocas PDC, equipamentos de laboratório OFITE, acessórios de cimentação e inteligência de dados para as maiores operadoras do Brasil.</p>
       <div class="hero-btns">
         <a href="OFITE Catalog.pdf" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="btn btn-green">
           <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -70,11 +72,9 @@
         <a href="#contato" class="btn btn-ghost">Falar com especialista</a>
       </div>
     </div>
-    <div class="hero-stats" aria-label="Indicadores">
-      <div class="stat-box"><span class="sn">12+</span><span class="sl">Anos de atuação</span></div>
-      <div class="stat-box"><span class="sn">64%</span><span class="sl">Aumento médio ROP</span></div>
-      <div class="stat-box"><span class="sn">75%</span><span class="sl">Redução custo Pré-Sal</span></div>
-      <div class="stat-box"><span class="sn">CRRC</span><span class="sl">Petrobras certificado</span></div>
+    <div class="hero-badge" aria-label="Anos de experiência">
+      <span class="hb-num">+12</span>
+      <span class="hb-label">anos de<br/>atuação</span>
     </div>
   </div>
 </section>
