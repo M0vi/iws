@@ -18,19 +18,18 @@ var SOLUCOES = [
   Edite os valores de "file" conforme os arquivos reais na sua pasta clientes/.
 */
 var CLIENTS = [
-  {file:'Petrobras',      label:'Petrobras'},
-  {file:'Eneva',          label:'Eneva'},
-  {file:'PetroReconcavo', label:'PetroReconcavo'},
-  {file:'3R-Petroleum',   label:'3R Petroleum'},
-  {file:'Imetame',        label:'Imetame'},
-  {file:'Carmo-Energy',   label:'Carmo Energy'},
-  {file:'Equinor',        label:'Equinor'},
-  {file:'Origem',         label:'Origem'},
-  {file:'Baker-Hughes',   label:'Baker Hughes'},
-  {file:'Matra',          label:'Matra'},
-  {file:'Acu-Petroleo',   label:'Açu Petróleo'},
-  {file:'Seacrest',       label:'Seacrest Petróleo'},
-  {file:'Great-Energy',   label:'Great Energy'},
+  {file:'PETROBRAS',        label:'Petrobras'},
+  {file:'ENEVA',            label:'Eneva'},
+  {file:'PETRORECONCAVO',   label:'PetroReconcavo'},
+  {file:'3R PETROLEUM',     label:'3R Petroleum'},
+  {file:'IMETAME',          label:'Imetame'},
+  {file:'CARMO ENERGY',     label:'Carmo Energy'},
+  {file:'EQUINOR',          label:'Equinor'},
+  {file:'ORIGEM',           label:'Origem'},
+  {file:'BAKER HUGHES',     label:'Baker Hughes'},
+  {file:'MATRA',            label:'Matra'},
+  {file:'SEACREST',         label:'Seacrest'},
+  {file:'GREAT ENERGY',     label:'Great Energy'},
 ];
 
 /* ── RENDER SOLUÇÕES ── */
