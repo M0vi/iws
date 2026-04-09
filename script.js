@@ -304,27 +304,25 @@ function lockInteractions() {
 }
 
 function initMobileLinks() {
-  // WhatsApp: usa window.location no mobile para abrir o app direto
+  // WhatsApp: abre em nova aba para não sair da página
   var waLinks = document.querySelectorAll('a[href*="wa.me"]');
   waLinks.forEach(function(link) {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      window.location.href = link.href;
+      window.open(link.href, '_blank', 'noopener');
     });
   });
 
-  // PDF: abre em nova aba ou faz download dependendo do dispositivo
+  // PDF: iOS abre no mesmo browser; Android/desktop abre em nova aba
   var pdfLinks = document.querySelectorAll('a[href$=".pdf"]');
   pdfLinks.forEach(function(link) {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      var url = link.href;
-      // iOS Safari não suporta download direto de PDFs, usa window.open
       var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       if (isIOS) {
-        window.location.href = url;
+        window.location.href = link.href;
       } else {
-        window.open(url, '_blank', 'noopener');
+        window.open(link.href, '_blank', 'noopener');
       }
     });
   });
