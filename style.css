@@ -344,3 +344,193 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--primary),var(--g
   html{scroll-behavior:auto}
   .mq-track{animation:none}
 }
+/* ===== #13 scroll-margin-top para todos os anchors ===== */
+section[id], div[id] { scroll-margin-top: calc(var(--nh) + 16px); }
+
+/* ===== #14 SPLASH SCREEN ===== */
+.splash {
+  position:fixed; inset:0; z-index:9999;
+  background:var(--dk);
+  display:flex; align-items:center; justify-content:center;
+  transition:opacity .5s ease, visibility .5s ease;
+}
+.splash.hide { opacity:0; visibility:hidden; pointer-events:none; }
+.splash-inner { display:flex; flex-direction:column; align-items:center; gap:28px; }
+.splash-bar {
+  width:160px; height:2px;
+  background:rgba(130,201,106,.15);
+  border-radius:2px; overflow:hidden;
+}
+.splash-fill {
+  height:100%; width:0;
+  background:var(--primary);
+  border-radius:2px;
+  animation: splashLoad .85s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes splashLoad { to { width:100%; } }
+
+/* ===== #12 CURSOR CUSTOMIZADO ===== */
+.cursor {
+  position:fixed; top:0; left:0; z-index:9998; pointer-events:none;
+  width:36px; height:36px; margin:-18px 0 0 -18px;
+  border:1.5px solid rgba(130,201,106,.6);
+  border-radius:50%;
+  transition:transform .12s ease, opacity .2s, border-color .2s;
+  will-change:transform;
+}
+.cursor-dot {
+  position:fixed; top:0; left:0; z-index:9999; pointer-events:none;
+  width:6px; height:6px; margin:-3px 0 0 -3px;
+  background:var(--primary); border-radius:50%;
+  transition:transform .06s ease;
+  will-change:transform;
+}
+.cursor.hovered { transform:scale(1.6); border-color:var(--primary); }
+body:not(:hover) .cursor,
+body:not(:hover) .cursor-dot { opacity:0; }
+@media (pointer:coarse) { .cursor, .cursor-dot { display:none; } }
+
+/* ===== #11 SCROLL-TRIGGERED ANIMATIONS ===== */
+.reveal, .reveal-left, .reveal-right {
+  opacity:0; transition:opacity .65s ease, transform .65s ease;
+}
+.reveal       { transform:translateY(28px); }
+.reveal-left  { transform:translateX(-36px); }
+.reveal-right { transform:translateX(36px); }
+.reveal.in, .reveal-left.in, .reveal-right.in {
+  opacity:1; transform:translate(0,0);
+}
+@media (prefers-reduced-motion:reduce) {
+  .reveal,.reveal-left,.reveal-right { opacity:1; transform:none; transition:none; }
+}
+
+/* ===== #15 CRRC BADGE ===== */
+.crrc-badge {
+  display:flex; align-items:center; gap:14px;
+  background:rgba(130,201,106,.07);
+  border:1px solid rgba(130,201,106,.25);
+  border-radius:10px; padding:14px 18px;
+  margin:20px 0 22px; max-width:460px;
+}
+.crrc-icon {
+  flex-shrink:0; width:44px; height:44px;
+  background:rgba(130,201,106,.12);
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--primary);
+}
+.crrc-title { display:block; font-size:.92rem; font-weight:700; color:var(--primary); }
+.crrc-sub   { display:block; font-size:.73rem; color:var(--g400t); margin-top:2px; line-height:1.4; }
+
+/* ===== #16 CASES ===== */
+.cases { background:var(--dk2); }
+.cases-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+  gap:20px;
+}
+.case-card {
+  background:var(--card); border:1px solid var(--bdr2);
+  border-radius:12px; padding:28px 24px;
+  display:flex; flex-direction:column; gap:8px;
+  transition:border-color .2s, transform .2s;
+}
+.case-card:hover { border-color:var(--bdr); transform:translateY(-4px); }
+.case-icon {
+  width:44px; height:44px;
+  background:rgba(130,201,106,.1); border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--primary); margin-bottom:4px;
+}
+.case-stat {
+  font-size:2.8rem; font-weight:800; line-height:1;
+  color:var(--primary); letter-spacing:-.02em;
+}
+.case-label   { font-size:.9rem; font-weight:600; color:var(--w); line-height:1.3; }
+.case-context { font-size:.72rem; color:var(--g400t); letter-spacing:.03em; margin-top:2px; }
+.case-desc    { font-size:.82rem; color:var(--g400t); line-height:1.65; margin-top:6px; padding-top:10px; border-top:1px solid var(--bdr2); }
+
+/* ===== #18 MAPA ===== */
+.mapa-section { background:var(--dk3); }
+.mapa-wrapper {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:48px; align-items:center;
+  padding-top:8px;
+}
+.mapa-container { display:flex; justify-content:center; }
+.brasil-map {
+  width:100%; max-width:340px;
+  filter:drop-shadow(0 0 32px rgba(130,201,106,.08));
+}
+.map-land {
+  fill:var(--card); stroke:var(--bdr); stroke-width:1.5;
+  transition:fill .3s;
+}
+.map-pin-group { cursor:default; }
+.pin-pulse   { animation:pulse 2.4s ease-in-out infinite; }
+.pin-pulse-2 { animation:pulse 2.4s ease-in-out infinite .4s; }
+@keyframes pulse { 0%,100%{r:14;opacity:.18} 50%{r:22;opacity:.06} }
+.map-label-name {
+  font-size:10px; font-weight:700; fill:var(--g100t);
+  font-family:'Outfit',sans-serif;
+}
+.map-label-tag {
+  font-size:9px; fill:var(--primary);
+  font-family:'Outfit',sans-serif;
+}
+
+.mapa-units { display:flex; flex-direction:column; gap:28px; }
+.mapa-unit  { display:flex; align-items:flex-start; gap:16px; }
+.mapa-unit-dot {
+  flex-shrink:0; margin-top:4px;
+  width:10px; height:10px; border-radius:50%;
+  background:var(--g300);
+  border:2px solid rgba(130,201,106,.4);
+}
+.mapa-sede { background:var(--primary); width:14px; height:14px; box-shadow:0 0 10px rgba(130,201,106,.4); }
+.mapa-unit-name { display:block; font-size:.95rem; font-weight:700; color:var(--w); }
+.mapa-unit-tag  { display:block; font-size:.7rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--primary); margin:3px 0 6px; }
+.mapa-unit-desc { font-size:.83rem; color:var(--g400t); line-height:1.65; }
+
+/* ===== #17 WHATSAPP ===== */
+.whatsapp-btn {
+  position:fixed; bottom:80px; right:22px; z-index:var(--z-sticky);
+  display:flex; align-items:center; gap:10px;
+  background:#25D366; color:#fff;
+  padding:12px 18px 12px 14px;
+  border-radius:999px;
+  font-size:.85rem; font-weight:600;
+  box-shadow:0 4px 20px rgba(37,211,102,.35);
+  transition:transform .2s, box-shadow .2s, padding .3s;
+  text-decoration:none;
+  overflow:hidden;
+  max-width:54px;
+}
+.whatsapp-btn:hover {
+  transform:scale(1.04);
+  box-shadow:0 6px 28px rgba(37,211,102,.5);
+  max-width:200px;
+  padding:12px 20px 12px 14px;
+  color:#fff;
+}
+.whatsapp-label {
+  white-space:nowrap; overflow:hidden;
+  max-width:0; opacity:0;
+  transition:max-width .3s ease, opacity .25s ease;
+  pointer-events:none;
+}
+.whatsapp-btn:hover .whatsapp-label { max-width:120px; opacity:1; }
+
+/* ===== #3 NÚMEROS ANIMADOS — case-stat ===== */
+/* (controlado via JS com data-target) */
+
+/* ===== MAPA RESPONSIVE ===== */
+@media(max-width:960px) {
+  .mapa-wrapper { grid-template-columns:1fr; }
+  .mapa-container { display:none; }
+  .cases-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:640px) {
+  .cases-grid { grid-template-columns:1fr; }
+  .whatsapp-btn { bottom:76px; right:16px; }
+}

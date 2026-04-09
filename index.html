@@ -3,8 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IWS Brasil</title>
-  <meta name="description" content="IWS Brasil: 12 anos em brocas PDC, equipamentos OFITE, cimentação e soluções de dados para O&G." />
+  <title>IWS Brasil — Tecnologia em Perfuração e Produção</title>
+  <meta name="description" content="12 anos reduzindo custo e aumentando ROP em brocas PDC, equipamentos OFITE, cimentação e inteligência de dados. Certificados CRRC Petrobras." />
+
+  <!-- #19 Open Graph completo -->
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://www.iwsbrasil.com/" />
+  <meta property="og:title"        content="IWS Brasil — Tecnologia que perfura mais fundo e custa menos" />
+  <meta property="og:description"  content="12 anos reduzindo custo e aumentando ROP no Pré-Sal. Representante exclusiva VAREL, OFITE, DIGGER e TENEX. Certificados CRRC Petrobras." />
+  <meta property="og:image"        content="https://www.iwsbrasil.com/og-image.jpg" />
+  <meta property="og:locale"       content="pt_BR" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="IWS Brasil — Tecnologia em Perfuração e Produção" />
+  <meta name="twitter:description" content="12 anos reduzindo custo e aumentando ROP no Pré-Sal brasileiro." />
+
+  <!-- Security headers -->
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self';
                  script-src 'self';
@@ -16,17 +29,38 @@
                  base-uri 'self';
                  form-action 'none';
                  frame-ancestors 'none';" />
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="DENY" />
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
-  <link rel="icon" href="logo.png" type="image/png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta http-equiv="X-Content-Type-Options"  content="nosniff" />
+  <meta http-equiv="X-Frame-Options"         content="DENY" />
+  <meta http-equiv="Referrer-Policy"         content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy"      content="camera=(), microphone=(), geolocation=(), payment=()" />
+
+  <!-- #9 Favicon SVG inline com suporte a dark mode -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23162410'/><text y='24' x='3' font-size='20' font-family='system-ui' font-weight='800' fill='%2382c96a'>IW</text></svg>" />
+
+  <!-- #10 Preload da imagem hero -->
+  <link rel="preload" as="image"
+        href="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&auto=format&fit=crop&q=80"
+        fetchpriority="high" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+<!-- #14 Splash screen -->
+<div class="splash" id="splash" aria-hidden="true" role="presentation">
+  <div class="splash-inner">
+    <img src="logo.png" alt="" width="140" height="44" onerror="this.style.display='none'" />
+    <div class="splash-bar"><div class="splash-fill"></div></div>
+  </div>
+</div>
+
+<!-- #12 Cursor customizado -->
+<div class="cursor"     id="cursor"     aria-hidden="true"></div>
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
 
 <header class="nav" id="nav" role="banner">
   <div class="nav-inner">
@@ -37,6 +71,7 @@
     <nav aria-label="Menu principal">
       <ul class="nav-links" id="nav-links" role="list">
         <li role="listitem"><a href="#sobre"    class="nl">Sobre</a></li>
+        <li role="listitem"><a href="#cases"    class="nl">Cases</a></li>
         <li role="listitem"><a href="#solucoes" class="nl">Soluções</a></li>
         <li role="listitem"><a href="#catalogo" class="nl">Catálogo</a></li>
         <li role="listitem"><a href="#clientes" class="nl">Clientes</a></li>
@@ -54,25 +89,26 @@
 
 <main id="main-content">
 
+<!-- HERO -->
 <section class="hero" id="hero" aria-labelledby="hero-heading">
   <div class="hero-bg-img" aria-hidden="true"></div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-inner">
-    <div class="hero-text">
+    <div class="hero-text reveal-left">
       <h1 id="hero-heading">Tecnologia que<br /><em>perfura mais fundo</em><br />e custa menos</h1>
-      <p class="hero-sub">Brocas PDC, equipamentos de laboratório OFITE, acessórios de cimentação e inteligência de dados para as maiores operadoras do Brasil.</p>
+      <p class="hero-sub">Brocas PDC, equipamentos OFITE, acessórios de cimentação e inteligência de dados — para as maiores operadoras do Brasil há mais de uma década.</p>
       <div class="hero-btns">
         <a href="OFITE Catalog.pdf" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="btn btn-green">
           <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M10 2v10M6 8l4 4 4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
           </svg>
-          Baixar Catálogo OFITE
+          Catálogo OFITE
         </a>
         <a href="#contato" class="btn btn-ghost">Falar com especialista</a>
       </div>
     </div>
-    <div class="hero-badge" aria-label="Anos de experiência">
+    <div class="hero-badge reveal-right" aria-label="12 anos de atuação">
       <span class="hb-num">+12</span>
       <span class="hb-label">anos de<br/>atuação</span>
     </div>
@@ -81,35 +117,107 @@
 
 <div class="sec-divider" aria-hidden="true"></div>
 
+<!-- SOBRE -->
 <section class="sobre" id="sobre" aria-labelledby="sobre-heading">
   <div class="sobre-inner">
-    <div class="sobre-text">
+    <div class="sobre-text reveal">
       <p class="sec-eyebrow">Quem Somos</p>
-      <h2 id="sobre-heading">Engenharia no coração do petróleo brasileiro</h2>
-      <p class="lead">Fundada em 2012 em Macaé, a IWS do Brasil é representante exclusiva no Brasil de <strong>VAREL</strong>, <strong>OFITE</strong>, <strong>DIGGER Downhole Tools</strong> e <strong>TENEX</strong>.</p>
-      <p class="body-p">Detentores do <strong>CRRC Petrobras</strong>, atuamos em projetos OnShore e OffShore no Pré-Sal com redução de custo entre 50%–75% por poço e record de ROP de <strong>+205%</strong> no campo de Búzios.</p>
+      <h2 id="sobre-heading">No coração do petróleo brasileiro desde 2012</h2>
+      <p class="lead">Fundada em Macaé, a IWS do Brasil é representante exclusiva de <strong>VAREL</strong>, <strong>OFITE</strong>, <strong>DIGGER Downhole Tools</strong> e <strong>TENEX</strong> — com filiais no Rio de Janeiro e Aracaju.</p>
+      <p class="body-p">Com o <strong>CRRC Petrobras</strong>, operamos no Pré-Sal, OnShore e OffShore entregando redução de 50–75% de custo por poço e o recorde de <strong>+205% ROP</strong> no campo de Búzios.</p>
+
+      <!-- #15 Badge CRRC visual -->
+      <div class="crrc-badge" aria-label="Certificação CRRC Petrobras">
+        <div class="crrc-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 2l2.8 8.6H24l-6.4 4.6 2.4 7.4L14 18.2l-6 4.4 2.4-7.4L4 10.6h7.2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="crrc-text">
+          <span class="crrc-title">CRRC Petrobras</span>
+          <span class="crrc-sub">Cadastro de Representantes e Revendedores Credenciados</span>
+        </div>
+      </div>
+
       <div class="certs" aria-label="Certificações">
         <span>API Q1</span><span>ISO 9001</span><span>ISO 45001</span><span>OHSAS 18001</span>
       </div>
     </div>
-    <div class="timeline" aria-label="Linha do tempo">
-      <div class="tl"><span class="tl-yr">2012</span><div><strong>Fundação</strong><p>Macaé, RJ - filiais no Rio de Janeiro e Aracaju.</p></div></div>
-      <div class="tl"><span class="tl-yr">2013</span><div><strong>Parcerias Globais</strong><p>VAREL, OFITE, DHP, DIGGER. CRRC Petrobras.</p></div></div>
-      <div class="tl"><span class="tl-yr">2018</span><div><strong>Pré-Sal</strong><p>Contrato para brocas customizadas no Pré-Sal.</p></div></div>
-      <div class="tl"><span class="tl-yr">2019</span><div><strong>Record Búzios</strong><p>+205% ROP vs. média offshore - Petrobras.</p></div></div>
-      <div class="tl"><span class="tl-yr">2024</span><div><strong>Novo Horizonte</strong><p>Soluções integradas via ciência de dados e IA.</p></div></div>
+    <div class="timeline reveal" aria-label="Linha do tempo">
+      <div class="tl"><span class="tl-yr">2012</span><div><strong>Fundação</strong><p>Macaé, RJ — sede operacional com filiais no Rio e Aracaju.</p></div></div>
+      <div class="tl"><span class="tl-yr">2013</span><div><strong>Parcerias Globais</strong><p>VAREL, OFITE, DIGGER e CRRC Petrobras conquistados.</p></div></div>
+      <div class="tl"><span class="tl-yr">2018</span><div><strong>Pré-Sal</strong><p>Contrato para brocas customizadas em águas ultraprofundas.</p></div></div>
+      <div class="tl"><span class="tl-yr">2019</span><div><strong>Recorde Búzios</strong><p>+205% ROP vs. média offshore — operação Petrobras.</p></div></div>
+      <div class="tl"><span class="tl-yr">2024</span><div><strong>Dados &amp; IA</strong><p>Soluções integradas com ciência de dados e inteligência artificial.</p></div></div>
     </div>
   </div>
 </section>
 
 <div class="sec-divider" aria-hidden="true"></div>
 
+<!-- #16 CASES -->
+<section class="cases" id="cases" aria-labelledby="cases-heading">
+  <div class="wrap">
+    <div class="sec-hd reveal">
+      <p class="sec-eyebrow">Resultados Comprovados</p>
+      <h2 id="cases-heading">Números reais, em campo</h2>
+      <p class="sec-sub">Cada resultado foi registrado em operações reais com nossas soluções.</p>
+    </div>
+    <div class="cases-grid">
+
+      <div class="case-card reveal">
+        <div class="case-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 24V6M6 16l8-10 8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="case-stat" data-target="205" data-prefix="+" data-suffix="%">+0%</div>
+        <div class="case-label">ROP acima da média offshore</div>
+        <div class="case-context">Campo de Búzios · Petrobras · 2019</div>
+        <p class="case-desc">Broca PDC customizada VAREL estabeleceu recorde de velocidade de penetração na bacia de Santos.</p>
+      </div>
+
+      <div class="case-card reveal">
+        <div class="case-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 20l5-7 4 3 5-8 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="case-stat" data-target="75" data-suffix="%">0%</div>
+        <div class="case-label">Redução de custo por poço</div>
+        <div class="case-context">Pré-Sal · Múltiplos campos</div>
+        <p class="case-desc">Maior durabilidade das brocas e engenharia de fluidos reduziram viagens e custo total por poço.</p>
+      </div>
+
+      <div class="case-card reveal">
+        <div class="case-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9" stroke="currentColor" stroke-width="2"/><path d="M14 9v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="case-stat" data-target="98" data-prefix="+" data-suffix="%">+0%</div>
+        <div class="case-label">Aumento médio na produção de óleo</div>
+        <div class="case-context">TenEx NanoCLEAR® · 16 meses contínuos</div>
+        <p class="case-desc">Nanofluidos mantiveram incremento de produção sustentado por mais de 16 meses em múltiplas bacias.</p>
+      </div>
+
+      <div class="case-card reveal">
+        <div class="case-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="5" y="5" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M10 14h8M14 10v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="case-stat" data-target="34" data-suffix="%">0%</div>
+        <div class="case-label">Economia por poço com IA</div>
+        <div class="case-context">DEEPVIEW EDR · Tempo real · 1 seg/ciclo</div>
+        <p class="case-desc">Otimização em tempo real detectou stall de motor e eliminou NPT, reduzindo custo operacional comprovadamente.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider" aria-hidden="true"></div>
+
+<!-- SOLUÇÕES -->
 <section class="solucoes" id="solucoes" aria-labelledby="sol-heading">
   <div class="wrap">
-    <div class="sec-hd">
+    <div class="sec-hd reveal">
       <p class="sec-eyebrow">Portfólio</p>
-      <h2 id="sol-heading">Soluções do subsolo à superfície</h2>
-      <p class="sec-sub">Cobertura total da cadeia de perfuração e produção.</p>
+      <h2 id="sol-heading">Do subsolo à superfície</h2>
+      <p class="sec-sub">Cobertura completa da cadeia de perfuração e produção.</p>
     </div>
     <div class="sol-grid" id="sol-grid" role="list"></div>
   </div>
@@ -117,12 +225,13 @@
 
 <div class="sec-divider" aria-hidden="true"></div>
 
+<!-- CATÁLOGO -->
 <section class="cat-spot" id="catalogo" aria-labelledby="cat-heading">
   <div class="cat-inner">
-    <div class="cat-text">
+    <div class="cat-text reveal">
       <p class="sec-eyebrow">Catálogo Técnico Oficial</p>
       <h2 id="cat-heading">Linha Completa<br /><span class="green">OFI Testing Equipment</span></h2>
-      <p class="cat-desc">Equipamentos de referência mundial para análise e controle de fluidos de perfuração. Como representante exclusivo no Brasil, a IWS oferece suporte técnico, treinamento e serviço pós-venda para toda a linha.</p>
+      <p class="cat-desc">Referência mundial em análise e controle de fluidos de perfuração. Representante exclusivo no Brasil — suporte técnico, treinamento e pós-venda incluídos.</p>
       <ul class="cat-feat">
         <li><span class="dot" aria-hidden="true"></span>Viscosímetros rotativos API (Model 900)</li>
         <li><span class="dot" aria-hidden="true"></span>Células HPHT até 400°F / 1.500 psi</li>
@@ -154,54 +263,126 @@
 
 <div class="sec-divider" aria-hidden="true"></div>
 
+<!-- CLIENTES -->
 <section class="clientes" id="clientes" aria-labelledby="cli-heading">
   <div class="wrap">
-    <div class="sec-hd">
+    <div class="sec-hd reveal">
       <p class="sec-eyebrow">Clientes</p>
       <h2 id="cli-heading">Das maiores bacias sedimentares às operações offshore de classe mundial.</h2>
     </div>
   </div>
-  <div class="mq-scene" aria-label="Carrossel de clientes">
+  <div class="mq-scene" aria-label="Clientes atendidos">
     <div class="mq-fade mq-l" aria-hidden="true"></div>
     <div class="mq-fade mq-r" aria-hidden="true"></div>
-    <div class="mq-track" id="mq-track" aria-live="off"></div>
+    <!-- #8 track inicialmente vazio — preenchido pelo IO quando visível -->
+    <div class="mq-track" id="mq-track" aria-live="polite" aria-atomic="false"></div>
   </div>
 </section>
 
 <div class="sec-divider" aria-hidden="true"></div>
 
+<!-- #18 MAPA -->
+<section class="mapa-section" id="unidades" aria-labelledby="mapa-heading">
+  <div class="wrap">
+    <div class="sec-hd reveal">
+      <p class="sec-eyebrow">Presença Nacional</p>
+      <h2 id="mapa-heading">Três unidades, cobertura total</h2>
+    </div>
+    <div class="mapa-wrapper">
+      <div class="mapa-container reveal">
+        <svg class="brasil-map" viewBox="0 0 500 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa do Brasil com localização das unidades IWS">
+          <path class="map-land" d="M200 30 L240 25 L270 35 L300 30 L330 45 L360 55 L390 80 L410 100 L420 130 L415 160 L400 185 L410 210 L420 240 L415 270 L400 300 L380 325 L360 345 L340 380 L320 410 L300 435 L275 460 L250 480 L230 495 L210 505 L195 510 L180 500 L165 485 L155 465 L150 445 L155 420 L160 395 L150 370 L135 345 L120 320 L110 295 L105 265 L110 235 L120 210 L115 185 L105 160 L100 135 L105 110 L115 90 L130 70 L150 50 L175 35 Z"/>
+
+          <!-- Macaé (sede) -->
+          <g class="map-pin-group" transform="translate(372,292)">
+            <circle class="pin-pulse"   r="22" fill="var(--primary)" opacity=".10"/>
+            <circle class="pin-pulse-2" r="14" fill="var(--primary)" opacity=".18"/>
+            <circle r="8" fill="var(--primary)"/>
+            <circle r="3" fill="var(--dk)"/>
+          </g>
+          <text x="386" y="288" class="map-label-name">Macaé</text>
+          <text x="386" y="300" class="map-label-tag">Sede</text>
+
+          <!-- Rio de Janeiro -->
+          <g class="map-pin-group" transform="translate(358,316)">
+            <circle class="pin-pulse" r="14" fill="var(--g300)" opacity=".15"/>
+            <circle r="6" fill="var(--g300)"/>
+            <circle r="2.5" fill="var(--dk)"/>
+          </g>
+          <text x="310" y="330" class="map-label-name">Rio de Janeiro</text>
+
+          <!-- Aracaju -->
+          <g class="map-pin-group" transform="translate(387,222)">
+            <circle class="pin-pulse" r="14" fill="var(--g300)" opacity=".15"/>
+            <circle r="6" fill="var(--g300)"/>
+            <circle r="2.5" fill="var(--dk)"/>
+          </g>
+          <text x="397" y="220" class="map-label-name">Aracaju</text>
+
+          <line x1="372" y1="292" x2="358" y2="316" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 3" opacity=".4"/>
+          <line x1="372" y1="292" x2="387" y2="222" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 3" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="mapa-units">
+        <div class="mapa-unit reveal">
+          <div class="mapa-unit-dot mapa-sede" aria-hidden="true"></div>
+          <div>
+            <span class="mapa-unit-name">Macaé, RJ</span>
+            <span class="mapa-unit-tag">Sede operacional</span>
+            <p class="mapa-unit-desc">Centro de operações principal, próximo aos campos do Pré-Sal na Bacia de Santos.</p>
+          </div>
+        </div>
+        <div class="mapa-unit reveal">
+          <div class="mapa-unit-dot" aria-hidden="true"></div>
+          <div>
+            <span class="mapa-unit-name">Rio de Janeiro, RJ</span>
+            <span class="mapa-unit-tag">Filial comercial</span>
+            <p class="mapa-unit-desc">Atendimento às operadoras na Barra da Tijuca — Av. das Américas, 500.</p>
+          </div>
+        </div>
+        <div class="mapa-unit reveal">
+          <div class="mapa-unit-dot" aria-hidden="true"></div>
+          <div>
+            <span class="mapa-unit-name">Aracaju, SE</span>
+            <span class="mapa-unit-tag">Filial nordeste</span>
+            <p class="mapa-unit-desc">Suporte para operações OnShore na Bacia Sergipe-Alagoas e região Nordeste.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider" aria-hidden="true"></div>
+
+<!-- CONTATO -->
 <section class="contato" id="contato" aria-labelledby="ct-heading">
   <div class="contato-inner">
     <p class="sec-eyebrow">Contato</p>
-    <h2 id="ct-heading">Vamos conversar sobre seu projeto</h2>
-    <p class="ct-sub">Nossa equipe técnica e comercial está pronta para analisar sua operação e propor a solução ideal.</p>
-
+    <h2 id="ct-heading" class="reveal">Fale com nosso time técnico</h2>
+    <p class="ct-sub reveal">Análise de operação e proposta customizada — sem custo inicial.</p>
     <div class="ct-grid">
-      <div class="ct-block">
+      <div class="ct-block reveal">
         <span class="ct-label">E-mail</span>
         <a href="mailto:contato@iwsbrasil.com" class="ct-link">contato@iwsbrasil.com</a>
       </div>
-      <div class="ct-block">
+      <div class="ct-block reveal">
         <span class="ct-label">Telefone</span>
-        <a href="tel:+552134955880" class="ct-link">+55 (21) 3495-5880</a>
+        <a href="tel:+552134955880"  class="ct-link">+55 (21) 3495-5880</a>
         <a href="tel:+5521967284652" class="ct-link">+55 (21) 96728-4652</a>
         <a href="tel:+5521981111312" class="ct-link">+55 (21) 98111-1312</a>
       </div>
-      <div class="ct-block">
+      <div class="ct-block reveal">
         <span class="ct-label">Endereço</span>
         <address class="ct-addr">
-          Av. das Américas, 500 - Bloco 21, Sala 265<br />
-          Barra da Tijuca - Rio de Janeiro, RJ<br />
-          CEP 22640-100 · CNPJ 16.652.154/0001-06
+          Av. das Américas, 500 — Bloco 21, Sala 265<br />
+          Barra da Tijuca · Rio de Janeiro, RJ<br />
+          CEP 22640-100
         </address>
       </div>
-      <div class="ct-block">
-        <span class="ct-label">Unidades</span>
-        <div class="locs">
-          <div class="loc"><span class="ldot" aria-hidden="true"></span>Macaé, RJ - Sede</div>
-          <div class="loc"><span class="ldot" aria-hidden="true"></span>Rio de Janeiro, RJ</div>
-          <div class="loc"><span class="ldot" aria-hidden="true"></span>Aracaju, SE</div>
-        </div>
+      <div class="ct-block reveal">
+        <span class="ct-label">CNPJ</span>
+        <span class="ct-link" style="cursor:default;color:var(--g400t)">16.652.154/0001-06</span>
       </div>
     </div>
   </div>
@@ -213,11 +394,12 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <img src="logo.png" alt="IWS Brasil" width="120" height="32" onerror="this.style.display='none'" loading="lazy" />
-      <p>Soluções para Redução de Custo e Aumento de Performance Operacional na Perfuração e Produção</p>
+      <p>Redução de custo e aumento de performance em perfuração e produção de petróleo.</p>
     </div>
     <nav aria-label="Links do rodapé">
       <ul class="footer-nav" role="list">
         <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#cases">Cases</a></li>
         <li><a href="#solucoes">Soluções</a></li>
         <li><a href="#catalogo">Catálogo</a></li>
         <li><a href="#clientes">Clientes</a></li>
@@ -239,6 +421,18 @@
     <path d="M10 15V5M5 10l5-5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </button>
+
+<!-- #17 WhatsApp flutuante -->
+<a class="whatsapp-btn" id="whatsapp-btn"
+   href="https://wa.me/5521967284652?text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20IWS%20Brasil."
+   target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+   aria-label="Falar com IWS Brasil pelo WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.138.564 4.144 1.549 5.878L.057 23.25l5.532-1.453A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.374l-.36-.213-3.285.864.878-3.207-.234-.37A9.818 9.818 0 1112 21.818z"/>
+  </svg>
+  <span class="whatsapp-label">WhatsApp</span>
+</a>
 
 <script src="script.js"></script>
 </body>
