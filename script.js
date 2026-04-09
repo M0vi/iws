@@ -303,7 +303,34 @@ function lockInteractions() {
   });
 }
 
-function init() {
+function initMobileLinks() {
+  // WhatsApp: usa window.location no mobile para abrir o app direto
+  var waLinks = document.querySelectorAll('a[href*="wa.me"]');
+  waLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = link.href;
+    });
+  });
+
+  // PDF: abre em nova aba ou faz download dependendo do dispositivo
+  var pdfLinks = document.querySelectorAll('a[href$=".pdf"]');
+  pdfLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var url = link.href;
+      // iOS Safari não suporta download direto de PDFs, usa window.open
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if (isIOS) {
+        window.location.href = url;
+      } else {
+        window.open(url, '_blank', 'noopener');
+      }
+    });
+  });
+}
+
+
   initSplash();
   renderSolucoes();
   renderClientes();
@@ -311,6 +338,7 @@ function init() {
   initReveal();
   initCounters();
   initScrollTop();
+  initMobileLinks();
   setYear();
   lockInteractions();
 }
