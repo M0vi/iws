@@ -336,7 +336,7 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--primary),var(--a
   nav[aria-label="Menu principal"]{display:block}
 
   .nav-links{
-    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    display:none;flex-direction:column;justify-content:center;align-items:center;
     position:fixed;inset:0;
     background:rgba(5,10,5,.97);
     z-index:var(--z-menu);
@@ -345,7 +345,7 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--primary),var(--a
     transition:opacity .28s,visibility .28s,transform .28s;
     pointer-events:none;
   }
-  .nav-links.open{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+  .nav-links.open{display:flex;opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
   .nav-overlay{display:block}
 
   .nl{display:block;width:100%;max-width:280px;text-align:center;padding:14px 20px;font-size:1.1rem;border-radius:6px}
