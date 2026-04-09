@@ -1,222 +1,197 @@
 'use strict';
 
-/* ═══════════════════════════════════════
-   DADOS
-═══════════════════════════════════════ */
-const SOLUCOES = [
-  { icon:'🪨', tag:'Perfuração', title:'Brocas PDC & Tricônicas Premium', desc:'Brocas customizadas para Pré-Sal e OnShore com tecnologia VAREL. Aumento comprovado de 64% em ROP e redução de custos de até 75% por poço nos diâmetros 8½" e 12¼".' },
-  { icon:'🧪', tag:'Laboratório', title:'Equipamentos OFITE', desc:'Linha completa para análise e controle de fluidos: viscosímetros, filtros API, células HPHT e analisadores de sólidos — padrão mundial em laboratórios de O&G.' },
-  { icon:'🔩', tag:'Completação', title:'Acessórios de Cimentação – DIGGER', desc:'Sapatas escareadoras, colares de estágio, packers mecânicos/hidráulicos, bridge plugs e CaseRunner. Materiais L-80 a Q-125, certificados API.' },
-  { icon:'📊', tag:'Data Science / IA', title:'Otimização em Tempo Real – DEEPVIEW', desc:'Software EDR a 1 seg/ciclo. Recomenda parâmetros ótimos, detecta stall, gerencia MSE e vibração. Economia comprovada de 34% por poço em múltiplas operadoras.' },
-  { icon:'🌊', tag:'Fluidos', title:'Engenharia de Fluidos de Perfuração', desc:'DESC Engineer + campo: seleção do fluido, controle de pressão, prevenção de danos à formação e monitoramento reológico em tempo real com MUDWATCHER.' },
-  { icon:'⚙️', tag:'Controle de Sólidos', title:'Controle de Sólidos & Filtração', desc:'Centrifugas decantadoras GN Solids Control, secadoras de cascalho, unidades de filtração modulares e bombas NEMO para redução de desgaste e impacto ambiental.' },
-  { icon:'🔬', tag:'Nanotecnologia', title:'Reservoir Solutions – TenEx NanoCLEAR®', desc:'Nanofluidos de óxido-metálico que combinam forças químicas + mecânicas. Resultados médios de +98% de produção de óleo sustentados por 16 meses.' },
-  { icon:'🤖', tag:'Inteligência Artificial', title:'Sistema IA – Gerenciamento de Riscos', desc:'IA embarcada para análise em tempo real, manutenção preditiva e tomada de decisão automatizada. Integração com sensores P/T, EDR e sistemas BEC/DAQ+.' },
+/* ── DADOS SOLUÇÕES ── */
+var SOLUCOES = [
+  {ico:'🪨', tag:'Perfuração', title:'Brocas PDC & Tricônicas Premium', desc:'Brocas customizadas VAREL para Pré-Sal e OnShore. +64% ROP médio, redução de custo de até 75% por poço nos diâmetros 8½" e 12¼".'},
+  {ico:'🧪', tag:'Laboratório', title:'Equipamentos OFITE', desc:'Linha completa para análise e controle de fluidos: viscosímetros, filtros API, células HPHT — padrão mundial em laboratórios de O&G.'},
+  {ico:'🔩', tag:'Completação', title:'Acessórios de Cimentação – DIGGER', desc:'Sapatas, colares de estágio, packers mecânicos/hidráulicos, bridge plugs e CaseRunner. Materiais L-80 a Q-125, certificados API.'},
+  {ico:'📊', tag:'Data Science / IA', title:'Otimização em Tempo Real – DEEPVIEW', desc:'Software EDR em 1 seg/ciclo. Recomenda parâmetros ótimos, detecta stall de motor e gerencia MSE. Economia comprovada de 34% por poço.'},
+  {ico:'🌊', tag:'Fluidos', title:'Engenharia de Fluidos de Perfuração', desc:'DESC Engineer + campo: seleção do fluido, controle de pressão, prevenção de danos à formação e monitoramento reológico com MUDWATCHER.'},
+  {ico:'⚙️', tag:'Controle de Sólidos', title:'Controle de Sólidos & Filtração', desc:'Centrifugas GN Solids Control, secadoras de cascalho, unidades de filtração modulares e bombas NEMO para operações mais limpas e eficientes.'},
+  {ico:'🔬', tag:'Nanotecnologia', title:'Reservoir Solutions – TenEx NanoCLEAR®', desc:'Nanofluidos de óxido-metálico com forças químicas + mecânicas. Média de +98% na produção de óleo sustentada por 16 meses em múltiplas bacias.'},
+  {ico:'🤖', tag:'Inteligência Artificial', title:'Sistema IA – Gerenciamento de Riscos', desc:'IA para análise em tempo real, manutenção preditiva e tomada de decisão automatizada. Integra sensores P/T, EDR e sistemas BEC/DAQ+.'},
 ];
 
 /*
-  Lista de clientes com seus nomes reais.
-  Arquivo esperado: clientes/{file}.png  (fallback .jpg, depois inicial)
-  Edite os valores de "file" para corresponder EXATAMENTE aos nomes dos
-  arquivos dentro da pasta clientes/ (sem extensão, case-sensitive).
+  CLIENTES: "file" = nome exato do arquivo dentro da pasta clientes/
+  (sem extensão). O código tenta .png, depois .jpg, depois mostra inicial.
+  Edite os valores de "file" conforme os arquivos reais na sua pasta clientes/.
 */
-const CLIENTS = [
-  { file: 'Petrobras',       label: 'Petrobras' },
-  { file: 'Eneva',           label: 'Eneva' },
-  { file: 'PetroReconcavo',  label: 'PetroReconcavo' },
-  { file: '3R-Petroleum',    label: '3R Petroleum' },
-  { file: 'Imetame',         label: 'Imetame' },
-  { file: 'Carmo-Energy',    label: 'Carmo Energy' },
-  { file: 'Equinor',         label: 'Equinor' },
-  { file: 'Origem',          label: 'Origem' },
-  { file: 'Baker-Hughes',    label: 'Baker Hughes' },
-  { file: 'Matra',           label: 'Matra' },
-  { file: 'Acu-Petroleo',    label: 'Açu Petróleo' },
-  { file: 'Seacrest',        label: 'Seacrest Petróleo' },
-  { file: 'Great-Energy',    label: 'Great Energy' },
+var CLIENTS = [
+  {file:'Petrobras',      label:'Petrobras'},
+  {file:'Eneva',          label:'Eneva'},
+  {file:'PetroReconcavo', label:'PetroReconcavo'},
+  {file:'3R-Petroleum',   label:'3R Petroleum'},
+  {file:'Imetame',        label:'Imetame'},
+  {file:'Carmo-Energy',   label:'Carmo Energy'},
+  {file:'Equinor',        label:'Equinor'},
+  {file:'Origem',         label:'Origem'},
+  {file:'Baker-Hughes',   label:'Baker Hughes'},
+  {file:'Matra',          label:'Matra'},
+  {file:'Acu-Petroleo',   label:'Açu Petróleo'},
+  {file:'Seacrest',       label:'Seacrest Petróleo'},
+  {file:'Great-Energy',   label:'Great Energy'},
 ];
 
-/* ═══════════════════════════════════════
-   UTILITÁRIOS
-═══════════════════════════════════════ */
-function el(tag, cls, text) {
-  const n = document.createElement(tag);
-  if (cls)  n.className = cls;
-  if (text) n.textContent = text;  // sempre textContent → XSS-safe
-  return n;
-}
-
-/* ═══════════════════════════════════════
-   RENDER – SOLUÇÕES
-═══════════════════════════════════════ */
+/* ── RENDER SOLUÇÕES ── */
 function renderSolucoes() {
-  const grid = document.getElementById('sol-grid');
+  var grid = document.getElementById('sol-grid');
   if (!grid) return;
-  SOLUCOES.forEach(s => {
-    const card = el('div', 'sol-card');
-    card.setAttribute('role', 'listitem');
-    const icon = el('div', 'sol-card__icon'); icon.textContent = s.icon;
-    const tag  = el('span', 'sol-card__tag', s.tag);
-    const h    = el('h3',  'sol-card__title', s.title);
-    const p    = el('p',   'sol-card__desc',  s.desc);
-    card.append(icon, tag, h, p);
+  SOLUCOES.forEach(function(s) {
+    var card = document.createElement('div');
+    card.className = 'sol-card';
+
+    var ico = document.createElement('div');
+    ico.className = 'sc-ico';
+    ico.textContent = s.ico;
+
+    var tag = document.createElement('span');
+    tag.className = 'sc-tag';
+    tag.textContent = s.tag;
+
+    var h3 = document.createElement('h3');
+    h3.className = 'sc-title';
+    h3.textContent = s.title;
+
+    var p = document.createElement('p');
+    p.className = 'sc-desc';
+    p.textContent = s.desc;
+
+    card.appendChild(ico);
+    card.appendChild(tag);
+    card.appendChild(h3);
+    card.appendChild(p);
     grid.appendChild(card);
   });
 }
 
-/* ═══════════════════════════════════════
-   RENDER – CLIENTES (marquee infinito)
-   Duplicamos os cards para criar o loop.
-═══════════════════════════════════════ */
-function buildClientCard(client) {
-  const card = el('div', 'client-card');
+/* ── RENDER CLIENTES (marquee) ── */
+function makeClientCard(c) {
+  var card = document.createElement('div');
+  card.className = 'client-card';
 
-  const img = document.createElement('img');
-  img.className  = 'client-card__img';
-  img.alt        = client.label;
-  img.loading    = 'lazy';
-  img.decoding   = 'async';
-  img.src        = `clientes/${client.file}.png`;
+  var img = document.createElement('img');
+  img.alt = c.label;
+  img.loading = 'lazy';
+  img.src = 'clientes/' + c.file + '.png';
 
   // Fallback: .png → .jpg → placeholder com inicial
-  img.addEventListener('error', function onErr() {
-    if (this.src.endsWith('.png')) {
-      this.src = `clientes/${client.file}.jpg`;
+  var tried = false;
+  img.onerror = function() {
+    if (!tried) {
+      tried = true;
+      img.src = 'clientes/' + c.file + '.jpg';
     } else {
-      const ph = el('div', 'client-card__ph');
-      ph.textContent = client.label.charAt(0).toUpperCase();
-      this.replaceWith(ph);
+      // Substitui por placeholder
+      var ph = document.createElement('div');
+      ph.className = 'cc-ph';
+      ph.textContent = c.label.charAt(0).toUpperCase();
+      img.parentNode.replaceChild(ph, img);
     }
-  });
+  };
 
-  const name = el('span', 'client-card__name', client.label);
-  card.append(img, name);
+  var name = document.createElement('span');
+  name.className = 'cc-name';
+  name.textContent = c.label;
+
+  card.appendChild(img);
+  card.appendChild(name);
   return card;
 }
 
 function renderClientes() {
-  const track = document.getElementById('marquee-track');
+  var track = document.getElementById('mq-track');
   if (!track) return;
 
-  // Inserimos os cards duas vezes para criar o loop visual sem JS extra
-  [...CLIENTS, ...CLIENTS].forEach(client => {
-    track.appendChild(buildClientCard(client));
+  // Insere 2x para loop visual contínuo
+  var all = CLIENTS.concat(CLIENTS);
+  all.forEach(function(c) {
+    track.appendChild(makeClientCard(c));
   });
 
-  // Ajusta a animação: duração proporcional ao nº de itens
-  const speed = 3.2; // segundos por item
-  const totalItems = CLIENTS.length;
-  track.style.animationDuration = `${totalItems * speed}s`;
+  // Ajusta duração: ~2.8s por card
+  track.style.animationDuration = (CLIENTS.length * 2.8) + 's';
 }
 
-/* ═══════════════════════════════════════
-   NAVBAR
-═══════════════════════════════════════ */
-function initNavbar() {
-  const navbar    = document.getElementById('navbar');
-  const hamburger = document.getElementById('hamburger-btn');
-  const nav       = document.getElementById('main-nav');
-  if (!navbar || !hamburger || !nav) return;
+/* ── NAVBAR ── */
+function initNav() {
+  var nav     = document.getElementById('nav');
+  var burger  = document.getElementById('burger');
+  var links   = document.getElementById('nav-links');
+  if (!nav || !burger || !links) return;
 
-  // Scroll class
-  const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 20);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, {passive: true});
 
-  // Hambúrguer
-  hamburger.addEventListener('click', () => {
-    const open = hamburger.getAttribute('aria-expanded') === 'true';
-    hamburger.setAttribute('aria-expanded', String(!open));
-    nav.classList.toggle('open', !open);
+  burger.addEventListener('click', function() {
+    var open = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!open));
+    links.classList.toggle('open', !open);
     document.body.style.overflow = !open ? 'hidden' : '';
   });
 
-  // Fecha ao clicar num link
-  nav.querySelectorAll('.navbar__link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.setAttribute('aria-expanded', 'false');
-      nav.classList.remove('open');
+  links.querySelectorAll('.nl').forEach(function(a) {
+    a.addEventListener('click', function() {
+      burger.setAttribute('aria-expanded', 'false');
+      links.classList.remove('open');
       document.body.style.overflow = '';
     });
   });
 
-  // Fecha com Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && nav.classList.contains('open')) {
-      hamburger.setAttribute('aria-expanded', 'false');
-      nav.classList.remove('open');
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && links.classList.contains('open')) {
+      burger.setAttribute('aria-expanded', 'false');
+      links.classList.remove('open');
       document.body.style.overflow = '';
     }
   });
 
-  // Active link via IntersectionObserver
+  // Active link
   if ('IntersectionObserver' in window) {
-    const links = document.querySelectorAll('.navbar__link[href^="#"]');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          links.forEach(l => l.classList.remove('active'));
-          const a = document.querySelector(`.navbar__link[href="#${entry.target.id}"]`);
+    var nls = document.querySelectorAll('.nl[href^="#"]');
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          nls.forEach(function(l) { l.classList.remove('active'); });
+          var a = document.querySelector('.nl[href="#' + e.target.id + '"]');
           if (a) a.classList.add('active');
         }
       });
-    }, { rootMargin: `-${68}px 0px -55% 0px` });
-    document.querySelectorAll('main section[id]').forEach(s => obs.observe(s));
+    }, {rootMargin: '-68px 0px -55% 0px'});
+    document.querySelectorAll('main section[id]').forEach(function(s) { obs.observe(s); });
   }
 }
 
-/* ═══════════════════════════════════════
-   SCROLL TO TOP
-═══════════════════════════════════════ */
+/* ── SCROLL TOP ── */
 function initScrollTop() {
-  const btn = document.getElementById('scroll-top-btn');
+  var btn = document.getElementById('scroll-top');
   if (!btn) return;
-  window.addEventListener('scroll', () => {
-    btn.classList.toggle('visible', window.scrollY > 380);
-  }, { passive: true });
-  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('show', window.scrollY > 380);
+  }, {passive: true});
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
 }
 
-/* ═══════════════════════════════════════
-   ANIMAÇÕES DE ENTRADA
-═══════════════════════════════════════ */
-function initAnimations() {
-  const els = document.querySelectorAll('[data-animate]');
-  if (!('IntersectionObserver' in window)) {
-    els.forEach(e => e.classList.add('in-view'));
-    return;
-  }
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  els.forEach(e => obs.observe(e));
-}
-
-/* ═══════════════════════════════════════
-   FOOTER YEAR
-═══════════════════════════════════════ */
+/* ── FOOTER YEAR ── */
 function setYear() {
-  const el = document.getElementById('footer-year');
+  var el = document.getElementById('yr');
   if (el) el.textContent = new Date().getFullYear();
 }
 
-/* ═══════════════════════════════════════
-   INIT
-═══════════════════════════════════════ */
+/* ── INIT ── */
 function init() {
   renderSolucoes();
   renderClientes();
-  initNavbar();
+  initNav();
   initScrollTop();
   setYear();
-  requestAnimationFrame(initAnimations);
 }
 
-document.readyState === 'loading'
-  ? document.addEventListener('DOMContentLoaded', init)
-  : init();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
