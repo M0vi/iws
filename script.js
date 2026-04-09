@@ -312,20 +312,6 @@ function initMobileLinks() {
       window.open(link.href, '_blank', 'noopener');
     });
   });
-
-  // PDF: iOS abre no mesmo browser; Android/desktop abre em nova aba
-  var pdfLinks = document.querySelectorAll('a[href$=".pdf"]');
-  pdfLinks.forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      if (isIOS) {
-        window.location.href = link.href;
-      } else {
-        window.open(link.href, '_blank', 'noopener');
-      }
-    });
-  });
 }
 
 
