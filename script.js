@@ -304,18 +304,6 @@ function setYear() {
   if (el) el.textContent = new Date().getFullYear();
 }
 
-function lockInteractions() {
-  document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-  document.addEventListener('selectstart', function(e) {
-    var tag = e.target && e.target.tagName;
-    if (tag === 'A' || tag === 'BUTTON' || tag === 'INPUT') return;
-    e.preventDefault();
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && ['a','A','u','U','s','S'].indexOf(e.key) !== -1) e.preventDefault();
-  });
-}
-
 function initMobileLinks() {
   // WhatsApp: abre em nova aba para não sair da página
   var waLinks = document.querySelectorAll('a[href*="wa.me"]');
@@ -338,7 +326,6 @@ function init() {
   initScrollTop();
   initMobileLinks();
   setYear();
-  lockInteractions();
 }
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
