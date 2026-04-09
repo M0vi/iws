@@ -1,11 +1,10 @@
 'use strict';
 
-/* ─── DATA ────────────────────────────────────────────────── */
 var SOLUCOES = [
   {
     tag: 'Perfuração',
     title: 'Brocas PDC & Tricônicas VAREL',
-    desc: 'Brocas customizadas para Pré-Sal e OnShore. +64% ROP médio, redução de custo de até 75% por poço nos diâmetros 8½" e 12¼".',
+    desc: 'Brocas customizadas para Pré-Sal e OnShore. +64% ROP médio, redução de custo de até 75% por poço nos diâmetros 8½\" e 12¼\".',
     svg: '<svg viewBox="0 0 40 40" fill="none"><polygon points="20,4 24,16 36,16 26,24 30,36 20,28 10,36 14,24 4,16 16,16" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1.8"/></svg>'
   },
   {
@@ -70,44 +69,15 @@ var CLIENTS = [
 var SAFE_FILENAME = /^[A-Za-z0-9À-ÿ _\-&.]+$/;
 function safeClientFile(name) { return SAFE_FILENAME.test(name) ? name : ''; }
 
-/* ─── #14 SPLASH ──────────────────────────────────────────── */
 function initSplash() {
   var splash = document.getElementById('splash');
   if (!splash) return;
   window.addEventListener('load', function() {
     setTimeout(function() { splash.classList.add('hide'); }, 900);
   });
-  // fallback se load demorar demais
   setTimeout(function() { splash.classList.add('hide'); }, 2200);
 }
 
-/* ─── #12 CURSOR ──────────────────────────────────────────── */
-function initCursor() {
-  if (window.matchMedia('(pointer:coarse)').matches) return;
-  var cursor    = document.getElementById('cursor');
-  var cursorDot = document.getElementById('cursor-dot');
-  if (!cursor || !cursorDot) return;
-
-  var mx = 0, my = 0, cx = 0, cy = 0;
-  document.addEventListener('mousemove', function(e) {
-    mx = e.clientX; my = e.clientY;
-    cursorDot.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
-  }, {passive: true});
-
-  (function animCursor() {
-    cx += (mx - cx) * 0.14;
-    cy += (my - cy) * 0.14;
-    cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px)';
-    requestAnimationFrame(animCursor);
-  })();
-
-  document.querySelectorAll('a,button,.case-card,.sol-card,.client-card').forEach(function(el) {
-    el.addEventListener('mouseenter', function() { cursor.classList.add('hovered'); });
-    el.addEventListener('mouseleave', function() { cursor.classList.remove('hovered'); });
-  });
-}
-
-/* ─── #11 SCROLL ANIMATIONS ───────────────────────────────── */
 function initReveal() {
   if (!('IntersectionObserver' in window)) {
     document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el) {
@@ -129,7 +99,6 @@ function initReveal() {
   });
 }
 
-/* ─── #3 NÚMEROS ANIMADOS ─────────────────────────────────── */
 function animateCount(el) {
   var target = parseInt(el.getAttribute('data-target'), 10);
   var prefix = el.getAttribute('data-prefix') || '';
@@ -163,7 +132,6 @@ function initCounters() {
   document.querySelectorAll('.case-stat[data-target]').forEach(function(el) { io.observe(el); });
 }
 
-/* ─── RENDER SOLUÇÕES ─────────────────────────────────────── */
 function renderSolucoes() {
   var grid = document.getElementById('sol-grid');
   if (!grid) return;
@@ -185,7 +153,6 @@ function renderSolucoes() {
   });
 }
 
-/* ─── #8 LAZY CAROUSEL ────────────────────────────────────── */
 function makeClientCard(c) {
   var safeFile  = safeClientFile(c.file);
   var safeLabel = String(c.label).replace(/[<>"'&]/g, '');
@@ -224,7 +191,6 @@ function renderClientes() {
   var track = document.getElementById('mq-track');
   if (!track) return;
 
-  // #8 só renderiza quando o carrossel entrar na viewport
   if (!('IntersectionObserver' in window)) { buildCarousel(track); return; }
   var io = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting) {
@@ -243,7 +209,6 @@ function buildCarousel(track) {
   track.style.animationDuration = (CLIENTS.length * 2.8) + 's';
 }
 
-/* ─── NAV ─────────────────────────────────────────────────── */
 function initNav() {
   var nav     = document.getElementById('nav');
   var burger  = document.getElementById('burger');
@@ -252,7 +217,6 @@ function initNav() {
   if (!nav || !burger || !links) return;
 
   var firstLink = links.querySelector('.nl');
-  var lastLink  = links.querySelector('.nl-cta');
 
   function openMenu() {
     burger.setAttribute('aria-expanded', 'true');
@@ -260,7 +224,7 @@ function initNav() {
     links.classList.add('open');
     if (overlay) { overlay.removeAttribute('aria-hidden'); overlay.classList.add('visible'); }
     document.body.style.overflow = 'hidden';
-    if (firstLink) firstLink.focus();   // #20 foco gerenciado
+    if (firstLink) firstLink.focus();
   }
 
   function closeMenu() {
@@ -269,10 +233,9 @@ function initNav() {
     links.classList.remove('open');
     if (overlay) { overlay.setAttribute('aria-hidden', 'true'); overlay.classList.remove('visible'); }
     document.body.style.overflow = '';
-    burger.focus();                      // #20 devolve foco ao burger
+    burger.focus();
   }
 
-  // #20 Trap focus no menu mobile
   links.addEventListener('keydown', function(e) {
     if (!links.classList.contains('open')) return;
     if (e.key === 'Tab') {
@@ -298,7 +261,6 @@ function initNav() {
     if (e.key === 'Escape' && links.classList.contains('open')) closeMenu();
   });
 
-  // Active section highlight
   if ('IntersectionObserver' in window) {
     var navLinks = document.querySelectorAll('.nl[href^="#"]');
     var sectionObs = new IntersectionObserver(function(entries) {
@@ -315,7 +277,6 @@ function initNav() {
   }
 }
 
-/* ─── SCROLL TOP ──────────────────────────────────────────── */
 function initScrollTop() {
   var btn = document.getElementById('scroll-top');
   if (!btn) return;
@@ -325,7 +286,6 @@ function initScrollTop() {
   btn.addEventListener('click', function() { window.scrollTo({top:0, behavior:'smooth'}); });
 }
 
-/* ─── MISC ────────────────────────────────────────────────── */
 function setYear() {
   var el = document.getElementById('yr');
   if (el) el.textContent = new Date().getFullYear();
@@ -339,10 +299,8 @@ function lockInteractions() {
   });
 }
 
-/* ─── INIT ────────────────────────────────────────────────── */
 function init() {
   initSplash();
-  initCursor();
   renderSolucoes();
   renderClientes();
   initNav();
