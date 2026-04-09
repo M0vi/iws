@@ -5,48 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IWS Brasil</title>
   <meta name="description" content="IWS Brasil: 12 anos em brocas PDC, equipamentos OFITE, cimentação e soluções de dados para O&G." />
+
+  <!-- Segurança: Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self';
+                 img-src 'self' data:;
+                 font-src 'self';
+                 connect-src 'none';
+                 object-src 'none';
+                 base-uri 'self';
+                 form-action 'none';
+                 frame-ancestors 'none';" />
+
+  <!-- Segurança: headers adicionais via meta -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
+
   <link rel="icon" href="logo.png" type="image/png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<header class="nav" id="nav">
+<header class="nav" id="nav" role="banner">
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo">
-      <img src="logo.png" alt="IWS Brasil" id="nav-logo-img" onerror="this.style.display='none'" />
+    <a href="#hero" class="nav-logo" aria-label="IWS Brasil – Início">
+      <img src="logo.png" alt="IWS Brasil" id="nav-logo-img" width="120" height="38" onerror="this.style.display='none'" />
     </a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#sobre"    class="nl">Sobre</a></li>
-      <li><a href="#solucoes" class="nl">Soluções</a></li>
-      <li><a href="#catalogo" class="nl">Catálogo</a></li>
-      <li><a href="#clientes" class="nl">Clientes</a></li>
-      <li><a href="#contato"  class="nl nl-cta">Contato</a></li>
-    </ul>
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" type="button">
-      <span></span><span></span><span></span>
+
+    <!-- Overlay de fundo para fechar o menu mobile -->
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+    <nav aria-label="Menu principal">
+      <ul class="nav-links" id="nav-links" role="list">
+        <li role="listitem"><a href="#sobre"    class="nl">Sobre</a></li>
+        <li role="listitem"><a href="#solucoes" class="nl">Soluções</a></li>
+        <li role="listitem"><a href="#catalogo" class="nl">Catálogo</a></li>
+        <li role="listitem"><a href="#clientes" class="nl">Clientes</a></li>
+        <li role="listitem"><a href="#contato"  class="nl nl-cta">Contato</a></li>
+      </ul>
+    </nav>
+
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"
+            aria-controls="nav-links" type="button">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
-<section class="hero" id="hero">
-  <div class="hero-orb o1"></div>
-  <div class="hero-orb o2"></div>
+<section class="hero" id="hero" aria-labelledby="hero-heading">
+  <div class="hero-orb o1" aria-hidden="true"></div>
+  <div class="hero-orb o2" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-text">
-      <span class="pill">OnShore · OffShore · Pré-Sal</span>
-      <h1>Tecnologia que<br /><em>perfura mais fundo</em><br />e custa menos</h1>
+      <span class="pill" aria-label="Operações">OnShore · OffShore · Pré-Sal</span>
+      <h1 id="hero-heading">Tecnologia que<br /><em>perfura mais fundo</em><br />e custa menos</h1>
       <p class="hero-sub">12 anos de inovação em brocas PDC, equipamentos de laboratório OFITE, acessórios de cimentação e inteligência de dados para as maiores operadoras do Brasil.</p>
       <div class="hero-btns">
-        <a href="OFITE Catalog.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-green">
-          <svg width="17" height="17" viewBox="0 0 20 20" fill="none"><path d="M10 2v10M6 8l4 4 4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <a href="OFITE Catalog.pdf" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+           class="btn btn-green">
+          <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 2v10M6 8l4 4 4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
           Baixar Catálogo OFITE
         </a>
         <a href="#contato" class="btn btn-ghost">Falar com especialista</a>
       </div>
     </div>
-    <div class="hero-stats">
+    <div class="hero-stats" aria-label="Indicadores">
       <div class="stat-box"><span class="sn">12+</span><span class="sl">Anos de atuação</span></div>
       <div class="stat-box"><span class="sn">64%</span><span class="sl">Aumento médio ROP</span></div>
       <div class="stat-box"><span class="sn">75%</span><span class="sl">Redução custo Pré-Sal</span></div>
@@ -55,48 +89,54 @@
   </div>
 </section>
 
-<section class="cat-spot" id="catalogo">
+<section class="cat-spot" id="catalogo" aria-labelledby="cat-heading">
   <div class="cat-inner">
     <div class="cat-text">
       <span class="kicker">Catálogo Técnico Oficial</span>
-      <h2>Linha Completa<br /><span class="green">OFITE Testing Equipment</span></h2>
+      <h2 id="cat-heading">Linha Completa<br /><span class="green">OFITE Testing Equipment</span></h2>
       <p class="cat-desc">Equipamentos de referência mundial para análise e controle de fluidos de perfuração. Como representante exclusivo no Brasil, a IWS oferece suporte técnico, treinamento e serviço pós-venda para toda a linha.</p>
       <ul class="cat-feat">
-        <li><span class="dot"></span>Viscosímetros rotativos API (Model 900)</li>
-        <li><span class="dot"></span>Células HPHT até 500°F / 1.000 psi</li>
-        <li><span class="dot"></span>Filtros prensa LP/LT e AP/AT</li>
-        <li><span class="dot"></span>Analisadores de sólidos (Retort Kit)</li>
-        <li><span class="dot"></span>Consistômetros para cimentação</li>
-        <li><span class="dot"></span>Kits de análise química completos</li>
+        <li><span class="dot" aria-hidden="true"></span>Viscosímetros rotativos API (Model 900)</li>
+        <li><span class="dot" aria-hidden="true"></span>Células HPHT até 500°F / 1.000 psi</li>
+        <li><span class="dot" aria-hidden="true"></span>Filtros prensa LP/LT e AP/AT</li>
+        <li><span class="dot" aria-hidden="true"></span>Analisadores de sólidos (Retort Kit)</li>
+        <li><span class="dot" aria-hidden="true"></span>Consistômetros para cimentação</li>
+        <li><span class="dot" aria-hidden="true"></span>Kits de análise química completos</li>
       </ul>
-      <a href="OFITE Catalog.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-catalog">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="12" y1="18" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="9 15 12 18 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <a href="OFITE Catalog.pdf" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+         class="btn btn-catalog">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <line x1="12" y1="18" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <polyline points="9 15 12 18 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         Acessar Catálogo Completo
       </a>
     </div>
-    <div class="cat-visual">
+    <div class="cat-visual" aria-hidden="true">
       <div class="cat-img-grid">
-        <img src="cat_img2.png" alt="OFITE Twin Cell UCA" />
-        <img src="cat_img3.png" alt="OFITE Filter Press" />
-        <img src="cat_img4.png" alt="OFITE HPHT Equipment" />
-        <img src="cat_img5.png" alt="OFITE Lab Equipment" />
+        <img src="cat_img2.png" alt="" loading="lazy" />
+        <img src="cat_img3.png" alt="" loading="lazy" />
+        <img src="cat_img4.png" alt="" loading="lazy" />
+        <img src="cat_img5.png" alt="" loading="lazy" />
       </div>
     </div>
   </div>
 </section>
 
-<section class="sobre" id="sobre">
+<section class="sobre" id="sobre" aria-labelledby="sobre-heading">
   <div class="sobre-inner">
     <div class="sobre-text">
       <span class="section-tag">Quem Somos</span>
-      <h2>Engenharia no coração do petróleo brasileiro</h2>
+      <h2 id="sobre-heading">Engenharia no coração do petróleo brasileiro</h2>
       <p class="lead">Fundada em 2012 em Macaé, a IWS do Brasil é representante exclusiva no Brasil de <strong>VAREL</strong>, <strong>OFITE</strong>, <strong>DIGGER Downhole Tools</strong> e <strong>TENEX</strong>.</p>
       <p class="body-p">Detentores do <strong>CRRC Petrobras</strong>, atuamos em projetos OnShore e OffShore no Pré-Sal com redução de custo entre 50%–75% por poço e record de ROP de <strong>+205%</strong> no campo de Búzios.</p>
-      <div class="certs">
+      <div class="certs" aria-label="Certificações">
         <span>API Q1</span><span>ISO 9001</span><span>ISO 45001</span><span>OHSAS 18001</span>
       </div>
     </div>
-    <div class="timeline">
+    <div class="timeline" aria-label="Linha do tempo">
       <div class="tl"><span class="tl-yr">2012</span><div><strong>Fundação</strong><p>Macaé, RJ — filiais no Rio de Janeiro e Aracaju.</p></div></div>
       <div class="tl"><span class="tl-yr">2013</span><div><strong>Parcerias Globais</strong><p>VAREL, OFITE, DHP, DIGGER. CRRC Petrobras.</p></div></div>
       <div class="tl"><span class="tl-yr">2018</span><div><strong>Pré-Sal</strong><p>Contrato para brocas customizadas no Pré-Sal.</p></div></div>
@@ -106,46 +146,49 @@
   </div>
 </section>
 
-<section class="solucoes" id="solucoes">
+<section class="solucoes" id="solucoes" aria-labelledby="sol-heading">
   <div class="wrap">
     <div class="sec-hd">
       <span class="section-tag">Portfólio</span>
-      <h2>Soluções do subsolo à superfície</h2>
+      <h2 id="sol-heading">Soluções do subsolo à superfície</h2>
       <p class="sec-sub">Cobertura total da cadeia de perfuração e produção.</p>
     </div>
-    <div class="sol-grid" id="sol-grid"></div>
+    <div class="sol-grid" id="sol-grid" role="list"></div>
   </div>
 </section>
 
-<section class="clientes" id="clientes">
+<section class="clientes" id="clientes" aria-labelledby="cli-heading">
   <div class="wrap">
     <div class="sec-hd">
       <span class="section-tag">Clientes</span>
-      <h2>Clientes</h2>
+      <h2 id="cli-heading">Clientes</h2>
       <p class="sec-sub">Das maiores bacias sedimentares às operações offshore de classe mundial.</p>
     </div>
   </div>
-  <div class="mq-scene">
-    <div class="mq-fade mq-l"></div>
-    <div class="mq-fade mq-r"></div>
-    <div class="mq-track" id="mq-track"></div>
+  <div class="mq-scene" aria-label="Carrossel de clientes">
+    <div class="mq-fade mq-l" aria-hidden="true"></div>
+    <div class="mq-fade mq-r" aria-hidden="true"></div>
+    <div class="mq-track" id="mq-track" aria-live="off"></div>
   </div>
 </section>
 
-<section class="contato" id="contato">
+<section class="contato" id="contato" aria-labelledby="ct-heading">
   <div class="contato-inner">
     <div class="ct-left">
       <span class="section-tag">Contato</span>
-      <h2>Vamos conversar sobre seu projeto</h2>
+      <h2 id="ct-heading">Vamos conversar sobre seu projeto</h2>
       <p class="ct-sub">Nossa equipe técnica e comercial está pronta para analisar sua operação e propor a solução ideal.</p>
       <a href="mailto:vendas@iwsbrasil.com" class="email-cta">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="2"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="2"/>
+        </svg>
         vendas@iwsbrasil.com
       </a>
       <div class="locs">
-        <div class="loc"><span class="ldot"></span>Macaé, RJ — Sede</div>
-        <div class="loc"><span class="ldot"></span>Rio de Janeiro, RJ</div>
-        <div class="loc"><span class="ldot"></span>Aracaju, SE</div>
+        <div class="loc"><span class="ldot" aria-hidden="true"></span>Macaé, RJ — Sede</div>
+        <div class="loc"><span class="ldot" aria-hidden="true"></span>Rio de Janeiro, RJ</div>
+        <div class="loc"><span class="ldot" aria-hidden="true"></span>Aracaju, SE</div>
       </div>
     </div>
   </div>
@@ -153,22 +196,24 @@
 
 </main>
 
-<footer class="footer">
+<footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="logo.png" alt="IWS Brasil" onerror="this.style.display='none'" />
+      <img src="logo.png" alt="IWS Brasil" width="120" height="32" onerror="this.style.display='none'" loading="lazy" />
       <p>Soluções para Redução de Custo e Aumento de Performance Operacional na Perfuração e Produção</p>
     </div>
-    <nav><ul class="footer-nav">
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#solucoes">Soluções</a></li>
-      <li><a href="#catalogo">Catálogo</a></li>
-      <li><a href="#clientes">Clientes</a></li>
-      <li><a href="#contato">Contato</a></li>
-    </ul></nav>
+    <nav aria-label="Links do rodapé">
+      <ul class="footer-nav" role="list">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#solucoes">Soluções</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#clientes">Clientes</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
     <div class="footer-ct">
       <a href="mailto:vendas@iwsbrasil.com">vendas@iwsbrasil.com</a>
-      <a href="https://www.iwsbrasil.com" target="_blank" rel="noopener noreferrer">www.iwsbrasil.com</a>
+      <a href="https://www.iwsbrasil.com" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">www.iwsbrasil.com</a>
     </div>
   </div>
   <div class="footer-btm">
@@ -177,7 +222,9 @@
 </footer>
 
 <button class="scroll-top" id="scroll-top" aria-label="Voltar ao topo" type="button">
-  <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 15V5M5 10l5-5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <path d="M10 15V5M5 10l5-5 5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
 </button>
 
 <script src="script.js"></script>
