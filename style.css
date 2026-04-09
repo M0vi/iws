@@ -287,38 +287,35 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--primary),var(--a
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
+  gap:0;
   background:#25D366;
   color:#fff;
-  width:56px;
   height:56px;
-  border-radius:50%;
+  padding:0 15px;
+  border-radius:28px;
   box-shadow:0 4px 20px rgba(37,211,102,.4);
-  transition:width .3s ease, border-radius .3s ease, padding .3s ease, box-shadow .2s;
+  transition:gap .3s ease, padding .3s ease, box-shadow .2s;
   text-decoration:none;
-  overflow:hidden;
   white-space:nowrap;
 }
 .whatsapp-btn:hover{
-  width:180px;
-  border-radius:28px;
-  padding:0 20px 0 14px;
+  gap:10px;
+  padding:0 20px 0 15px;
   box-shadow:0 6px 28px rgba(37,211,102,.55);
   color:#fff;
-  justify-content:flex-start;
 }
-.whatsapp-icon{flex-shrink:0}
+.whatsapp-icon{flex-shrink:0;width:26px;height:26px;display:block}
 .whatsapp-label{
   font-size:.88rem;
   font-weight:600;
   color:#fff;
   overflow:hidden;
-  max-width:0;
+  width:0;
   opacity:0;
-  transition:max-width .3s ease, opacity .2s ease .1s;
+  transition:width .3s ease, opacity .2s ease .05s;
   pointer-events:none;
 }
-.whatsapp-btn:hover .whatsapp-label{max-width:120px;opacity:1;}
+.whatsapp-btn:hover .whatsapp-label{width:90px;opacity:1;}
 
 @media(max-width:960px){
   .hero-inner{grid-template-columns:1fr}
@@ -369,11 +366,11 @@ h1 em{font-style:normal;background:linear-gradient(135deg,var(--primary),var(--a
   .whatsapp-btn{
     bottom:80px;
     right:16px;
-    width:52px;
     height:52px;
+    padding:0 14px;
   }
   .whatsapp-btn:hover{
-    width:168px;
+    padding:0 18px 0 14px;
   }
 }
 
@@ -492,9 +489,7 @@ section[id], div[id] { scroll-margin-top: calc(var(--nh) + 16px); }
   transition:fill .3s;
 }
 .map-pin-group { cursor:default; }
-.pin-pulse   { animation:pulse 2.4s ease-in-out infinite; }
-.pin-pulse-2 { animation:pulse 2.4s ease-in-out infinite .4s; }
-@keyframes pulse { 0%,100%{r:14;opacity:.18} 50%{r:22;opacity:.06} }
+.pin-pulse, .pin-pulse-2 { display:none; }
 .map-label-name {
   font-size:10px; font-weight:700; fill:var(--g100t);
   font-family:'Outfit',sans-serif;

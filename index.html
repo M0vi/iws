@@ -259,30 +259,40 @@
     </div>
     <div class="mapa-wrapper">
       <div class="mapa-container reveal">
-        <svg class="brasil-map" viewBox="0 0 500 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa do Brasil com localização das unidades IWS">
-          <path class="map-land" d="M200 30 L240 25 L270 35 L300 30 L330 45 L360 55 L390 80 L410 100 L420 130 L415 160 L400 185 L410 210 L420 240 L415 270 L400 300 L380 325 L360 345 L340 380 L320 410 L300 435 L275 460 L250 480 L230 495 L210 505 L195 510 L180 500 L165 485 L155 465 L150 445 L155 420 L160 395 L150 370 L135 345 L120 320 L110 295 L105 265 L110 235 L120 210 L115 185 L105 160 L100 135 L105 110 L115 90 L130 70 L150 50 L175 35 Z"/>
-          <g class="map-pin-group" transform="translate(372,292)">
-            <circle class="pin-pulse"   r="22" fill="var(--primary)" opacity=".10"/>
-            <circle class="pin-pulse-2" r="14" fill="var(--primary)" opacity=".18"/>
-            <circle r="8" fill="var(--primary)"/>
-            <circle r="3" fill="var(--dk)"/>
+        <svg class="brasil-map" viewBox="0 0 500 560" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa do Brasil com localização das unidades IWS">
+          <path class="map-land" d="
+            M185,28 L210,22 L240,24 L265,20 L290,26 L315,22 L338,30 L358,42 L375,58
+            L388,76 L398,96 L406,118 L410,140 L408,162 L400,180 L395,198
+            L406,215 L416,238 L418,262 L413,284 L402,305 L388,324
+            L375,340 L362,358 L348,378 L332,400 L314,422 L296,442
+            L276,460 L256,476 L238,490 L220,502 L205,512 L192,518
+            L178,510 L164,496 L154,478 L148,458 L152,436 L158,414
+            L152,390 L140,365 L126,340 L114,314 L106,286 L104,258
+            L108,232 L118,208 L113,184 L103,160 L98,134 L102,108
+            L112,86 L126,66 L144,50 L163,37 Z
+          "/>
+
+          <g class="map-pin-group" transform="translate(358,295)">
+            <circle r="9" fill="var(--primary)" stroke="var(--dk)" stroke-width="2"/>
+            <circle r="3.5" fill="var(--dk)"/>
           </g>
-          <text x="386" y="288" class="map-label-name">Macaé</text>
-          <text x="386" y="300" class="map-label-tag">Sede</text>
-          <g class="map-pin-group" transform="translate(358,316)">
-            <circle class="pin-pulse" r="14" fill="var(--g300)" opacity=".15"/>
-            <circle r="6" fill="var(--g300)"/>
+          <text x="372" y="291" class="map-label-name">Macaé</text>
+          <text x="372" y="303" class="map-label-tag">Sede</text>
+
+          <g class="map-pin-group" transform="translate(345,318)">
+            <circle r="6" fill="var(--g300)" stroke="var(--dk)" stroke-width="2"/>
             <circle r="2.5" fill="var(--dk)"/>
           </g>
-          <text x="310" y="330" class="map-label-name">Rio de Janeiro</text>
-          <g class="map-pin-group" transform="translate(387,222)">
-            <circle class="pin-pulse" r="14" fill="var(--g300)" opacity=".15"/>
-            <circle r="6" fill="var(--g300)"/>
+          <text x="295" y="332" class="map-label-name">Rio de Janeiro</text>
+
+          <g class="map-pin-group" transform="translate(375,220)">
+            <circle r="6" fill="var(--g300)" stroke="var(--dk)" stroke-width="2"/>
             <circle r="2.5" fill="var(--dk)"/>
           </g>
-          <text x="397" y="220" class="map-label-name">Aracaju</text>
-          <line x1="372" y1="292" x2="358" y2="316" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 3" opacity=".4"/>
-          <line x1="372" y1="292" x2="387" y2="222" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 3" opacity=".4"/>
+          <text x="385" y="218" class="map-label-name">Aracaju</text>
+
+          <line x1="358" y1="295" x2="345" y2="318" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 3" opacity=".5"/>
+          <line x1="358" y1="295" x2="375" y2="220" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 3" opacity=".5"/>
         </svg>
       </div>
       <div class="mapa-units">
