@@ -15,17 +15,6 @@
   <meta name="twitter:title"       content="IWS Brasil - Tecnologia em Perfuração e Produção" />
   <meta name="twitter:description" content="12 anos reduzindo custo e aumentando ROP no Pré-Sal brasileiro." />
 
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self';
-                 script-src 'self';
-                 style-src 'self' https://fonts.googleapis.com;
-                 img-src 'self' data: https://images.unsplash.com;
-                 font-src 'self' https://fonts.gstatic.com;
-                 connect-src 'self' https://wa.me;
-                 object-src 'self';
-                 base-uri 'self';
-                 form-action 'none';
-                 frame-ancestors 'none';" />
   <meta http-equiv="X-Content-Type-Options"  content="nosniff" />
   <meta http-equiv="X-Frame-Options"         content="DENY" />
   <meta http-equiv="Referrer-Policy"         content="strict-origin-when-cross-origin" />
@@ -72,6 +61,7 @@
   </div>
 </header>
 
+<!-- nav-overlay fora do header para não bloquear cliques no mobile -->
 <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
 <main id="main-content">
@@ -273,26 +263,22 @@
             L108,232 L118,208 L113,184 L103,160 L98,134 L102,108
             L112,86 L126,66 L144,50 L163,37 Z
           "/>
-
           <g class="map-pin-group" transform="translate(358,295)">
             <circle r="9" fill="var(--primary)" stroke="var(--dk)" stroke-width="2"/>
             <circle r="3.5" fill="var(--dk)"/>
           </g>
           <text x="372" y="291" class="map-label-name">Macaé</text>
           <text x="372" y="303" class="map-label-tag">Sede</text>
-
           <g class="map-pin-group" transform="translate(345,318)">
             <circle r="6" fill="var(--g300)" stroke="var(--dk)" stroke-width="2"/>
             <circle r="2.5" fill="var(--dk)"/>
           </g>
           <text x="295" y="332" class="map-label-name">Rio de Janeiro</text>
-
           <g class="map-pin-group" transform="translate(375,220)">
             <circle r="6" fill="var(--g300)" stroke="var(--dk)" stroke-width="2"/>
             <circle r="2.5" fill="var(--dk)"/>
           </g>
           <text x="385" y="218" class="map-label-name">Aracaju</text>
-
           <line x1="358" y1="295" x2="345" y2="318" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 3" opacity=".5"/>
           <line x1="358" y1="295" x2="375" y2="220" stroke="var(--primary)" stroke-width="1.2" stroke-dasharray="4 3" opacity=".5"/>
         </svg>

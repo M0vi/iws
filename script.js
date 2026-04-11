@@ -1,10 +1,12 @@
 'use strict';
 
+/* ─── DADOS ─────────────────────────────────────────────────────────────── */
+
 var SOLUCOES = [
   {
     tag: 'Perfuração',
     title: 'Brocas PDC & Tricônicas VAREL',
-    desc: 'Brocas customizadas para Pré-Sal e OnShore. +64% ROP médio, redução de custo de até 75% por poço nos diâmetros 8½\" e 12¼\".',
+    desc: 'Brocas customizadas para Pré-Sal e OnShore. +64% ROP médio, redução de custo de até 75% por poço nos diâmetros 8½" e 12¼".',
     svg: '<svg viewBox="0 0 40 40" fill="none"><polygon points="20,4 24,16 36,16 26,24 30,36 20,28 10,36 14,24 4,16 16,16" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1.8"/></svg>'
   },
   {
@@ -66,46 +68,51 @@ var CLIENTS = [
   {file:'GREAT ENERGY',   label:'Great Energy'},
 ];
 
-var SAFE_FILENAME = /^[A-Za-z0-9À-ÿ _\-&.]+$/;
-function safeClientFile(name) { return SAFE_FILENAME.test(name) ? name : ''; }
-
+/* ─── SPLASH ────────────────────────────────────────────────────────────── */
+/*
+ * Problema original: o splash ficava com pointer-events ativo no mobile,
+ * bloqueando todos os toques. Agora desativamos pointer-events ANTES de
+ * qualquer animação e removemos o elemento do DOM com múltiplos fallbacks.
+ */
 function initSplash() {
   var splash = document.getElementById('splash');
   if (!splash) return;
 
-  function hideSplash() {
-    // Remove pointer-events imediatamente para não bloquear cliques
-    splash.style.pointerEvents = 'none';
-    splash.classList.add('hide');
-    // Remove do DOM após a transição, com múltiplos fallbacks
-    var removed = false;
-    function doRemove() {
-      if (!removed && splash.parentNode) {
-        removed = true;
-        splash.parentNode.removeChild(splash);
-      }
+  function removeSplash() {
+    if (splash.parentNode) {
+      splash.parentNode.removeChild(splash);
     }
-    splash.addEventListener('transitionend', doRemove, { once: true });
-    setTimeout(doRemove, 600);
-    setTimeout(doRemove, 1200);
   }
 
-  // Dispara assim que possível — não espera o evento 'load' que pode demorar no mobile
-  if (document.readyState === 'complete') {
-    setTimeout(hideSplash, 500);
-  } else {
-    window.addEventListener('load', function() { setTimeout(hideSplash, 500); });
-    // Fallback agressivo: garante remoção mesmo que load nunca dispare
-    setTimeout(hideSplash, 1500);
-    setTimeout(hideSplash, 2500);
+  function hideSplash() {
+    /* Desativa interação imediatamente — não espera transição */
+    splash.style.pointerEvents = 'none';
+    splash.style.userSelect    = 'none';
+    splash.classList.add('hide');
+    /* Remove do DOM com 3 tentativas independentes */
+    setTimeout(removeSplash, 550);
+    setTimeout(removeSplash, 900);
+    setTimeout(removeSplash, 1400);
   }
+
+  /* Dispara o mais rápido possível — não confia só no evento 'load'
+     que pode demorar no mobile com imagens/fontes pesadas */
+  if (document.readyState === 'complete') {
+    hideSplash();
+  } else {
+    window.addEventListener('load', hideSplash, { once: true });
+  }
+  /* Fallbacks absolutos caso 'load' nunca dispare */
+  setTimeout(hideSplash, 1200);
+  setTimeout(hideSplash, 2000);
 }
 
+/* ─── REVEAL (scroll) ───────────────────────────────────────────────────── */
+
 function initReveal() {
+  var els = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
   if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el) {
-      el.classList.add('in');
-    });
+    els.forEach(function(el) { el.classList.add('in'); });
     return;
   }
   var io = new IntersectionObserver(function(entries) {
@@ -116,26 +123,22 @@ function initReveal() {
       }
     });
   }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
-
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el) {
-    io.observe(el);
-  });
+  els.forEach(function(el) { io.observe(el); });
 }
 
+/* ─── CONTADORES ────────────────────────────────────────────────────────── */
+
 function animateCount(el) {
-  var target = parseInt(el.getAttribute('data-target'), 10);
-  var prefix = el.getAttribute('data-prefix') || '';
-  var suffix = el.getAttribute('data-suffix') || '';
+  var target   = parseInt(el.getAttribute('data-target'), 10);
+  var prefix   = el.getAttribute('data-prefix') || '';
+  var suffix   = el.getAttribute('data-suffix') || '';
   var duration = 1600;
-  var start = null;
-
+  var start    = null;
   function ease(t) { return t < .5 ? 2*t*t : -1+(4-2*t)*t; }
-
   function step(ts) {
     if (!start) start = ts;
     var progress = Math.min((ts - start) / duration, 1);
-    var val = Math.round(ease(progress) * target);
-    el.textContent = prefix + val + suffix;
+    el.textContent = prefix + Math.round(ease(progress) * target) + suffix;
     if (progress < 1) requestAnimationFrame(step);
     else el.textContent = prefix + target + suffix;
   }
@@ -152,28 +155,50 @@ function initCounters() {
       }
     });
   }, { threshold: 0.5 });
-  document.querySelectorAll('.case-stat[data-target]').forEach(function(el) { io.observe(el); });
+  document.querySelectorAll('.case-stat[data-target]').forEach(function(el) {
+    io.observe(el);
+  });
 }
+
+/* ─── SOLUÇÕES (render) ─────────────────────────────────────────────────── */
 
 function renderSolucoes() {
   var grid = document.getElementById('sol-grid');
   if (!grid) return;
   SOLUCOES.forEach(function(s) {
-    var card = document.createElement('div');
+    var card  = document.createElement('div');
     card.className = 'sol-card reveal';
     card.setAttribute('role', 'listitem');
 
-    var ico = document.createElement('div');
-    ico.className = 'sc-ico'; ico.setAttribute('aria-hidden', 'true');
+    var ico   = document.createElement('div');
+    ico.className = 'sc-ico';
+    ico.setAttribute('aria-hidden', 'true');
     ico.innerHTML = s.svg;
 
-    var tag = document.createElement('span'); tag.className = 'sc-tag'; tag.textContent = s.tag;
-    var h3  = document.createElement('h3');   h3.className  = 'sc-title'; h3.textContent  = s.title;
-    var p   = document.createElement('p');    p.className   = 'sc-desc';  p.textContent   = s.desc;
+    var tag   = document.createElement('span'); tag.className = 'sc-tag';   tag.textContent = s.tag;
+    var h3    = document.createElement('h3');   h3.className  = 'sc-title'; h3.textContent  = s.title;
+    var p     = document.createElement('p');    p.className   = 'sc-desc';  p.textContent   = s.desc;
 
-    card.appendChild(ico); card.appendChild(tag); card.appendChild(h3); card.appendChild(p);
+    card.appendChild(ico);
+    card.appendChild(tag);
+    card.appendChild(h3);
+    card.appendChild(p);
     grid.appendChild(card);
   });
+}
+
+/* ─── CLIENTES (carrossel) ──────────────────────────────────────────────── */
+
+var SAFE_FILENAME = /^[A-Za-z0-9À-ÿ _\-&.]+$/;
+function safeClientFile(name) { return SAFE_FILENAME.test(name) ? name : ''; }
+
+function showPlaceholder(card, imgEl, label) {
+  var ph = document.createElement('div');
+  ph.className = 'cc-ph';
+  ph.setAttribute('aria-hidden', 'true');
+  ph.textContent = (label || '?').charAt(0).toUpperCase();
+  if (imgEl && imgEl.parentNode) imgEl.parentNode.replaceChild(ph, imgEl);
+  else card.insertBefore(ph, card.firstChild);
 }
 
 function makeClientCard(c) {
@@ -195,42 +220,36 @@ function makeClientCard(c) {
       }
     };
     card.appendChild(img);
-  } else { showPlaceholder(card, null, safeLabel); }
+  } else {
+    showPlaceholder(card, null, safeLabel);
+  }
 
-  var name = document.createElement('span'); name.className = 'cc-name'; name.textContent = safeLabel;
+  var name = document.createElement('span');
+  name.className = 'cc-name';
+  name.textContent = safeLabel;
   card.appendChild(name);
   return card;
 }
 
-function showPlaceholder(card, imgEl, label) {
-  var ph = document.createElement('div'); ph.className = 'cc-ph';
-  ph.setAttribute('aria-hidden', 'true');
-  ph.textContent = (label || '?').charAt(0).toUpperCase();
-  if (imgEl && imgEl.parentNode) imgEl.parentNode.replaceChild(ph, imgEl);
-  else card.insertBefore(ph, card.firstChild);
+function buildCarousel(track) {
+  var all  = CLIENTS.concat(CLIENTS);
+  var frag = document.createDocumentFragment();
+  all.forEach(function(c) { frag.appendChild(makeClientCard(c)); });
+  track.appendChild(frag);
 }
 
 function renderClientes() {
   var track = document.getElementById('mq-track');
   if (!track) return;
-
   if (!('IntersectionObserver' in window)) { buildCarousel(track); return; }
   var target = document.getElementById('clientes') || track;
   var io = new IntersectionObserver(function(entries) {
-    if (entries[0].isIntersecting) {
-      buildCarousel(track);
-      io.disconnect();
-    }
+    if (entries[0].isIntersecting) { buildCarousel(track); io.disconnect(); }
   }, { rootMargin: '300px' });
   io.observe(target);
 }
 
-function buildCarousel(track) {
-  var all = CLIENTS.concat(CLIENTS);
-  var frag = document.createDocumentFragment();
-  all.forEach(function(c) { frag.appendChild(makeClientCard(c)); });
-  track.appendChild(frag);
-}
+/* ─── NAVEGAÇÃO ─────────────────────────────────────────────────────────── */
 
 function initNav() {
   var nav     = document.getElementById('nav');
@@ -245,7 +264,10 @@ function initNav() {
     burger.setAttribute('aria-expanded', 'true');
     burger.setAttribute('aria-label', 'Fechar menu');
     links.classList.add('open');
-    if (overlay) { overlay.removeAttribute('aria-hidden'); overlay.classList.add('visible'); }
+    if (overlay) {
+      overlay.removeAttribute('aria-hidden');
+      overlay.classList.add('visible');
+    }
     document.body.style.overflow = 'hidden';
     if (firstLink) firstLink.focus();
   }
@@ -254,72 +276,85 @@ function initNav() {
     burger.setAttribute('aria-expanded', 'false');
     burger.setAttribute('aria-label', 'Abrir menu');
     links.classList.remove('open');
-    if (overlay) { overlay.setAttribute('aria-hidden', 'true'); overlay.classList.remove('visible'); }
+    if (overlay) {
+      overlay.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('visible');
+    }
     document.body.style.overflow = '';
     burger.focus();
   }
 
+  /* Trap focus dentro do menu mobile */
   links.addEventListener('keydown', function(e) {
     if (!links.classList.contains('open')) return;
-    if (e.key === 'Tab') {
-      var focusable = Array.from(links.querySelectorAll('a'));
-      var first = focusable[0], last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
+    if (e.key !== 'Tab') return;
+    var focusable = Array.from(links.querySelectorAll('a'));
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 
+  /* Sticky nav */
   window.addEventListener('scroll', function() {
     nav.classList.toggle('scrolled', window.scrollY > 20);
-  }, {passive: true});
+  }, { passive: true });
 
+  /* Burger: toggle */
   burger.addEventListener('click', function() {
-    if (burger.getAttribute('aria-expanded') === 'true') closeMenu(); else openMenu();
+    if (burger.getAttribute('aria-expanded') === 'true') closeMenu();
+    else openMenu();
   });
 
-  links.querySelectorAll('.nl').forEach(function(a) { a.addEventListener('click', closeMenu); });
+  /* Fecha ao clicar num link do menu */
+  links.querySelectorAll('.nl').forEach(function(a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  /* Fecha ao clicar no overlay */
   if (overlay) overlay.addEventListener('click', closeMenu);
 
+  /* Fecha com Escape */
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && links.classList.contains('open')) closeMenu();
   });
 
+  /* Highlight do link ativo conforme scroll */
   if ('IntersectionObserver' in window) {
     var navLinks = document.querySelectorAll('.nl[href^="#"]');
     var sectionObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          navLinks.forEach(function(l) { l.classList.remove('active'); });
-          var id = entry.target.id.replace(/[^\w-]/g, '');
-          var active = document.querySelector('.nl[href="#' + id + '"]');
-          if (active) active.classList.add('active');
-        }
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(function(l) { l.classList.remove('active'); });
+        var id     = entry.target.id.replace(/[^\w-]/g, '');
+        var active = document.querySelector('.nl[href="#' + id + '"]');
+        if (active) active.classList.add('active');
       });
-    }, {rootMargin: '-68px 0px -55% 0px', threshold: 0});
-    document.querySelectorAll('main section[id]').forEach(function(s) { sectionObs.observe(s); });
+    }, { rootMargin: '-68px 0px -55% 0px', threshold: 0 });
+    document.querySelectorAll('main section[id]').forEach(function(s) {
+      sectionObs.observe(s);
+    });
   }
 }
+
+/* ─── SCROLL TO TOP ─────────────────────────────────────────────────────── */
 
 function initScrollTop() {
   var btn = document.getElementById('scroll-top');
   if (!btn) return;
   window.addEventListener('scroll', function() {
     btn.classList.toggle('show', window.scrollY > 380);
-  }, {passive: true});
-  btn.addEventListener('click', function() { window.scrollTo({top:0, behavior:'smooth'}); });
+  }, { passive: true });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }
+
+/* ─── ANO NO FOOTER ─────────────────────────────────────────────────────── */
 
 function setYear() {
   var el = document.getElementById('yr');
   if (el) el.textContent = new Date().getFullYear();
 }
-
-function initMobileLinks() {
-  // Links com target="_blank" já funcionam nativamente.
-  // Não interceptar com preventDefault + window.open — perde o contexto
-  // de "user gesture" no mobile e o browser bloqueia a abertura.
-}
-
 
 function init() {
   initSplash();
@@ -329,9 +364,11 @@ function init() {
   initReveal();
   initCounters();
   initScrollTop();
-  initMobileLinks();
   setYear();
 }
 
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-else init();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
