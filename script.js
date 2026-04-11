@@ -74,21 +74,31 @@ function initSplash() {
   if (!splash) return;
 
   function hideSplash() {
+    // Remove pointer-events imediatamente para não bloquear cliques
+    splash.style.pointerEvents = 'none';
     splash.classList.add('hide');
-    splash.addEventListener('transitionend', function() {
-      splash.remove();
-    }, { once: true });
-    // Fallback caso transitionend não dispare
-    setTimeout(function() {
-      if (splash.parentNode) splash.remove();
-    }, 800);
+    // Remove do DOM após a transição, com múltiplos fallbacks
+    var removed = false;
+    function doRemove() {
+      if (!removed && splash.parentNode) {
+        removed = true;
+        splash.parentNode.removeChild(splash);
+      }
+    }
+    splash.addEventListener('transitionend', doRemove, { once: true });
+    setTimeout(doRemove, 600);
+    setTimeout(doRemove, 1200);
   }
 
-  window.addEventListener('load', function() {
-    setTimeout(hideSplash, 900);
-  });
-  // Fallback caso load demore muito
-  setTimeout(hideSplash, 2200);
+  // Dispara assim que possível — não espera o evento 'load' que pode demorar no mobile
+  if (document.readyState === 'complete') {
+    setTimeout(hideSplash, 500);
+  } else {
+    window.addEventListener('load', function() { setTimeout(hideSplash, 500); });
+    // Fallback agressivo: garante remoção mesmo que load nunca dispare
+    setTimeout(hideSplash, 1500);
+    setTimeout(hideSplash, 2500);
+  }
 }
 
 function initReveal() {
@@ -305,14 +315,9 @@ function setYear() {
 }
 
 function initMobileLinks() {
-  // WhatsApp: abre em nova aba para não sair da página
-  var waLinks = document.querySelectorAll('a[href*="wa.me"]');
-  waLinks.forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      window.open(link.href, '_blank', 'noopener');
-    });
-  });
+  // Links com target="_blank" já funcionam nativamente.
+  // Não interceptar com preventDefault + window.open — perde o contexto
+  // de "user gesture" no mobile e o browser bloqueia a abertura.
 }
 
 
