@@ -514,7 +514,8 @@ section[id], div[id] { scroll-margin-top: calc(var(--nh) + 16px); }
 
 @media(max-width:960px) {
   .mapa-wrapper { grid-template-columns:1fr; }
-  .mapa-container { display:none; }
+  .mapa-container { display:flex; justify-content:center; }
+  .brasil-map { max-width:260px; }
   .cases-grid { grid-template-columns:1fr 1fr; }
 }
 @media(max-width:640px) {
